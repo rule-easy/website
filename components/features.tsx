@@ -2,7 +2,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBoltLightning, faBookAtlas, faBrain, faChartLine, faChartPie, faGlobe, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faBan, faBoltLightning, faBookAtlas, faBrain, faChartLine, faChartPie, faCode, faGlobe, faUsers } from "@fortawesome/free-solid-svg-icons";
 
 export default function Features() {
   return (
@@ -22,7 +22,7 @@ export default function Features() {
             {/* 1st item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-anchor="[data-aos-id-blocks]">
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <FontAwesomeIcon icon={faGlobe} size="xs" color="#5D5DFF" />
+                <FontAwesomeIcon icon={faBrain} size="xs" color="#5D5DFF" />
               </svg>
               <h4 className="h4 mb-2">Comprehensive engine</h4>
               <p className="text-lg text-gray-400 text-center">From heuristic rules to ML-generated ones, we've got you covered.</p>
@@ -31,7 +31,7 @@ export default function Features() {
             {/* 2nd item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="100" data-aos-anchor="[data-aos-id-blocks]">
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <FontAwesomeIcon icon={faBrain} size="xs" color="#5D5DFF" />
+                <FontAwesomeIcon icon={faBan} size="xs" color="#5D5DFF" />
               </svg>
               <h4 className="h4 mb-2">No-code operations</h4>
               <p className="text-lg text-gray-400 text-center">Generate and modify patterns without dedicated engineering team.</p>
@@ -43,7 +43,7 @@ export default function Features() {
                 <FontAwesomeIcon icon={faBoltLightning} size="xs" color="#5D5DFF" />
               </svg>
               <h4 className="h4 mb-2">Fatser TAT</h4>
-              <p className="text-lg text-gray-400 text-center">Satisfied with results, promote to production and stop bleeding ASAP.</p>
+              <p className="text-lg text-gray-400 text-center">Happy with the outcomes, deploy to production to minimize losses quickly.</p>
             </div>
 
             {/* 4th item */}
@@ -52,7 +52,7 @@ export default function Features() {
                 <FontAwesomeIcon icon={faUsers} size="xs" color="#5D5DFF" />
               </svg>
               <h4 className="h4 mb-2">Collusion first</h4>
-              <p className="text-lg text-gray-400 text-center">Platform built by keeping collusion fraud as first class scenario.</p>
+              <p className="text-lg text-gray-400 text-center">Platform built with a primary focus on tackling collusion fraud.</p>
             </div>
 
             {/* 5th item */}

@@ -13,9 +13,9 @@ export default function Zigzag() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">How it works</div>
-            <h1 className="h2 mb-4">One product, unlimited patterns to detect</h1>
-            <p className="text-xl text-gray-400">Our platform can be used to identify, recognize and configure to prevent any pattern agnostic of industry or domain.</p>
+            <div style={{ background: "#5D5DFF" }} className="inline-flex text-sm font-semibold py-1 px-3 m-2 rounded-full mb-4">How it works</div>
+            <h1 className="h2 mb-4">Detect limitless patterns with just one product - <b style={{ color: "#5D5DFF" }}>PatternAct</b></h1>
+            <p className="text-xl text-gray-400">Our flagship product can be applied to detect, acknowledge, and adapt to prevent patterns, irrespective of the industry or domain.</p>
           </div>
 
           {/* Items */}
@@ -50,7 +50,7 @@ export default function Zigzag() {
                       <svg className="w-3 h-3 fill-current text-green-500 mr-2 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                       </svg>
-                      <span>Let our experts identify and generate a rule to prevent pattern.</span>
+                      <span>Let our experts spot and block patterns.</span>
                     </li>
                   </ul>
                 </div>
@@ -104,7 +104,7 @@ export default function Zigzag() {
                       <svg className="w-3 h-3 fill-current text-green-500 mr-2 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                       </svg>
-                      <span>Enable rules in production in few minutes</span>
+                      <span>Enable bussiness rules safely in few minutes</span>
                     </li>
                     <li className="flex items-center mb-2">
                       <svg className="w-3 h-3 fill-current text-green-500 mr-2 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -112,12 +112,12 @@ export default function Zigzag() {
                       </svg>
                       <span>No engineering team involvement required</span>
                     </li>
-                    <li className="flex items-center">
+                    {/* <li className="flex items-center">
                       <svg className="w-3 h-3 fill-current text-green-500 mr-2 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                       </svg>
                       <span>Controll production rollout percentage</span>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </div>
@@ -140,13 +140,13 @@ export default function Zigzag() {
                       <svg className="w-3 h-3 fill-current text-green-500 mr-2 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                       </svg>
-                      <span> Track activity of each data input</span>
+                      <span>Track activity of each data input</span>
                     </li>
                     <li className="flex items-center mb-2">
                       <svg className="w-3 h-3 fill-current text-green-500 mr-2 shrink-0" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
                       </svg>
-                      <span>Perform historical analysis of the rule</span>
+                      <span>Use data to improve configuered rules</span>
                     </li>
                   </ul>
                 </div>
