@@ -30,6 +30,11 @@ module.exports = {
           800: '#38379C',
           900: '#262668',
         },
+        custom: {
+          primary: '#5D5DFF',
+          green: '#B6D7A8',
+          red: '#EA9999',
+        }
       },
       spacing: {
         '9/16': '56.25%',
