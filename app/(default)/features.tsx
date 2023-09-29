@@ -22,7 +22,7 @@ export default function Features() {
             {/* 1st item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-anchor="[data-aos-id-blocks]">
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <FontAwesomeIcon icon={faBrain} size="xs" color="#5D5DFF" />
+                <FontAwesomeIcon icon={faBrain} size="xs" className="text-indigo-600" />
               </svg>
               <h4 className="h4 mb-2">Comprehensive engine</h4>
               <p className="text-lg text-gray-400 text-center">From heuristic rules to ML-generated ones, we've got you covered.</p>
@@ -31,7 +31,7 @@ export default function Features() {
             {/* 2nd item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="100" data-aos-anchor="[data-aos-id-blocks]">
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <FontAwesomeIcon icon={faBan} size="xs" color="#5D5DFF" />
+                <FontAwesomeIcon icon={faBan} size="xs" className="text-indigo-600" />
               </svg>
               <h4 className="h4 mb-2">No-code operations</h4>
               <p className="text-lg text-gray-400 text-center">Generate and modify patterns without dedicated engineering team.</p>
@@ -40,7 +40,7 @@ export default function Features() {
             {/* 3rd item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="200" data-aos-anchor="[data-aos-id-blocks]">
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <FontAwesomeIcon icon={faBoltLightning} size="xs" color="#5D5DFF" />
+                <FontAwesomeIcon icon={faBoltLightning} size="xs" className="text-indigo-600" />
               </svg>
               <h4 className="h4 mb-2">Fatser TAT</h4>
               <p className="text-lg text-gray-400 text-center">Happy with the outcomes, deploy to production to minimize losses quickly.</p>
@@ -49,7 +49,7 @@ export default function Features() {
             {/* 4th item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="300" data-aos-anchor="[data-aos-id-blocks]">
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <FontAwesomeIcon icon={faUsers} size="xs" color="#5D5DFF" />
+                <FontAwesomeIcon icon={faUsers} size="xs" className="text-indigo-600" />
               </svg>
               <h4 className="h4 mb-2">Collusion first</h4>
               <p className="text-lg text-gray-400 text-center">Platform built with a primary focus on tackling collusion fraud.</p>
@@ -58,7 +58,7 @@ export default function Features() {
             {/* 5th item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <FontAwesomeIcon icon={faBookAtlas} size="xs" color="#5D5DFF" />
+                <FontAwesomeIcon icon={faBookAtlas} size="xs" className="text-indigo-600" />
               </svg>
               <h4 className="h4 mb-2">Rule library</h4>
               <p className="text-lg text-gray-400 text-center">Explore rules that are applicable for every industry.</p>
@@ -67,7 +67,7 @@ export default function Features() {
             {/* 6th item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="500" data-aos-anchor="[data-aos-id-blocks]">
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <FontAwesomeIcon icon={faChartLine} size="xs" color="#5D5DFF" />
+                <FontAwesomeIcon icon={faChartLine} size="xs" className="text-indigo-600" />
               </svg>
               <h4 className="h4 mb-2">Monitor</h4>
               <p className="text-lg text-gray-400 text-center">Monitor efficiency of the system for each pattern configuered.</p>

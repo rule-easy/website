@@ -12,13 +12,13 @@ export default function SignUp() {
         <div className="pt-32 pb-12 md:pt-40 md:pb-20">
 
           {/* Page header */}
-          <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
+          {/* <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
             <h1 className="h1">Welcome. We exist to make entrepreneurship easier.</h1>
-          </div>
+          </div> */}
 
           {/* Form */}
           <div className="max-w-sm mx-auto">
-            <form>
+            {/* <form>
               <div className="flex flex-wrap -mx-3">
                 <div className="w-full px-3">
                   <button className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center">
@@ -35,7 +35,7 @@ export default function SignUp() {
               <div className="border-t border-gray-700 border-dotted grow mr-3" aria-hidden="true"></div>
               <div className="text-gray-400">Or, register with your email</div>
               <div className="border-t border-gray-700 border-dotted grow ml-3" aria-hidden="true"></div>
-            </div>
+            </div> */}
             <form>
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
@@ -61,9 +61,9 @@ export default function SignUp() {
                   <input id="password" type="password" className="form-input w-full text-gray-300" placeholder="Password (at least 10 characters)" required />
                 </div>
               </div>
-              <div className="text-sm text-gray-500 text-center">
+              {/* <div className="text-sm text-gray-500 text-center">
                 I agree to be contacted by Open PRO about this offer as per the Open PRO <Link href="#" className="underline text-gray-400 hover:text-gray-200 hover:no-underline transition duration-150 ease-in-out">Privacy Policy</Link>.
-              </div>
+              </div> */}
               <div className="flex flex-wrap -mx-3 mt-6">
                 <div className="w-full px-3">
                   <button className="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Sign up</button>
@@ -71,7 +71,7 @@ export default function SignUp() {
               </div>
             </form>
             <div className="text-gray-400 text-center mt-6">
-              Already using Open PRO? <Link href="/signin" className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Sign in</Link>
+              Already using PatternAct? <Link href="/signin" className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Sign in</Link>
             </div>
           </div>
 
