@@ -39,13 +39,13 @@ export default function Header() {
                   How it works
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/casestudies"
                   className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
                   Case Studies
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/pricing" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
                   Pricing
@@ -53,7 +53,7 @@ export default function Header() {
               </li>
               <li>
                 <Link href="/console" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
-                  Console
+                  Login
                 </Link>
               </li>
             </ul>

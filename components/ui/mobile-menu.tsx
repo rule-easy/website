@@ -75,11 +75,11 @@ export default function MobileMenu() {
               Pricing
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="/casestudies" className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center" onClick={() => setMobileNavOpen(false)}>
               Case studies
             </Link>
-          </li>
+          </li> */}
           {/* <li>
             <Link
               href="/signup"
