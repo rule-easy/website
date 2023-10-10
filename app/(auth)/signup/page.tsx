@@ -2,22 +2,8 @@
 
 import Link from 'next/link'
 import React, { useState, FormEvent } from 'react'
-
-// const callAPI = async () => {
-//   var formData = {}
-//   try {
-//     const response = await fetch('https://jsonplaceholder.typicode.com/posts/1', {
-//       method: 'POST',
-//       body: formData,
-//     }
-//     const res = await fetch(`https://jsonplaceholder.typicode.com/posts/1`);
-//     const data = await res.json();
-//     console.log(data);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
+import { SignUp as SignUpSvc } from '@/src/services/auth'
+import { AuthResponse, SignupRequest } from '@/src/dto/auth'
 
 export default function SignUp() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -29,16 +15,11 @@ export default function SignUp() {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setIsLoading(true) // Set loading to true when the request starts
+    const signUpReq: SignupRequest = { email: email, company: companyName, password: passWord, name: fullName }
     try {
       console.log("Trying signup now with info - ", email, companyName, fullName, passWord);
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email, company: companyName, name: fullName, password: passWord })
-      };
-      const response = await fetch(`http://localhost:8080/v1/signup`, requestOptions);
-      const data = await response.json();
-      // this.setState({ postId: data.id });
+      const data: AuthResponse = await SignUpSvc(signUpReq);
+      console.log("Successfully logged in :", data.data?.jwt)
     } catch (error) {
       console.error(error)
     } finally {
