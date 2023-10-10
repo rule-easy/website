@@ -115,7 +115,7 @@ export default function Pricing() {
                                 <span className="inline-block text-center font-semibold mt-3 mb-3 text-indigo-100">Upto 25K requests</span>
                             </div>
                             <div className="grid grid-cols-3">
-                                <span className="inline-block text-gray-500 text-left font-semibold mt-3 mb-3 text-indigo-100">On-demand rule evaluation</span>
+                                <span className="inline-block text-gray-500 text-left font-semibold mt-3 mb-3">On-demand rule evaluation</span>
                                 <span className="inline-block text-center font-semibold mt-3 mb-3 text-indigo-100">$30 per 10K req</span>
                                 {/* <button type="submit" className="w-2/3 flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ">On request <FontAwesomeIcon icon={faArrowRight} color="#FFF" className="pl-4" /></button> */}
                             </div>
