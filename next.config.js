@@ -5,7 +5,11 @@ const nextConfig = {
     distDir: '_static',
     images: {
         unoptimized: true
-    }
+    },
+    publicRuntimeConfig: {
+        backendHost: 'http://localhost:8080'
+    },
+
 }
 
 module.exports = nextConfig
