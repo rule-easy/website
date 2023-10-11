@@ -3,6 +3,7 @@ import { SignupRequest, AuthResponse, SigninRequest } from "../dto/auth";
 import axios from "axios";
 import { AxiosRequestConfig } from "axios";
 import { Config, GetEnvConfig } from "../config/config";
+import { saveToStorage } from "../localstorage/localstorage";
 
 
 export async function SignUp(signUpReq: SignupRequest) {
@@ -14,7 +15,8 @@ export async function SignUp(signUpReq: SignupRequest) {
             headers: { 'Content-Type': 'application/json' },
         }
         const auth: AuthResponse = (await axios.post("v1/signup", signUpReq, axiosRequestConfig)).data;
-        console.log(auth)
+        const jwt = auth.data?.jwt || ""
+        saveToStorage("access_token", jwt)
         return auth
     } catch (error) {
         console.error(error)
@@ -32,7 +34,8 @@ export async function SignIn(signinReq: SigninRequest) {
             headers: { 'Content-Type': 'application/json' },
         }
         const auth: AuthResponse = (await axios.post("v1/login", signinReq, axiosRequestConfig)).data;
-        console.log(auth)
+        const jwt = auth.data?.jwt || ""
+        saveToStorage("access_token", jwt)
         return auth
     } catch (error) {
         console.error(error)

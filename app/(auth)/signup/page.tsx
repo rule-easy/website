@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React, { useState, FormEvent } from 'react'
 import { SignUp as SignUpSvc } from '@/src/services/auth'
 import { AuthResponse, SignupRequest } from '@/src/dto/auth'
+import { redirect } from 'next/navigation'
 
 export default function SignUp() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -11,15 +12,15 @@ export default function SignUp() {
   const [email, setEmail] = useState<string>("")
   const [passWord, setPassWord] = useState<string>("")
   const [companyName, setCompanyName] = useState<string>("")
-  // onSubmit hook for Signup
+
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setIsLoading(true) // Set loading to true when the request starts
     const signUpReq: SignupRequest = { email: email, company: companyName, password: passWord, name: fullName }
     try {
-      console.log("Trying signup now with info - ", email, companyName, fullName, passWord);
       const data: AuthResponse = await SignUpSvc(signUpReq);
-      console.log("Successfully logged in :", data.data?.jwt)
+      console.log("Successfully logged in and redirecting :", data.data?.jwt)
+      redirect('/signin')
     } catch (error) {
       console.error(error)
     } finally {

@@ -1,39 +1,28 @@
 'use client'
 
 import Link from 'next/link'
-import React, { useState, FormEvent } from 'react'
-import { SignIn as SignInSvc } from '@/src/services/auth'
-import { AuthResponse, SigninRequest } from '@/src/dto/auth'
+import React, { useRef } from 'react'
+import { signIn } from "next-auth/react";
 
-export default function SignIn() {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [email, setEmail] = useState<string>("")
-  const [passWord, setPassWord] = useState<string>("")
-  // onSubmit hook for Signup
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    setIsLoading(true) // Set loading to true when the request starts
-    const signinReq: SigninRequest = { email: email, password: passWord }
-    try {
-      console.log("Trying signup now with info - ", email, passWord);
-      const data: AuthResponse = await SignInSvc(signinReq);
-      console.log("Successfully logged in :", data.data?.jwt)
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setIsLoading(false) // Set loading to false when the request completes
-    }
-  }
+export default function Login() {
+  const userEmail = useRef("")
+  const userPassword = useRef("")
+
+  const onSubmit = async () => {
+    console.log("Requesting authenticaion", userEmail.current, userPassword.current)
+    const result = await signIn();
+    // const result = await signIn("credentials", {
+    //   email: userEmail.current,
+    //   password: userPassword.current,
+    //   redirect: true,
+    //   callbackUrl: "/landing",
+    // });
+  };
 
   return (
     <section className="relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-
-          {/* Page header */}
-          {/* <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h1 className="h1">Welcome back. We exist to make entrepreneurship easier.</h1>
-          </div> */}
 
           {/* Form */}
           <div className="max-w-sm mx-auto">
@@ -41,13 +30,13 @@ export default function SignIn() {
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
                   <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="email">Email</label>
-                  <input value={email} onChange={(e) => setEmail(e.target.value)} id="email" type="email" className="form-input w-full text-gray-300" placeholder="you@yourcompany.com" required />
+                  <input onChange={(e) => (userEmail.current = e.target.value)} id="email" type="email" className="form-input w-full text-gray-300" placeholder="you@yourcompany.com" required />
                 </div>
               </div>
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
                   <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="password">Password</label>
-                  <input value={passWord} onChange={(e) => setPassWord(e.target.value)} id="password" type="password" className="form-input w-full text-gray-300" placeholder="Password (at least 10 characters)" required />
+                  <input onChange={(e) => (userPassword.current = e.target.value)} id="password" type="password" className="form-input w-full text-gray-300" placeholder="Password (at least 10 characters)" required />
                 </div>
               </div>
               <div className="flex flex-wrap -mx-3 mb-4">
@@ -68,7 +57,7 @@ export default function SignIn() {
               </div>
             </form>
             <div className="text-gray-400 text-center mt-6">
-              Don’t you have an account? <Link href="/signup" className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Sign up</Link>
+              Don't you have an account? <Link href="/signup" className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Sign up</Link>
             </div>
           </div>
 
