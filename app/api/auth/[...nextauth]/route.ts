@@ -1,5 +1,5 @@
-import { AuthResponse, SigninRequest } from "@/src/dto/auth";
-import { SignIn } from "@/src/services/auth";
+import { AuthResponse, SigninRequest } from "@/lib/dto/auth";
+import { SignIn } from "@/lib/services/auth";
 import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 

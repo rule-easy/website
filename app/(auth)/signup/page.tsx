@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import React, { useState, FormEvent } from 'react'
-import { SignUp as SignUpSvc } from '@/src/services/auth'
-import { AuthResponse, SignupRequest } from '@/src/dto/auth'
+import { SignUp as SignUpSvc } from '@/lib/services/auth'
+import { AuthResponse, SignupRequest } from '@/lib/dto/auth'
 import { redirect } from 'next/navigation'
 
 export default function SignUp() {
