@@ -18,7 +18,7 @@ export const authOptions: AuthOptions = {
                     var signinReq: SigninRequest = { email: credentials?.email, password: credentials?.password }
                     const authResponse: AuthResponse = await SignIn(signinReq)
                     console.log("Successful authentication:", authResponse)
-                    return authResponse
+                    return authResponse.data
                 } catch (e) {
                     console.error(e);
                     return null;
@@ -29,15 +29,16 @@ export const authOptions: AuthOptions = {
     pages: {
         signIn: "/login",
     },
-    // callbacks: {
-    //     async jwt({ token, user }) {
-    //         return { ...token, ...user };
-    //     },
-    //     async session({ session, token, user }) {
-    //         session.user = token as any;
-    //         return session;
-    //     },
-    // },
+    callbacks: {
+        async jwt({ token, user }) {
+            return { ...token, ...user };
+        },
+        async session({ session, token, user }) {
+            session.user = token as any;
+            console.log("Caching the session:", session)
+            return session;
+        },
+    },
 }
 
 const handler = NextAuth(authOptions);
