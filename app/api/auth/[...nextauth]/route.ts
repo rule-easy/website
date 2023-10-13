@@ -26,9 +26,9 @@ export const authOptions: AuthOptions = {
             },
         }),
     ],
-    // pages: {
-    //     signIn: "/login",
-    // },
+    pages: {
+        signIn: "/login",
+    },
     // callbacks: {
     //     async jwt({ token, user }) {
     //         return { ...token, ...user };
