@@ -1,9 +1,9 @@
 'use client'
+//NOTE: Based on https://github.com/vahid-nejad/custom-login-page-intercepting-routes
 
 import Link from 'next/link'
 import React, { useRef } from 'react'
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 type Props = {
     className?: string;
@@ -11,8 +11,7 @@ type Props = {
     error?: string;
 };
 
-export default function Login() {
-    const router = useRouter();
+export default function Login(props: Props) {
     const userEmail = useRef("")
     const userPassword = useRef("")
 
@@ -31,6 +30,12 @@ export default function Login() {
         <section className="relative">
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
                 <div className="pt-32 pb-12 md:pt-40 md:pb-20">
+                    {/* Failed authentication */}
+                    {!!props.error && (
+                        <p className="bg-red-100 text-red-600 text-center p-2">
+                            Authentication Failed
+                        </p>
+                    )}
                     {/* Form */}
                     <div className="max-w-sm mx-auto">
                         <form onSubmit={onSubmit}>

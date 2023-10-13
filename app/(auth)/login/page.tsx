@@ -4,8 +4,8 @@ import React from 'react'
 const LoginInterceptor = () => {
   return (
     <div>
-      <Login></Login>
-    </div>
+      <Login />
+    </div >
   )
 }
 
