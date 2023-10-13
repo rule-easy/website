@@ -14,8 +14,8 @@ export default function Login() {
     // const result = await signIn("credentials", {
     //   email: userEmail.current,
     //   password: userPassword.current,
-    //   redirect: true,
-    //   callbackUrl: "/landing",
+    //   // redirect: true,
+    //   // callbackUrl: "/home",
     // });
   };
 
