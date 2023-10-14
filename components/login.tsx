@@ -4,16 +4,13 @@
 import Link from 'next/link'
 import React, { useRef } from 'react'
 import { signIn } from "next-auth/react";
+import { useSearchParams } from 'next/navigation'
 
-type Props = {
-    className?: string;
-    callbackUrl?: string;
-    error?: string;
-};
-
-export default function Login(props: Props) {
+export default function Login() {
     const userEmail = useRef("")
     const userPassword = useRef("")
+    const searchParams = useSearchParams()
+    const errorMsg = searchParams.get('error')
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -31,7 +28,7 @@ export default function Login(props: Props) {
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
                 <div className="pt-32 pb-12 md:pt-40 md:pb-20">
                     {/* Failed authentication */}
-                    {!!props.error && (
+                    {!!errorMsg && (
                         <p className="bg-red-100 text-red-600 text-center p-2">
                             Authentication Failed
                         </p>

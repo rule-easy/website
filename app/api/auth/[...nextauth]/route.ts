@@ -18,10 +18,10 @@ export const authOptions: AuthOptions = {
                     var signinReq: SigninRequest = { email: credentials?.email, password: credentials?.password }
                     const authResponse: AuthResponse = await SignIn(signinReq)
                     console.log("Successful authentication:", authResponse)
-                    return authResponse.data
+                    return authResponse.success?.data
                 } catch (e) {
-                    console.error(e);
-                    return null;
+                    console.log("Unsuccessful authentication")
+                    return null
                 }
             },
         }),

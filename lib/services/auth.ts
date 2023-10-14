@@ -11,27 +11,16 @@ export async function SignUp(signUpReq: SignupRequest) {
     try {
         console.log("Trying signup now with info - ", signUpReq);
         const auth: AuthResponse = (await axios.post("v1/signup", signUpReq)).data;
-        const jwt = auth.data?.jwt || ""
-        saveToStorage("access_token", jwt)
         return auth
     } catch (error) {
         console.error(error)
-        const auth: AuthResponse = { code: 500 }
-        return auth
+        return null
     }
 }
 
 export async function SignIn(signinReq: SigninRequest) {
     const env: Config = await GetEnvConfig()
-    try {
-        console.log("Trying signup now with info - ", signinReq);
-        const auth: AuthResponse = (await axios.post("v1/login", signinReq)).data;
-        const jwt = auth.data?.jwt || ""
-        saveToStorage("access_token", jwt)
-        return auth
-    } catch (error) {
-        console.error(error)
-        const auth: AuthResponse = { code: 500 }
-        return auth
-    }
+    console.log("Trying login with info - ", signinReq);
+    const auth: AuthResponse = (await axios.post("v1/login", signinReq)).data;
+    return auth
 }

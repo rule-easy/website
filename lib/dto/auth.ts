@@ -1,8 +1,11 @@
 export interface AuthResponse {
-    code: number;
-    error?: string;
-    data?: {
-        jwt: string
+    success?: {
+        code: number
+        data?: any
+    }
+    error?: {
+        code: number
+        msg?: string
     }
 }
 

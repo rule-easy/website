@@ -1,18 +1,19 @@
-// "use client";
+"use client";
 
-// import axios from "../axios"
-// import { signIn, useSession } from "next-auth/react";
+import { AuthResponse } from "@/lib/dto/auth";
+import axios from "../axios"
+import { signIn, useSession } from "next-auth/react";
 
-// export const useRefreshToken = () => {
-//     const { data: session } = useSession();
+export const useRefreshToken = () => {
+    const { data: session } = useSession();
 
-//     const refreshToken = async () => {
-//         const res = await axios.post("/auth/refresh", {
-//             refresh: session?.user.refreshToken,
-//         });
+    const refreshToken = async () => {
+        const res: AuthResponse = await axios.post("/v1/refresh", {
+            refresh: session?.user.refreshToken,
+        });
 
-//         if (session) session.user.accessToken = res.data.accessToken;
-//         else signIn();
-//     };
-//     return refreshToken;
-// };
+        if (session) session.user.accessToken = res.success?.data?.accessToken;
+        else signIn();
+    };
+    return refreshToken;
+};
