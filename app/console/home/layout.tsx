@@ -29,12 +29,11 @@ export default function DefaultLayout({
             <main className="grow">
                 <Providers>
                     <PageIllustration />
-
-                    {children}
+                    <div className='pt-20 h-full'>
+                        {children}
+                    </div>
                 </Providers>
-
-
-            </main>
+            </main >
 
             <Footer />
         </>
