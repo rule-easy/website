@@ -8,11 +8,11 @@ const ConsoleMenu = () => {
         <div>
             <div className='grid grid-cols-12'>
                 <div className="flex justify-start col-span-6">
-                    <div className="btn-group ml-1">
+                    {/* <div className="btn-group ml-1">
                         <button className="btn btn-active">Button</button>
                         <button className="btn">Button</button>
                         <button className="btn">Button</button>
-                    </div>
+                    </div> */}
                     {/* <button className="flex items-center justify-center mr-0.5 border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"><FontAwesomeIcon icon={faBan} className=" text-indigo-100" /></button>
                     <button className="flex items-center justify-center mr-0.5 border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"><FontAwesomeIcon icon={faChartLine} className=" text-indigo-100" /></button>
                     <button className="flex items-center justify-center mr-0.5 border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"><FontAwesomeIcon icon={faGlobe} className=" text-indigo-100" /></button> */}

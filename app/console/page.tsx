@@ -2,11 +2,13 @@
 
 import React, { useState, FormEvent } from 'react'
 import { signIn, signOut, useSession } from "next-auth/react";
-import Menu from '@/components/menu';
 import SideBar from '@/components/sidebar';
-import ConsoleMenu from '@/components/consolemenu';
 
-export default function Landing() {
+export default function Console({
+    children,
+}: {
+    children: React.ReactNode
+}) {
     const { data: session } = useSession();
 
     if (true) {
@@ -17,16 +19,17 @@ export default function Landing() {
                         <div className='col-span-3'>
                             <SideBar></SideBar>
                         </div>
-                        <div className='col-span-9 bg-gray-700'>
+                        <div className='col-span-9 bg-gray-700 pt-10'>
                             <div className='flex flex-col'>
-                                <ConsoleMenu />
-                                <div className='h-48'> Hello </div>
+                                <div className='flex flex-grow justify-center'>
+                                    {children}
+                                </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
-            </section>
+            </section >
         );
     } else {
         return (

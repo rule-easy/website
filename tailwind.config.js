@@ -34,6 +34,7 @@ module.exports = {
           primary: '#5D5DFF',
           green: '#B6D7A8',
           red: '#EA9999',
+          gray: '#1D232A'
         }
       },
       spacing: {

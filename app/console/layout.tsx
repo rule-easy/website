@@ -9,6 +9,7 @@ import PageIllustration from '@/components/page-illustration'
 import Footer from '@/components/ui/footer'
 import SigninButton from '@/components/signin-button'
 import Providers from './Provider'
+import Console from './page'
 export default function DefaultLayout({
     children,
 }: {
@@ -30,7 +31,9 @@ export default function DefaultLayout({
                 <Providers>
                     <PageIllustration />
                     <div className='pt-20 h-full'>
-                        {children}
+                        <Console>
+                            {children}
+                        </Console>
                     </div>
                 </Providers>
             </main >
