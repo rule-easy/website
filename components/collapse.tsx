@@ -1,132 +1,80 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faDatabase, faArrowLeft, faBookAtlas, faBrain, faShieldHalved, faChartPie, faCode, faGlobe, faCircleXmark, faArrowRight, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faDatabase, faArrowLeft, faPlus, faBrain, faShieldHalved, faCloud, faCirclePlay, faCog, faCircleXmark, faArrowRight, faCheckCircle, faCode } from "@fortawesome/free-solid-svg-icons";
 import { signOut } from "next-auth/react";
+import Link from 'next/link'
 
 const Collapse = () => {
     return (
         <div>
             <ul className="menu bg-custom-gray">
-                <li>
-                    <div className="collapse-title text-l font-medium text-gray-300">
+                <li className='mb-8'>
+                    <Link href="/console" className="text-l font-medium text-gray-300">
                         <FontAwesomeIcon icon={faHouse} className=" pr-4 text-indigo-600" /> DASHBOARD
-                    </div>
+                    </Link>
                 </li>
-                <li>
-                    <div className="collapse-title text-l font-medium text-gray-300">
-                        <FontAwesomeIcon icon={faDatabase} className=" pr-4 text-indigo-600" /> DATA SOURCE
+                <li className='mb-8'>
+                    <div className="text-l font-medium text-gray-300">
+                        <FontAwesomeIcon icon={faPlus} className=" pr-4 text-indigo-600" /> CREATE
                     </div>
                     <ul>
-                        <li className='active'>
-                            <div className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
-                                CREATE
-                            </div>
+                        <li>
+                            <Link href="/console/streams/create" className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
+                                <FontAwesomeIcon icon={faDatabase} /> STREAM
+                            </Link>
                         </li>
                         <li>
-                            <div className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
-                                UPDATE
-                            </div>
+                            <Link href="/console/rules/create" className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
+                                <FontAwesomeIcon icon={faShieldHalved} /> RULE
+                            </Link>
                         </li>
                         <li>
-                            <div className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
-                                VIEW
+                            <details>
+                                <summary>
+                                    <div className="text-l font-medium text-gray-300">
+                                        ML RULES
+                                    </div>
+                                </summary>
+                                <li>
+                                    <Link href="/console/datasources/create" className='text-l text-gray-400 ml-4 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
+                                        <FontAwesomeIcon icon={faCloud} /> DATASOURCE
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/console/workflows/create" className='text-l text-gray-400 ml-4 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
+                                        <FontAwesomeIcon icon={faCirclePlay} /> WORKFLOW
+                                    </Link>
+                                </li>
+                            </details>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li className='mb-8'>
+                    <div className="text-l font-medium text-gray-300">
+                        <FontAwesomeIcon icon={faCog} className=" pr-4 text-indigo-600" /> SETTINGS
+                    </div>
+                    <ul>
+                        <li>
+                            <div onClick={() => signOut()} className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
+                                <FontAwesomeIcon icon={faCode} className="pl-4" /> DEVLOPER
                             </div>
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <details>
-                        <summary>
-                            <div className="collapse-title text-l font-medium text-gray-300">
-                                <FontAwesomeIcon icon={faShieldHalved} className=" pr-4 text-indigo-600" /> RULE
+
+                <li className='mb-8'>
+                    <div className="text-l font-medium text-gray-300">
+                        <FontAwesomeIcon icon={faShieldHalved} className=" pr-4 text-indigo-600" /> AUTH
+                    </div>
+                    <ul>
+                        <li>
+                            <div onClick={() => signOut()} className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
+                                <FontAwesomeIcon icon={faArrowLeft} className="pl-4" /> SIGN OUT
                             </div>
-                        </summary>
-                        <ul>
-                            <li className='active'>
-                                <div className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
-                                    CREATE
-                                </div>
-                            </li>
-                            <li>
-                                <div className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
-                                    UPDATE
-                                </div>
-                            </li>
-                            <li>
-                                <div className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
-                                    VIEW
-                                </div>
-                            </li>
-                        </ul>
-                    </details>
-                </li>
-                <li>
-                    <details>
-                        <summary>
-                            <div className="collapse-title text-l font-medium text-gray-300">
-                                <FontAwesomeIcon icon={faShieldHalved} className=" pr-4 text-indigo-600" /> STREAMS
-                            </div>
-                        </summary>
-                        <ul>
-                            <li className='active'>
-                                <div className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
-                                    CREATE
-                                </div>
-                            </li>
-                            <li>
-                                <div className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
-                                    UPDATE
-                                </div>
-                            </li>
-                            <li>
-                                <div className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
-                                    VIEW
-                                </div>
-                            </li>
-                        </ul>
-                    </details>
-                </li>
-                <li>
-                    <details>
-                        <summary>
-                            <div className="collapse-title text-l font-medium text-gray-300">
-                                <FontAwesomeIcon icon={faShieldHalved} className=" pr-4 text-indigo-600" /> WORKFLOWS
-                            </div>
-                        </summary>
-                        <ul>
-                            <li className='active'>
-                                <div className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
-                                    CREATE
-                                </div>
-                            </li>
-                            <li>
-                                <div className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
-                                    UPDATE
-                                </div>
-                            </li>
-                            <li>
-                                <div className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
-                                    VIEW
-                                </div>
-                            </li>
-                        </ul>
-                    </details>
-                </li>
-                <li>
-                    <details>
-                        <summary>
-                            <div className="collapse-title text-l font-medium text-gray-300">
-                                <FontAwesomeIcon icon={faShieldHalved} className=" pr-4 text-indigo-600" /> AUTH
-                            </div>
-                        </summary>
-                        <ul>
-                            <li>
-                                <div onClick={() => signOut()} className='text-l text-gray-400 pt-2 pb-2 hover:text-indigo-600 hover:cursor-pointer hover:font-bold'>
-                                    <FontAwesomeIcon icon={faArrowLeft} className="pl-4" /> SIGN OUT
-                                </div>
-                            </li>
-                        </ul>
-                    </details>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
