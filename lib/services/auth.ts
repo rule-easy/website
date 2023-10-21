@@ -1,9 +1,7 @@
 
 import { SignupRequest, AuthResponse, SigninRequest } from "../dto/auth";
 import axios from "../interceptors/axios";
-import { AxiosRequestConfig } from "axios";
 import { Config, GetEnvConfig } from "../config/config";
-import { saveToStorage } from "../localstorage/localstorage";
 
 
 export async function SignUp(signUpReq: SignupRequest) {
