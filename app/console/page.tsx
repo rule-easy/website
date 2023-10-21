@@ -14,19 +14,16 @@ export default function Console({
     if (true) {
         return (
             <section>
-                <div className="max-w-6xl mx-auto h-full relative">
+                <div className="max-w-6xl mx-auto relative">
                     <div className='grid grid-cols-12 gap-0.5'>
+                        {/* Side bar */}
                         <div className='col-span-3'>
                             <SideBar></SideBar>
                         </div>
+                        {/* Console body */}
                         <div className='col-span-9 bg-gray-700 pt-10'>
-                            <div className='flex flex-col'>
-                                <div className='flex flex-grow justify-center'>
-                                    {children}
-                                </div>
-                            </div>
+                            {children}
                         </div>
-
                     </div>
                 </div>
             </section >

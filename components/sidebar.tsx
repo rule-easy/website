@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const SideBar = () => {
     return (
-        <div className='bg-custom-gray'>
+        <div className='h-full bg-custom-gray'>
             <div className='flex flex-col'>
                 <div className='flex flex-row p-4'>
                     <Logo />

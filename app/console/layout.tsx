@@ -30,7 +30,7 @@ export default function DefaultLayout({
             <main className="grow">
                 <Providers>
                     <PageIllustration />
-                    <div className='pt-20 h-full'>
+                    <div className='pt-20'>
                         <Console>
                             {children}
                         </Console>

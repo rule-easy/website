@@ -23,7 +23,7 @@ export default function DefaultLayout({
     return (
         <>
             <main className="grow">
-                <div className='p-5 h-full'>
+                <div className='p-5'>
                     {children}
                 </div>
             </main >
