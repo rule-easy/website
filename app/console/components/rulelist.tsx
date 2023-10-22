@@ -4,7 +4,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { RuleDetails } from '@/lib/dto/rules';
 
 const RuleList = () => {
-    const ruleList = [
+    const ruleList: RuleDetails[] = [
         {
             name: "Chip Dumping",
             total_events: 100,
