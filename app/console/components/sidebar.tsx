@@ -1,8 +1,6 @@
 import React from 'react'
 import Collapse from './collapse'
-import Link from 'next/link'
-import Logo from './logo'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Logo from '../../../components/logo'
 
 const SideBar = () => {
     return (

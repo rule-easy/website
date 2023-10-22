@@ -2,7 +2,7 @@
 
 import React, { useState, FormEvent } from 'react'
 import { signIn, signOut, useSession } from "next-auth/react";
-import SideBar from '@/components/sidebar';
+import SideBar from '@/app/console/components/sidebar';
 
 export default function Console({
     children,
