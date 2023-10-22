@@ -9,7 +9,7 @@ const EventDetails = () => {
 
     return (
         <div>
-            <p>Event details here {eventID}</p>
+            Event details
         </div>
     )
 }

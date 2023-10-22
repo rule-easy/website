@@ -1,9 +1,10 @@
 import React from 'react'
+import EventList from '../components/eventlist'
 
 const AllEvents = () => {
     return (
         <div>
-            <p>All Events</p>
+            <EventList></EventList>
         </div>
     )
 }

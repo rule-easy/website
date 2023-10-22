@@ -1,10 +1,9 @@
 import React from 'react'
+import RuleList from '../components/rulelist'
 
 const AllRules = () => {
     return (
-        <div>
-            <p>All rules</p>
-        </div>
+        <RuleList></RuleList>
     )
 }
 
