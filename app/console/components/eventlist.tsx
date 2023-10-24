@@ -1,7 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faFastForward, faFastBackward } from "@fortawesome/free-solid-svg-icons";
-import { EventDetails } from '@/lib/dto/events';
+import { EventDetails } from '@/types/events';
 import Link from 'next/link';
 
 const EventList = () => {

@@ -1,4 +1,4 @@
-import { AuthResponse, SigninRequest } from "@/lib/dto/auth";
+import { ServerResponse, SigninRequest } from "@/types/auth";
 import { SignIn } from "@/lib/services/auth";
 import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -16,7 +16,7 @@ const authOptions: AuthOptions = {
                 console.log("Trying authentication:", credentials)
                 try {
                     var signinReq: SigninRequest = { email: credentials?.email, password: credentials?.password }
-                    const authResponse: AuthResponse = await SignIn(signinReq)
+                    const authResponse: ServerResponse = await SignIn(signinReq)
                     console.log("Successful authentication:", authResponse)
                     return authResponse.success?.data
                 } catch (e) {

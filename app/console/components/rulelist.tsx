@@ -1,7 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faFastForward, faFastBackward } from "@fortawesome/free-solid-svg-icons";
-import { RuleDetails } from '@/lib/dto/rules';
+import { RuleDetails } from '@/types/rules';
 
 const RuleList = () => {
     const ruleList: RuleDetails[] = [

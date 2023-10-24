@@ -14,6 +14,7 @@ const useAxiosAuth = () => {
                 if (!config.headers["Token"]) {
                     config.headers["Token"] = `${session?.user?.accessToken}`;
                 }
+                console.log("Config set to:", config)
                 return config;
             },
             (error) => Promise.reject(error)

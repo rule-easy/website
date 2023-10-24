@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthResponse } from "@/lib/dto/auth";
+import { ServerResponse } from "@/types/auth";
 import axios from "../axios"
 import { signIn, useSession } from "next-auth/react";
 
@@ -8,7 +8,7 @@ export const useRefreshToken = () => {
     const { data: session } = useSession();
 
     const refreshToken = async () => {
-        const res: AuthResponse = await axios.post("/v1/refresh", {
+        const res: ServerResponse = await axios.post("/v1/refresh", {
             refresh: session?.user.refreshToken,
         });
 

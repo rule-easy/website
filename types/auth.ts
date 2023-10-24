@@ -1,4 +1,4 @@
-export interface AuthResponse {
+export interface ServerResponse {
     success?: {
         code: number
         data?: any
