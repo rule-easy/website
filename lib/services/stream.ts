@@ -1,8 +1,7 @@
-import { ServerResponse } from "../../types/auth";
-import { Config, GetEnvConfig } from "../config/config";
-import { CreateStreamRequest } from "../../types/stream";
-import useAxiosAuth from "../interceptors/hooks/useAxiosAuth";
-
+import { ServerResponse } from '../../types/auth';
+import { CreateStreamRequest } from '../../types/stream';
+import { Config, GetEnvConfig } from '../config/config';
+import useAxiosAuth from '../interceptors/hooks/useAxiosAuth';
 
 export async function CreateStream(createStreamReq: CreateStreamRequest) {
     const env: Config = await GetEnvConfig()

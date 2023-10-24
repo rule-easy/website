@@ -1,7 +1,8 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
+import React from 'react';
+
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const CreateStreamSuccess = () => {
     return (

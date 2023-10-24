@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useState, FormEvent } from 'react'
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from 'next-auth/react';
+import React, { FormEvent, useState } from 'react';
+
 import SideBar from '@/app/console/components/sidebar';
 
 export default function Console({

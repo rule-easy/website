@@ -1,13 +1,14 @@
 'use client'
-import React, { useRef } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import clsx from 'clsx';
-import { CreateStreamRequest } from '@/types/stream';
-import { ServerResponse } from '@/types/auth';
-import useAxiosAuth from '@/lib/interceptors/hooks/useAxiosAuth';
 import { AxiosError } from 'axios';
-import { useRouter } from "next/navigation";
+import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
+import React, { useRef } from 'react';
+
+import useAxiosAuth from '@/lib/interceptors/hooks/useAxiosAuth';
+import { ServerResponse } from '@/types/auth';
+import { CreateStreamRequest } from '@/types/stream';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const CreateStream = () => {
     const [progress, setProgress] = React.useState(0);

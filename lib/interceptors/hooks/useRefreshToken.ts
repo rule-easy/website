@@ -1,10 +1,10 @@
 "use client";
 
-import { ServerResponse } from "@/types/auth";
-import axios from "../axios"
-import { signIn, useSession } from "next-auth/react";
-import { AxiosResponse } from "axios";
-import { error } from "console";
+import { AxiosResponse } from 'axios';
+import { error } from 'console';
+import { signIn, useSession } from 'next-auth/react';
+
+import axios from '../axios';
 
 export const useRefreshToken = () => {
     const { data: session } = useSession();

@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect } from 'react'
+import 'aos/dist/aos.css';
 
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+import AOS from 'aos';
+import { useEffect } from 'react';
 
-import PageIllustration from '@/components/page-illustration'
-import Footer from '@/components/ui/footer'
+import PageIllustration from '@/components/page-illustration';
+import Footer from '@/components/ui/footer';
 
 export default function DefaultLayout({
   children,

@@ -1,9 +1,12 @@
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
-config.autoAddCss = false;
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBan, faBoltLightning, faBookAtlas, faBrain, faChartLine, faChartPie, faCode, faGlobe, faUsers } from "@fortawesome/free-solid-svg-icons";
+import '@fortawesome/fontawesome-svg-core/styles.css';
 
+import { config } from '@fortawesome/fontawesome-svg-core';
+import {
+  faBan, faBoltLightning, faBookAtlas, faBrain, faChartLine, faUsers
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+config.autoAddCss = false;
 export default function Features() {
   return (
     <section>

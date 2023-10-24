@@ -1,14 +1,10 @@
-import UpperStats from '@/components/upper-stats'
-import React from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
+
 import EventList from '@/app/console/components/eventlist';
-import RuleList from '@/app/console/components/rulelist';
-import RuleChart from '@/app/console/components/rulechart';
 import FixedTimeSelector from '@/app/console/components/fixedtimeselector';
-
-
-
+import RuleChart from '@/app/console/components/rulechart';
+import RuleList from '@/app/console/components/rulelist';
+import UpperStats from '@/components/upper-stats';
 
 const Dashboard = () => {
     return (

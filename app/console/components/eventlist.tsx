@@ -1,8 +1,11 @@
-import React from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faFastForward, faFastBackward } from "@fortawesome/free-solid-svg-icons";
-import { EventDetails } from '@/types/events';
 import Link from 'next/link';
+import React from 'react';
+
+import { EventDetails } from '@/types/events';
+import {
+    faFastBackward, faFastForward, faMagnifyingGlass
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const EventList = () => {
     const eventList: EventDetails[] = [

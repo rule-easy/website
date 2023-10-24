@@ -1,5 +1,6 @@
-import React from 'react'
-import EventList from '../components/eventlist'
+import React from 'react';
+
+import EventList from '../components/eventlist';
 
 const AllEvents = () => {
     return (

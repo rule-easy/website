@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
+
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBan, faBoltLightning, faBookAtlas, faBrain, faChartLine, faChartPie, faCode, faGlobe, faCircleXmark, faArrowRight, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const CreateRule = () => {
     return (

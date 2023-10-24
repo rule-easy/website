@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useRef, Fragment } from 'react'
-import type { StaticImageData } from 'next/image'
-import { Dialog, Transition } from '@headlessui/react'
-import Image from 'next/image'
+import Image from 'next/image';
+import { Fragment, useRef, useState } from 'react';
 
+import { Dialog, Transition } from '@headlessui/react';
+
+import type { StaticImageData } from 'next/image'
 interface ModalVideoProps {
   thumb: StaticImageData
   thumbWidth: number

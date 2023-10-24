@@ -1,8 +1,9 @@
 "use client";
-import { axiosAuth } from "../axios";
-import { useSession } from "next-auth/react";
-import { useEffect } from "react";
-import { useRefreshToken } from "./useRefreshToken"
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+
+import { axiosAuth } from '../axios';
+import { useRefreshToken } from './useRefreshToken';
 
 export default function useAxiosAuth() {
     const { data: session } = useSession();

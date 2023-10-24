@@ -1,8 +1,7 @@
 
-import { SignupRequest, ServerResponse, SigninRequest } from "../../types/auth";
-import axios from "../interceptors/axios";
-import { Config, GetEnvConfig } from "../config/config";
-
+import { ServerResponse, SigninRequest, SignupRequest } from '../../types/auth';
+import { Config, GetEnvConfig } from '../config/config';
+import axios from '../interceptors/axios';
 
 export async function SignUp(signUpReq: SignupRequest) {
     const env: Config = await GetEnvConfig()

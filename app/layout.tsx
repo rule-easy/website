@@ -1,9 +1,9 @@
-import './css/style.css'
+import './css/style.css';
 
-import { Inter, Architects_Daughter } from 'next/font/google'
+import { Architects_Daughter, Inter } from 'next/font/google';
 
-import Header from '@/components/ui/header'
-import Banner from '@/components/banner'
+import Banner from '@/components/banner';
+import Header from '@/components/ui/header';
 
 const inter = Inter({
   subsets: ['latin'],

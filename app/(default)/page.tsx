@@ -3,11 +3,9 @@ export const metadata = {
   description: 'PatternAct landing page',
 }
 
-import Hero from '@/app/(default)/hero'
-import Features from '@/app/(default)/features'
-import Newsletter from '@/components/newsletter'
-import Zigzag from '@/app/(static)/documentation/zigzag'
-import Testimonials from '@/app/(default)/testimonials'
+import Features from '@/app/(default)/features';
+import Hero from '@/app/(default)/hero';
+import Newsletter from '@/components/newsletter';
 
 export default function Home() {
   return (

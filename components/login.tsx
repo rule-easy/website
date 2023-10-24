@@ -1,10 +1,10 @@
 'use client'
 //NOTE: Based on https://github.com/vahid-nejad/custom-login-page-intercepting-routes
 
-import Link from 'next/link'
-import React, { useRef } from 'react'
-import { signIn } from "next-auth/react";
-import { useSearchParams } from 'next/navigation'
+import { signIn } from 'next-auth/react';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import React, { useRef } from 'react';
 
 export default function Login() {
     const userEmail = useRef("")

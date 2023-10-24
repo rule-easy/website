@@ -1,6 +1,7 @@
-import React from 'react'
-import Collapse from './collapse'
-import Logo from '../../../components/logo'
+import React from 'react';
+
+import Logo from '../../../components/logo';
+import Collapse from './collapse';
 
 const SideBar = () => {
     return (

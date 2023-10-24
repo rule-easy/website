@@ -1,5 +1,6 @@
-import React from 'react'
-import RuleList from '../components/rulelist'
+import React from 'react';
+
+import RuleList from '../components/rulelist';
 
 const AllRules = () => {
     return (

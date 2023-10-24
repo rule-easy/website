@@ -3,7 +3,7 @@ export const metadata = {
   description: 'Page description',
 }
 
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default function ResetPassword() {
   return (

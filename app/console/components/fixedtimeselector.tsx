@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const FixedTimeSelector = () => {
     const fixedTimes = ["1 hr", "4 hrs", "8 hrs", "16 hrs", "1 day"]

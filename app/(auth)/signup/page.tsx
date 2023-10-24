@@ -1,10 +1,11 @@
 'use client'
 
-import Link from 'next/link'
-import React, { useState, FormEvent } from 'react'
-import { SignUp as SignUpSvc } from '@/lib/services/auth'
-import { SignupRequest } from '@/types/auth'
-import { useRouter } from "next/navigation";
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import React, { FormEvent, useState } from 'react';
+
+import { SignUp as SignUpSvc } from '@/lib/services/auth';
+import { SignupRequest } from '@/types/auth';
 
 export default function SignUp() {
   const [isLoading, setIsLoading] = useState<boolean>(false)

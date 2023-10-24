@@ -1,8 +1,11 @@
-import React from 'react'
+import { signOut } from 'next-auth/react';
+import Link from 'next/link';
+import React from 'react';
+
+import {
+    faArrowLeft, faCirclePlay, faCloud, faCode, faCog, faDatabase, faHouse, faPlus, faShieldHalved
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faDatabase, faArrowLeft, faPlus, faBrain, faShieldHalved, faCloud, faCirclePlay, faCog, faCircleXmark, faArrowRight, faCheckCircle, faCode } from "@fortawesome/free-solid-svg-icons";
-import { signOut } from "next-auth/react";
-import Link from 'next/link'
 
 const Collapse = () => {
     return (

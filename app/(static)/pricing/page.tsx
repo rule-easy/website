@@ -1,8 +1,12 @@
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
+import '@fortawesome/fontawesome-svg-core/styles.css';
+
+import { config } from '@fortawesome/fontawesome-svg-core';
+import {
+    faArrowRight, faBan, faBoltLightning, faCheckCircle, faCircleXmark
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 config.autoAddCss = false;
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBan, faBoltLightning, faBookAtlas, faBrain, faChartLine, faChartPie, faCode, faGlobe, faCircleXmark, faArrowRight, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 export const metadata = {
     title: 'Pricing - PatternAct',
     description: 'PatternAct pricing page',

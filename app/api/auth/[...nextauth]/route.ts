@@ -1,7 +1,8 @@
-import { ServerResponse, SigninRequest } from "@/types/auth";
-import { SignIn } from "@/lib/services/auth";
-import NextAuth, { AuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import NextAuth, { AuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+
+import { SignIn } from '@/lib/services/auth';
+import { ServerResponse, SigninRequest } from '@/types/auth';
 
 const authOptions: AuthOptions = {
     providers: [
