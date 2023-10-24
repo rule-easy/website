@@ -3,14 +3,18 @@ import React, { useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import clsx from 'clsx';
-import { CreateStream as CreateStreamSvc } from '@/lib/services/stream'
 import { CreateStreamRequest } from '@/types/stream';
 import { ServerResponse } from '@/types/auth';
+import useAxiosAuth from '@/lib/interceptors/hooks/useAxiosAuth';
+import { AxiosError } from 'axios';
+import { useRouter } from "next/navigation";
 
 const CreateStream = () => {
     const [progress, setProgress] = React.useState(0);
     const [createStreamSuccess, setCreateStreamSuccess] = React.useState(false);
     const [errorMsg, setErrorMsg] = React.useState("");
+    const axiosAuth = useAxiosAuth()
+    const router = useRouter();
 
     const streamName = useRef("")
     const schema = useRef("")
@@ -28,18 +32,18 @@ const CreateStream = () => {
     };
     const createStream = async () => {
         console.log("Creating stream")
-        // TODO: Make an API
-        setProgress(4)
         const createStreamReq: CreateStreamRequest = { name: streamName.current, schema: schema.current }
-        const resp: ServerResponse = await CreateStreamSvc(createStreamReq);
-        console.log(resp)
-        if (resp.success?.code == 201) {
-            console.log("Successfully created stream")
+        var resp: ServerResponse
+        // Make an API calls
+        axiosAuth.put("/v1/stream", createStreamReq).then((resp) => {
+            console.log(resp)
             setCreateStreamSuccess(true)
-        } else {
-            console.error("Failed to create a stream: error=", resp.error?.msg)
+            router.push("/console/streams/create/success")
+        }).catch((error: AxiosError) => {
+            resp = error.response?.data
             setErrorMsg(resp.error?.msg || "")
-        }
+        })
+        setProgress(4)
     }
     const nextStep = async () => {
         if (progress == 0) {
@@ -135,13 +139,6 @@ const CreateStream = () => {
                     </div>
                 }
             </div>
-
-            {/* Success page */}
-            {createStreamSuccess &&
-                <div>
-                    Success
-                </div>
-            }
         </div >
     )
 }

@@ -3,8 +3,7 @@
 import Link from 'next/link'
 import React, { useState, FormEvent } from 'react'
 import { SignUp as SignUpSvc } from '@/lib/services/auth'
-import { ServerResponse, SignupRequest } from '@/types/auth'
-import { redirect } from 'next/navigation'
+import { SignupRequest } from '@/types/auth'
 import { useRouter } from "next/navigation";
 
 export default function SignUp() {

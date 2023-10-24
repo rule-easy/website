@@ -3,17 +3,21 @@
 import { ServerResponse } from "@/types/auth";
 import axios from "../axios"
 import { signIn, useSession } from "next-auth/react";
+import { AxiosResponse } from "axios";
+import { error } from "console";
 
 export const useRefreshToken = () => {
     const { data: session } = useSession();
 
     const refreshToken = async () => {
-        const res: ServerResponse = await axios.post("/v1/refresh", {
-            refresh: session?.user.refreshToken,
-        });
-
-        if (session) session.user.accessToken = res.success?.data?.accessToken;
-        else signIn();
+        axios.post("/v1/refresh", {
+            refreshToken: session?.user.refreshToken,
+        }).then((resp: AxiosResponse) => {
+            if (session) session.user.accessToken = resp.data.success?.data?.accessToken;
+        }).catch((error) => {
+            // Clear the token
+            signIn();
+        })
     };
     return refreshToken;
 };

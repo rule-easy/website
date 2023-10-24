@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRefreshToken } from "./useRefreshToken"
 
-const useAxiosAuth = () => {
+export default function useAxiosAuth() {
     const { data: session } = useSession();
     const refreshToken = useRefreshToken();
 
@@ -14,7 +14,6 @@ const useAxiosAuth = () => {
                 if (!config.headers["Token"]) {
                     config.headers["Token"] = `${session?.user?.accessToken}`;
                 }
-                console.log("Config set to:", config)
                 return config;
             },
             (error) => Promise.reject(error)
@@ -42,5 +41,3 @@ const useAxiosAuth = () => {
 
     return axiosAuth;
 };
-
-export default useAxiosAuth;
