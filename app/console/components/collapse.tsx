@@ -17,7 +17,7 @@ const Collapse = () => {
                     </Link>
                 </li>
                 <li className='mb-8'>
-                    <div className="text-l font-medium text-gray-300">
+                    <div className="text-l font-medium text-gray-300 disabled">
                         <FontAwesomeIcon icon={faPlus} className=" pr-4 text-indigo-600" /> CREATE
                     </div>
                     <ul>

@@ -1,9 +1,11 @@
 'use client'
 
-import { signIn, signOut, useSession } from 'next-auth/react';
-import React, { FormEvent, useState } from 'react';
+import { signIn, useSession } from 'next-auth/react';
+import React from 'react';
 
 import SideBar from '@/app/console/components/sidebar';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Console({
     children,
@@ -12,7 +14,7 @@ export default function Console({
 }) {
     const { data: session } = useSession();
 
-    if (session) {
+    if (true) {
         return (
             <section>
                 <div className="max-w-6xl mx-auto relative">
@@ -34,14 +36,12 @@ export default function Console({
             <section>
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 relative">
                     <div className="relative pt-32 pb-10 md:pt-40 md:pb-16">
-                        <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-                            <button onClick={() => signIn()} className="text-red-600">
-                                Sign In
-                            </button>
+                        <div className="flex col-span-6 justify-center">
+                            <button onClick={() => signIn()} type="submit" className="flex items-center justify-center border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">  Sign In <FontAwesomeIcon icon={faArrowRight} className="pl-4 text-indigo-100" /></button>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
         );
     }
 }
