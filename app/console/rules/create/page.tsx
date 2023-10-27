@@ -22,6 +22,8 @@ import RuleDataSetter from '../../components/ruleselector';
 const CreateRule = () => {
     const [progress, setProgress] = React.useState(0);
     const [errorMsg, setErrorMsg] = React.useState("");
+    const [rule, setRule] = React.useState("")
+
     const axiosAuth = useAxiosAuth()
     const router = useRouter();
 
@@ -48,6 +50,11 @@ const CreateRule = () => {
     const ruleNameChanged = async (ruleName: string) => {
         console.log("Rule name changed", ruleName)
         finalRuleName = ruleName
+    }
+
+    const ruleChanged = async (ruleId: string, one_rule: string) => {
+        console.log("Rule changed", ruleId, one_rule)
+        setRule(one_rule)
     }
 
     const nextStep = async () => {
@@ -80,7 +87,7 @@ const CreateRule = () => {
                     </div>
                 </div>
             }
-
+            <p>{rule}</p>
             {/* Progress bar */}
             {progress > 0 &&
                 <ProgressSteps progress={progress} steps={['Select stream', 'Choose a name', 'Configure rule', 'Test', 'Submit']} />
@@ -117,8 +124,9 @@ const CreateRule = () => {
                         <span className="label-text">Configure rule</span>
                     </label>
                     <div className='flex flex-col'>
-                        <RuleDataSetter></RuleDataSetter>
+                        <RuleDataSetter id="absa-dasd-dasd" parentCallback={ruleChanged}></RuleDataSetter>
                     </div>
+                    <textarea className="textarea textarea-bordered h-24" placeholder='{ amount: 100, status: "COMPLETED", userID: "dsad-saas-dssa-dassa"}' value={rule} readOnly></textarea>
                 </div>
             }
 
