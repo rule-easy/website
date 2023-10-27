@@ -15,6 +15,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import DropDown from '../../components/dropdown';
+import LabelledInput from '../../components/labelledinput';
 import ProgressSteps from '../../components/progresssteps';
 import RuleDataSetter from '../../components/ruleselector';
 
@@ -27,6 +28,7 @@ const CreateRule = () => {
     const streamName = useRef("")
     const schema = useRef("")
     const [finalRule, setFinalRule] = React.useState("");
+    let finalRuleName = ""
 
     const startForm = async () => {
         console.log("Starting a new form")
@@ -40,19 +42,14 @@ const CreateRule = () => {
         // TODO: Validate JSON schema
     };
     const createRule = async () => {
-        console.log("Creating stream")
-        const createStreamReq: CreateStreamRequest = { name: streamName.current, schema: schema.current }
-        var resp: ServerResponse
-        // Make an API calls
-        axiosAuth.put("/v1/stream", createStreamReq).then((resp) => {
-            console.log(resp)
-            router.push("/console/streams/create/success")
-        }).catch((error: AxiosError) => {
-            resp = error.response?.data
-            setErrorMsg(resp.error?.msg || "")
-        })
         setProgress(4)
     }
+
+    const ruleNameChanged = async (ruleName: string) => {
+        console.log("Rule name changed", ruleName)
+        finalRuleName = ruleName
+    }
+
     const nextStep = async () => {
         if (progress == 0) {
             startForm()
@@ -109,15 +106,7 @@ const CreateRule = () => {
             {/* Step-2 - Select rule name */}
             {
                 progress >= 2 &&
-                <div data-aos="fade-up" data-aos-delay="200" className="form-control pl-8">
-                    <label className="label">
-                        <span className="label-text">Choose a unique rule name</span>
-                    </label>
-                    <label className="input-group">
-                        <span>Rule name</span>
-                        <input onChange={(e) => (streamName.current = e.target.value)} type="text" placeholder="Ex:chip-dumping-rule" className="input input-bordered disabled:bg-gray-800" disabled={progress > 2} />
-                    </label>
-                </div>
+                <LabelledInput parentCallback={ruleNameChanged} label="Rule name" top_label="Choose a unique rule name" disabled={progress > 2} />
             }
 
             {/* Step-3 - Configure rule */}
