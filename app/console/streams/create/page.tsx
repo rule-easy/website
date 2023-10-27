@@ -38,7 +38,7 @@ const CreateStream = () => {
     const createStream = async () => {
         console.log("Creating stream")
         const createStreamReq: CreateStreamRequest = { name: finalStreamName, schema: schema.current }
-        var resp: ServerResponse
+        var resp: any
         // Make an API calls
         axiosAuth.put("/v1/stream", createStreamReq).then((resp) => {
             console.log(resp)
