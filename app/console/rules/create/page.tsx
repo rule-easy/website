@@ -10,7 +10,9 @@ import Button from '@/components/button';
 import useAxiosAuth from '@/lib/interceptors/hooks/useAxiosAuth';
 import { ServerResponse } from '@/types/auth';
 import { CreateStreamRequest } from '@/types/stream';
-import { faArrowLeft, faArrowRight, faDatabase, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+    faArrowLeft, faArrowRight, faDatabase, faFlagCheckered, faPlus, faShieldHalved
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import RuleDataSetter from '../../components/ruleselector';
@@ -76,8 +78,7 @@ const CreateRule = () => {
                         On PatternAct, Rules are set of customer defined logic that needs to be evaluated against each event in a stream. PatternAct systematically evaluates these rules for every incoming event in a stream.
                     </p>
                     <div className="flex justify-end col-span-6 mt-5">
-                        {/* <button onClick={() => nextStep()} type="submit" className="flex items-center justify-center border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Create new rule <FontAwesomeIcon icon={faArrowRight} className="pl-4 text-indigo-100" /></button> */}
-                        <Button onClick={nextStep} ricon={faArrowRight} text={"Create new rule"}></Button>
+                        <Button onClick={nextStep} licon={faShieldHalved} text={"Create new rule"} ricon={faArrowRight}></Button>
                     </div>
                 </div>
             }
@@ -154,19 +155,13 @@ const CreateRule = () => {
             {/* Navigation buttons */}
             <div data-aos="fade-down" data-aos-delay="200" className={clsx({ "flex flex-row mt-12": true }, { "justify-end": progress == 1 }, { "justify-between": progress >= 2 })}>
                 {progress >= 2 &&
-                    <div className="flex col-span-6">
-                        <button onClick={() => prevStep()} type="submit" className="flex items-center justify-center border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"> <FontAwesomeIcon icon={faArrowLeft} className="pr-4 text-indigo-100" /> Back</button>
-                    </div>
+                    <Button onClick={prevStep} licon={faArrowLeft} text={"Back"}></Button>
                 }
                 {progress >= 1 && progress <= 2 &&
-                    <div className="flex col-span-6">
-                        <button onClick={() => nextStep()} type="submit" className="flex items-center justify-center border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Next <FontAwesomeIcon icon={faArrowRight} className="pl-4 text-indigo-100" /></button>
-                    </div>
+                    <Button onClick={nextStep} ricon={faArrowRight} text={"Next"}></Button>
                 }
                 {progress >= 3 &&
-                    <div className="flex col-span-6">
-                        <button onClick={() => createRule()} type="submit" className="flex items-center justify-center border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Finish <FontAwesomeIcon icon={faArrowRight} className="pl-4 text-indigo-100" /></button>
-                    </div>
+                    <Button onClick={nextStep} ricon={faFlagCheckered} text={"Finish"}></Button>
                 }
             </div>
         </div >

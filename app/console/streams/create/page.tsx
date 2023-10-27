@@ -4,10 +4,13 @@ import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import React, { useRef } from 'react';
 
+import Button from '@/components/button';
 import useAxiosAuth from '@/lib/interceptors/hooks/useAxiosAuth';
 import { ServerResponse } from '@/types/auth';
 import { CreateStreamRequest } from '@/types/stream';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import {
+    faArrowLeft, faArrowRight, faDatabase, faFlagCheckered
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const CreateStream = () => {
@@ -72,7 +75,7 @@ const CreateStream = () => {
                         On PatternAct, streams signify the incoming flow of homogeneous events from client side. Each event in a stream shares a common schema that needs to be registered before sending data.
                     </p>
                     <div className="flex justify-end col-span-6 mt-5">
-                        <button onClick={() => nextStep()} type="submit" className="flex items-center justify-center border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Create new stream <FontAwesomeIcon icon={faArrowRight} className="pl-4 text-indigo-100" /></button>
+                        <Button onClick={nextStep} licon={faDatabase} text={"Create new stream"} ricon={faArrowRight}></Button>
                     </div>
                 </div>
             }
@@ -123,21 +126,15 @@ const CreateStream = () => {
             }
 
             {/* Navigation buttons */}
-            <div data-aos="fade-down" data-aos-delay="200" className={clsx({ "flex flex-row mt-8": true }, { "justify-end": progress == 1 }, { "justify-between": progress >= 2 })}>
+            <div data-aos="fade-down" data-aos-delay="200" className={clsx({ "flex flex-row mt-12": true }, { "justify-end": progress == 1 }, { "justify-between": progress >= 2 })}>
                 {progress >= 2 &&
-                    <div className="flex col-span-6">
-                        <button onClick={() => prevStep()} type="submit" className="flex items-center justify-center border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"> <FontAwesomeIcon icon={faArrowLeft} className="pr-4 text-indigo-100" /> Back</button>
-                    </div>
+                    <Button onClick={prevStep} licon={faArrowLeft} text={"Back"}></Button>
                 }
                 {progress >= 1 && progress <= 2 &&
-                    <div className="flex col-span-6">
-                        <button onClick={() => nextStep()} type="submit" className="flex items-center justify-center border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Next <FontAwesomeIcon icon={faArrowRight} className="pl-4 text-indigo-100" /></button>
-                    </div>
+                    <Button onClick={nextStep} ricon={faArrowRight} text={"Next"}></Button>
                 }
                 {progress >= 3 &&
-                    <div className="flex col-span-6">
-                        <button onClick={() => createStream()} type="submit" className="flex items-center justify-center border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Finish <FontAwesomeIcon icon={faArrowRight} className="pl-4 text-indigo-100" /></button>
-                    </div>
+                    <Button onClick={nextStep} ricon={faFlagCheckered} text={"Finish"}></Button>
                 }
             </div>
         </div >
