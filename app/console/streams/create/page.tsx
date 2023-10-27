@@ -120,7 +120,7 @@ const CreateStream = () => {
                     <Button onClick={nextStep} ricon={faArrowRight} text={"Next"} />
                 }
                 {progress >= 3 &&
-                    <Button onClick={nextStep} ricon={faFlagCheckered} text={"Finish"} />
+                    <Button onClick={createStream} ricon={faFlagCheckered} text={"Finish"} />
                 }
             </div>
         </div >
