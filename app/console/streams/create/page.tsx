@@ -71,7 +71,7 @@ const CreateStream = () => {
         finalStreamName = streamName
     }
     return (
-        <div data-aos="fade-up" data-aos-delay="200" className='flex flex-col bg-custom-gray mr-2 p-2 rounded-xl'>
+        <div data-aos="fade-up" data-aos-delay="200" className='flex flex-col bg-custom-gray mx-2 p-2 rounded-xl'>
             {progress == 0 &&
                 <div className='flex flex-col p-2'>
                     <p>
@@ -107,7 +107,7 @@ const CreateStream = () => {
                     <label className="label">
                         <span className="label-text">Enter a valid JSON sample data</span>
                     </label>
-                    <textarea onChange={(e) => (schema.current = e.target.value)} className="textarea textarea-bordered h-24" placeholder='{ amount: 100, status: "COMPLETED", userID: "dsad-saas-dssa-dassa"}' disabled={progress > 2}></textarea>
+                    <textarea onChange={(e) => (schema.current = e.target.value)} className="textarea textarea-bordered h-24 mt-10" placeholder='{ amount: 100, status: "COMPLETED", userID: "dsad-saas-dssa-dassa"}' disabled={progress > 2}></textarea>
                 </div>
             }
 

@@ -32,14 +32,12 @@ const RuleDataSetter = (props: any) => {
     }
     return (
         <div>
-            <div className='flex flex-row justify-around space-x-3 space-y-1'>
-                <div className='flex flex-row items-center'>
-                    <FontAwesomeIcon icon={faCircleMinus} className=" text-custom-red cursor-pointer hover:text-indigo-700" />
-                </div>
+            <div className='flex flex-row space-x-3 space-y-1'>
 
                 <input onChange={operand1Changed} type="text" placeholder="Start typing (ex: amount)" className="grow input input-bordered input-primary w-full max-w-xs" />
 
-                <select onChange={operatorChanged} className="select select-primary w-full max-w-xs basis-2/12" defaultValue="==">
+                <select onChange={operatorChanged} className="select select-primary w-full max-w-xs basis-2/12" defaultValue="  ">
+                    <option></option>
                     <option>==</option>
                     <option>&gt;=</option>
                     <option>&lt;=</option>
@@ -47,19 +45,14 @@ const RuleDataSetter = (props: any) => {
                     <option>&lt;</option>
                 </select>
 
-                <input onChange={operand2Changed} type="text" placeholder="Ex: 200" className="basis-6/12 input input-bordered input-primary w-full max-w-xs" />
-                {!conditionEnabled &&
-                    <div className='flex flex-row items-center '>
-                        <FontAwesomeIcon onClick={() => enableCondition()} icon={faCirclePlus} className=" text-custom-green cursor-pointer hover:text-indigo-700" />
-                    </div>
-                }
+                <input onChange={operand2Changed} type="text" placeholder="Ex: 200" className="basis-4/12 input input-bordered input-primary w-full max-w-xs" />
 
-                {conditionEnabled &&
-                    <select onChange={conditionChanged} className="select select-primary w-full max-w-xs basis-2/12" defaultValue="&&">
-                        <option>&&</option>
-                        <option>||</option>
-                    </select>
-                }
+                <select onChange={conditionChanged} className="select select-primary w-full max-w-xs basis-2/12" defaultValue="  ">
+                    <option></option>
+                    <option>&&</option>
+                    <option>||</option>
+                </select>
+
             </div>
         </div>
     )
