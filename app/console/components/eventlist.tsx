@@ -69,9 +69,9 @@ const EventList = () => {
                     <tbody>
                         {eventList.map((eventData: EventDetails) => (
                             <tr className='hover:bg-indigo-600 hover:cursor-pointer'>
-                                <Link href="/console/events/details">
-                                    <td>{eventData.id}</td>
-                                </Link>
+                                {/* <Link href="/console/events/details"> */}
+                                <td>{eventData.id}</td>
+                                {/* </Link> */}
                                 <td>{eventData.ts}</td>
                                 <td>{eventData.rule_name}</td>
                                 <td>True</td>

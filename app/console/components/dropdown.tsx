@@ -5,7 +5,7 @@ const DropDown = (props: any) => {
         <div>
             <div className="form-control">
                 <select className="select select-primary w-full max-w-xs disabled:bg-gray-800" disabled={props.disabled}>
-                    <option disabled selected> {props.placeholder} </option>
+                    <option disabled> {props.placeholder} </option>
                     {
                         props.options.map((element: string) => (
                             <option>{element}</option>

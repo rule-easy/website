@@ -8,7 +8,7 @@ const RuleChart = () => {
                 <p className='basis-4/12 text-sm mr-4 font-semibold'>Streams</p>
                 <div className='basis-8/12 flex flex-row-reverse items-center'>
                     <select className="select select-bordered select-xs w-full max-w-xs">
-                        <option disabled selected>Select rules</option>
+                        <option disabled>Select rules</option>
                         {allRules.map((ruleName: string) => (
                             <option>{ruleName}</option>
                         ))}

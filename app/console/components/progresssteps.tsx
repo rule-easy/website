@@ -8,7 +8,7 @@ const ProgressSteps = (props: any) => {
                 <ul className="steps align-center mb-6">
                     {
                         props.steps.map((element: string, index: number) => (
-                            <li className={clsx({ "step": true }, { "step-primary": props.progress >= index + 1 })}>{element}</li>
+                            <li key={index} className={clsx({ "step": true }, { "step-primary": props.progress >= index + 1 })}>{element}</li>
                         ))
                     }
                 </ul>

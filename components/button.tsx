@@ -19,7 +19,9 @@ const Button = (props: any) => {
                 {props.href &&
                     <Link href={props.href} className={clsx({ "pointer-events: none": props.disabled })}> {props.text} </Link>
                 }
-                <FontAwesomeIcon icon={props.ricon} className="pl-4 text-indigo-100 disabled:cursor-not-allowed" />
+                {props.ricon &&
+                    <FontAwesomeIcon icon={props.ricon} className="pl-4 text-indigo-100 disabled:cursor-not-allowed" />
+                }
             </button>
         </div>
     )
