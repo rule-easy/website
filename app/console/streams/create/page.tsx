@@ -12,6 +12,7 @@ import {
     faArrowLeft, faArrowRight, faDatabase, faFlagCheckered
 } from '@fortawesome/free-solid-svg-icons';
 
+import LabelledInput from '../../components/labelledinput';
 import ProgressSteps from '../../components/progresssteps';
 
 const CreateStream = () => {
@@ -20,8 +21,8 @@ const CreateStream = () => {
     const axiosAuth = useAxiosAuth()
     const router = useRouter();
 
-    const streamName = useRef("")
     const schema = useRef("")
+    let finalStreamName = ""
 
     const startForm = async () => {
         console.log("Starting a new form")
@@ -36,7 +37,7 @@ const CreateStream = () => {
     };
     const createStream = async () => {
         console.log("Creating stream")
-        const createStreamReq: CreateStreamRequest = { name: streamName.current, schema: schema.current }
+        const createStreamReq: CreateStreamRequest = { name: finalStreamName, schema: schema.current }
         var resp: ServerResponse
         // Make an API calls
         axiosAuth.put("/v1/stream", createStreamReq).then((resp) => {
@@ -66,6 +67,9 @@ const CreateStream = () => {
         setErrorMsg("")
         setProgress(progress - 1)
     }
+    const onStreamNameChange = async (streamName: string) => {
+        finalStreamName = streamName
+    }
     return (
         <div data-aos="fade-up" data-aos-delay="200" className='flex flex-col bg-custom-gray mr-2 p-2 rounded-xl'>
             {progress == 0 &&
@@ -93,15 +97,7 @@ const CreateStream = () => {
             {/* Step-1 form */}
             {
                 progress >= 1 &&
-                <div data-aos="fade-up" data-aos-delay="200" className="form-control">
-                    <label className="label">
-                        <span className="label-text">Choose a unique stream name</span>
-                    </label>
-                    <label className="input-group">
-                        <span>Stream name</span>
-                        <input onChange={(e) => (streamName.current = e.target.value)} type="text" placeholder="Ex:add-cash-events" className="input input-bordered" disabled={progress > 1} />
-                    </label>
-                </div>
+                <LabelledInput parentCallback={onStreamNameChange} placeholder="Ex:add-cash-events" label="Stream name" top_label="Choose a unique stream name" disabled={progress > 1} />
             }
 
             {/* Step-2 form */}
