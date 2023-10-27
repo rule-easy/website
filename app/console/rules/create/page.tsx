@@ -13,8 +13,9 @@ import { CreateStreamRequest } from '@/types/stream';
 import {
     faArrowLeft, faArrowRight, faDatabase, faFlagCheckered, faPlus, faShieldHalved
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import DropDown from '../../components/dropdown';
+import ProgressSteps from '../../components/progresssteps';
 import RuleDataSetter from '../../components/ruleselector';
 
 const CreateRule = () => {
@@ -78,25 +79,14 @@ const CreateRule = () => {
                         On PatternAct, Rules are set of customer defined logic that needs to be evaluated against each event in a stream. PatternAct systematically evaluates these rules for every incoming event in a stream.
                     </p>
                     <div className="flex justify-end col-span-6 mt-5">
-                        <Button onClick={nextStep} licon={faShieldHalved} text={"Create new rule"} ricon={faArrowRight}></Button>
+                        <Button onClick={nextStep} licon={faShieldHalved} text={"Create new rule"} ricon={faArrowRight} />
                     </div>
                 </div>
             }
 
             {/* Progress bar */}
             {progress > 0 &&
-                <div data-aos="fade-up" data-aos-delay="200" className='flex flex-col'>
-                    <ul className="steps align-center mb-6">
-                        <li className={clsx({ "step": true }, { "step-primary": progress >= 1 })}>Select stream</li>
-                        <li className={clsx({ "step": true }, { "step-primary": progress >= 2 })}>Choose a name</li>
-                        <li className={clsx({ "step": true }, { "step-primary": progress >= 3 })}>Configure rule</li>
-                        <li className={clsx({ "step": true }, { "step-primary": progress >= 4 })}>Test</li>
-                        <li className={clsx({ "step": true }, { "step-primary": progress >= 5 })}>Submit</li>
-                    </ul>
-                    <div className="relative flex py-5 items-center">
-                        <div className="flex-grow border-t border-gray-600"></div>
-                    </div>
-                </div>
+                <ProgressSteps progress={progress} steps={['Select stream', 'Choose a name', 'Configure rule', 'Test', 'Submit']} />
             }
 
             {!!errorMsg && (
@@ -109,18 +99,9 @@ const CreateRule = () => {
             {
                 progress >= 1 &&
                 <div data-aos="fade-up" data-aos-delay="200" className="flex flex-col w-full lg:flex-row lg:justify-around">
-                    <div className="form-control">
-                        <select className="select select-primary w-full max-w-xs disabled:bg-gray-800" disabled={progress > 1}>
-                            <option disabled selected>----- Select stream ----- </option>
-                            <option>add-cash</option>
-                            <option>withdrawals</option>
-                            <option>promotions</option>
-                            <option>Walking Dead</option>
-                        </select>
-                    </div>
+                    <DropDown placeholder="----- Select stream -----" options={['add-cash', 'withdrawals', 'promotions']} disabled={progress > 1} />
                     <div className="divider lg:divider-horizontal">OR</div>
-                    <Button licon={faPlus} ricon={faDatabase} href={"/console/streams/create"} text={"Create stream"} disabled={progress > 1}></Button>
-                    {/* <button type="submit" className="flex items-center justify-center border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-gray-800 disabled:cursor-not-allowed" disabled={progress > 1}> <FontAwesomeIcon icon={faPlus} className="pr-4 text-indigo-100" /> <Link href="/console/streams/create">Create new stream</Link><FontAwesomeIcon icon={faDatabase} className="pl-4 text-indigo-100" /></button> */}
+                    <Button licon={faPlus} ricon={faDatabase} href={"/console/streams/create"} text={"Create stream"} disabled={progress > 1} />
                 </div>
 
             }
@@ -155,13 +136,13 @@ const CreateRule = () => {
             {/* Navigation buttons */}
             <div data-aos="fade-down" data-aos-delay="200" className={clsx({ "flex flex-row mt-12": true }, { "justify-end": progress == 1 }, { "justify-between": progress >= 2 })}>
                 {progress >= 2 &&
-                    <Button onClick={prevStep} licon={faArrowLeft} text={"Back"}></Button>
+                    <Button onClick={prevStep} licon={faArrowLeft} text={"Back"} />
                 }
                 {progress >= 1 && progress <= 2 &&
-                    <Button onClick={nextStep} ricon={faArrowRight} text={"Next"}></Button>
+                    <Button onClick={nextStep} ricon={faArrowRight} text={"Next"} />
                 }
                 {progress >= 3 &&
-                    <Button onClick={nextStep} ricon={faFlagCheckered} text={"Finish"}></Button>
+                    <Button onClick={nextStep} ricon={faFlagCheckered} text={"Finish"} />
                 }
             </div>
         </div >

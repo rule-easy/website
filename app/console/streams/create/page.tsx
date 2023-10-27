@@ -11,11 +11,11 @@ import { CreateStreamRequest } from '@/types/stream';
 import {
     faArrowLeft, faArrowRight, faDatabase, faFlagCheckered
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import ProgressSteps from '../../components/progresssteps';
 
 const CreateStream = () => {
     const [progress, setProgress] = React.useState(0);
-    const [createStreamSuccess, setCreateStreamSuccess] = React.useState(false);
     const [errorMsg, setErrorMsg] = React.useState("");
     const axiosAuth = useAxiosAuth()
     const router = useRouter();
@@ -41,7 +41,6 @@ const CreateStream = () => {
         // Make an API calls
         axiosAuth.put("/v1/stream", createStreamReq).then((resp) => {
             console.log(resp)
-            setCreateStreamSuccess(true)
             router.push("/console/streams/create/success")
         }).catch((error: AxiosError) => {
             resp = error.response?.data
@@ -75,23 +74,14 @@ const CreateStream = () => {
                         On PatternAct, streams signify the incoming flow of homogeneous events from client side. Each event in a stream shares a common schema that needs to be registered before sending data.
                     </p>
                     <div className="flex justify-end col-span-6 mt-5">
-                        <Button onClick={nextStep} licon={faDatabase} text={"Create new stream"} ricon={faArrowRight}></Button>
+                        <Button onClick={nextStep} licon={faDatabase} text={"Create new stream"} ricon={faArrowRight} />
                     </div>
                 </div>
             }
 
             {/* Progress bar */}
             {progress > 0 &&
-                <div data-aos="fade-up" data-aos-delay="200" className='flex flex-col'>
-                    <ul className="steps align-center mb-6">
-                        <li className={clsx({ "step": true }, { "step-primary": progress >= 1 })}>Choose a name</li>
-                        <li className={clsx({ "step": true }, { "step-primary": progress >= 2 })}>Register schema</li>
-                        <li className={clsx({ "step": true }, { "step-primary": progress >= 3 })}>Review</li>
-                    </ul>
-                    <div className="relative flex py-5 items-center">
-                        <div className="flex-grow border-t border-gray-600"></div>
-                    </div>
-                </div>
+                <ProgressSteps progress={progress} steps={['Choose a name', 'Register schema', 'Review']} />
             }
 
             {!!errorMsg && (
@@ -128,13 +118,13 @@ const CreateStream = () => {
             {/* Navigation buttons */}
             <div data-aos="fade-down" data-aos-delay="200" className={clsx({ "flex flex-row mt-12": true }, { "justify-end": progress == 1 }, { "justify-between": progress >= 2 })}>
                 {progress >= 2 &&
-                    <Button onClick={prevStep} licon={faArrowLeft} text={"Back"}></Button>
+                    <Button onClick={prevStep} licon={faArrowLeft} text={"Back"} />
                 }
                 {progress >= 1 && progress <= 2 &&
-                    <Button onClick={nextStep} ricon={faArrowRight} text={"Next"}></Button>
+                    <Button onClick={nextStep} ricon={faArrowRight} text={"Next"} />
                 }
                 {progress >= 3 &&
-                    <Button onClick={nextStep} ricon={faFlagCheckered} text={"Finish"}></Button>
+                    <Button onClick={nextStep} ricon={faFlagCheckered} text={"Finish"} />
                 }
             </div>
         </div >
