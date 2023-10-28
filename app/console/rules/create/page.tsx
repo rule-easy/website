@@ -18,58 +18,80 @@ import ProgressSteps from '../../components/progresssteps';
 import RuleDataSetter from '../../components/ruleselector';
 
 interface Rule {
-    key: string;
-    data: string
+    id: string;
+    data: string;
+    order: number;
 }
 
 const CreateRule = () => {
-    const [progress, setProgress] = React.useState(0);
-    const [errorMsg, setErrorMsg] = React.useState("");
+    const [progress, setProgress] = React.useState(0)
+    const [errorMsg, setErrorMsg] = React.useState("")
     const [name, setName] = React.useState("")
     const [rule, setRule] = React.useState("")
-    const [ruleMap, setRuleMap] = React.useState<Map<string, string>>(new Map<string, string>())
+    const [ruleMap, setRuleMap] = React.useState<Map<string, Rule>>(new Map<string, Rule>())
+    const [totalRules, setTotalRules] = React.useState(1)
 
     const axiosAuth = useAxiosAuth()
     const router = useRouter();
 
     const checkName = async () => {
-        // TODO: Validate name
     }
-    const validateSchema = async () => {
-        // TODO: Validate JSON schema
+    const checkStream = async () => {
     };
     const createRule = async () => {
         addNewRule()
+        setProgress(3)
+    }
+
+    const createActions = async () => {
         setProgress(4)
     }
 
     const nextStep = async () => {
-        if (progress == 1) {
+        // Validation steps
+        let curStep = progress
+        if (curStep == 0) {
+        } else if (curStep == 1) {
+            checkStream()
+        } else if (curStep == 2) {
             checkName()
-        } else if (progress == 2) {
-            validateSchema()
-        } else {
             createRule()
+        } else if (curStep == 3) {
+            // Invoke rule creation API here
+        } else if (curStep == 4) {
+            createActions()
         }
         setProgress(progress + 1)
     }
 
-    const prevStep = async () => {
-        setErrorMsg("")
-        setProgress(progress - 1)
+    const clearRules = async () => {
         setRule("")
+        setRuleMap(new Map<string, Rule>())
+        setTotalRules(1)
+    }
+
+    const prevStep = async () => {
+        let curStep = progress
+        setErrorMsg("")
+        if (progress == 3) {
+            clearRules()
+        }
+        setProgress(progress - 1)
     }
 
     const contructRule = async () => {
         let updateRule = ""
-        for (let [k, v] of ruleMap) {
-            updateRule += " " + v
+        for (let [ruleID, rule] of ruleMap) {
+            updateRule += " " + rule.data
         }
         setRule(updateRule)
     }
 
     const addNewRule = async () => {
-        setRuleMap(new Map(ruleMap.set(uuid(), "")))
+        console.log("Add new rule")
+        let ruleID = uuid()
+        setRuleMap(new Map(ruleMap.set(ruleID, { id: ruleID, order: totalRules, data: "" })))
+        setTotalRules(totalRules + 1)
         console.log(ruleMap)
         contructRule()
     }
@@ -84,7 +106,8 @@ const CreateRule = () => {
 
     const updateRule = async (ruleId: string, updated_rule: string) => {
         console.log("Rule changed", ruleId, updated_rule)
-        setRuleMap(new Map(ruleMap.set(ruleId, updated_rule)))
+        let rule = ruleMap.get(ruleId)
+        setRuleMap(new Map(ruleMap.set(ruleId, { id: ruleId, order: rule?.order || 0, data: updated_rule })))
         console.log(ruleMap)
         contructRule()
     }
@@ -104,7 +127,7 @@ const CreateRule = () => {
 
             {/* Progress bar */}
             {progress > 0 &&
-                <ProgressSteps progress={progress} steps={['Select stream', 'Choose a name', 'Configure rule', 'Test', 'Submit']} />
+                <ProgressSteps progress={progress} steps={['Select stream', 'Choose a name', 'Configure rule', 'Configure actions', 'Submit']} />
             }
 
             {!!errorMsg && (
@@ -137,24 +160,15 @@ const CreateRule = () => {
                         <span className="label-text">Configure rule</span>
                     </label>
                     <div className='flex flex-col'>
-                        {/* <div className='flex flex-row justify-around'>
-                            <div className='flex flex-row items-center'>
-                                <FontAwesomeIcon icon={faCircleMinus} className=" text-gray-600 cursor-not-allowed" />
-                            </div>
-                            <RuleDataSetter id="687e1b23-80f4-463d-93d3-8293ad675e81" parentCallback={updateRule}></RuleDataSetter>
-                            <div className='flex flex-row items-center '>
-                                <FontAwesomeIcon onClick={() => addNewRule()} icon={faCirclePlus} className=" text-custom-green cursor-pointer hover:text-indigo-700" />
-                            </div>
-                        </div> */}
                         {
-                            [...ruleMap.entries()].map(([key, value]) =>
-                                <div className='flex flex-row justify-around' key={key}>
+                            [...ruleMap.entries()].map(([ruleID, rule]) =>
+                                <div className='flex flex-row justify-around' key={ruleID}>
                                     <div className='flex flex-row items-center'>
-                                        <FontAwesomeIcon onClick={() => removeRule(key)} icon={faCircleMinus} className=" text-custom-red cursor-pointer hover:text-indigo-700" />
+                                        <FontAwesomeIcon onClick={progress == 3 && rule.order > 1 ? () => removeRule(ruleID) : undefined} icon={faCircleMinus} className={clsx({ "text-custom-red cursor-pointer hover:text-indigo-700": progress == 3 && rule.order > 1 }, { "text-gray-600 cursor-not-allowed": progress > 3 || rule.order == 1 })} />
                                     </div>
-                                    <RuleDataSetter id={key} parentCallback={updateRule}></RuleDataSetter>
+                                    <RuleDataSetter id={ruleID} parentCallback={updateRule} disabled={progress >= 4}></RuleDataSetter>
                                     <div className='flex flex-row items-center '>
-                                        <FontAwesomeIcon onClick={() => addNewRule()} icon={faCirclePlus} className=" text-custom-green cursor-pointer hover:text-indigo-700" />
+                                        <FontAwesomeIcon onClick={progress == 3 ? () => addNewRule() : undefined} icon={faCirclePlus} className={clsx({ "text-custom-green cursor-pointer hover:text-indigo-700": progress == 3 }, { "text-gray-600 cursor-not-allowed": progress > 3 })} />
                                     </div>
                                 </div>
                             )
@@ -163,7 +177,7 @@ const CreateRule = () => {
                     <label className="label mt-10">
                         <span className="label-text">Final rule</span>
                     </label>
-                    <textarea className="textarea textarea-bordered h-24 font-mono" placeholder='amount == 200 && ...' value={rule} readOnly></textarea>
+                    <textarea className="textarea textarea-bordered h-24 font-mono cursor-not-allowed disabled:bg-gray-800" placeholder='amount == 200 && ...' value={rule} readOnly disabled={progress >= 4} />
                 </div>
             }
 
@@ -172,10 +186,10 @@ const CreateRule = () => {
                 {progress >= 2 &&
                     <Button onClick={prevStep} licon={faArrowLeft} text={"Back"} />
                 }
-                {progress >= 1 && progress <= 2 &&
+                {progress >= 1 && progress <= 3 &&
                     <Button onClick={nextStep} ricon={faArrowRight} text={"Next"} />
                 }
-                {progress >= 3 &&
+                {progress >= 4 &&
                     <Button onClick={nextStep} ricon={faFlagCheckered} text={"Finish"} />
                 }
             </div>
