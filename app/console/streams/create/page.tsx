@@ -18,26 +18,43 @@ import ProgressSteps from '../../components/progresssteps';
 const CreateStream = () => {
     const [progress, setProgress] = React.useState(0);
     const [errorMsg, setErrorMsg] = React.useState("");
+    const [name, setName] = React.useState("")
+
     const axiosAuth = useAxiosAuth()
     const router = useRouter();
 
     const schema = useRef("")
-    let finalStreamName = ""
 
     const startForm = async () => {
         console.log("Starting a new form")
     };
-    const checkName = async () => {
-        console.log("Validating name")
+    const checkName = () => {
+        console.log("Validating name:", name)
+        if (name.length == 0) {
+            setErrorMsg("Stream name cannot be empty")
+            return false
+        }
+        setErrorMsg("")
+        return true
         // TODO: Validate name
     }
-    const validateSchema = async () => {
+    const validateSchema = () => {
         console.log("Validating schema")
-        // TODO: Validate JSON schema
+        try {
+            JSON.parse(schema.current)
+            return true
+        } catch (e) {
+            console.log("Setting error message")
+            setErrorMsg("Please enter valid JSON")
+            return false
+        }
+        setErrorMsg("")
+        return true
     };
+
     const createStream = async () => {
         console.log("Creating stream")
-        const createStreamReq: CreateStreamRequest = { name: finalStreamName, schema: schema.current }
+        const createStreamReq: CreateStreamRequest = { name: name, schema: schema.current }
         var resp: any
         // Make an API calls
         axiosAuth.put("/v1/stream", createStreamReq).then((resp) => {
@@ -50,17 +67,17 @@ const CreateStream = () => {
         setProgress(4)
     }
     const nextStep = async () => {
-        if (progress == 0) {
-            startForm()
-        } else if (progress == 1) {
-            checkName()
-        } else if (progress == 2) {
-            validateSchema()
+        let curStep = progress
+        if (curStep == 1) {
+            if (!checkName()) { return }
+        } else if (curStep == 2) {
+            if (!validateSchema()) { return }
         } else {
             CreateStream()
         }
         setProgress(progress + 1)
-        console.log("Pressed next step")
+        console.log("Pressed next step:", errorMsg)
+
     }
     const prevStep = async () => {
         console.log("Pressed prev step")
@@ -68,7 +85,8 @@ const CreateStream = () => {
         setProgress(progress - 1)
     }
     const onStreamNameChange = async (streamName: string) => {
-        finalStreamName = streamName
+        console.log("Stream name changed", streamName)
+        setName(streamName)
     }
     return (
         <div data-aos="fade-up" data-aos-delay="200" className='flex flex-col bg-custom-gray mx-2 p-2 rounded-xl'>
@@ -107,7 +125,7 @@ const CreateStream = () => {
                     <label className="label">
                         <span className="label-text">Enter a valid JSON sample data</span>
                     </label>
-                    <textarea onChange={(e) => (schema.current = e.target.value)} className="textarea textarea-bordered h-24 mt-10" placeholder='{ amount: 100, status: "COMPLETED", userID: "dsad-saas-dssa-dassa"}' disabled={progress > 2}></textarea>
+                    <textarea onChange={(e) => (schema.current = e.target.value)} className="textarea textarea-bordered h-24 mt-10" placeholder='{ "amount": 100, "status": "COMPLETED", "userID": "dsad-saas-dssa-dassa"}' disabled={progress > 2}></textarea>
                 </div>
             }
 
