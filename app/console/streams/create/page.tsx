@@ -25,40 +25,30 @@ const CreateStream = () => {
 
     const schema = useRef("")
 
-    const startForm = async () => {
-        console.log("Starting a new form")
-    };
     const checkName = () => {
-        console.log("Validating name:", name)
         if (name.length == 0) {
             setErrorMsg("Stream name cannot be empty")
             return false
         }
         setErrorMsg("")
         return true
-        // TODO: Validate name
+        // TODO: Validate name for duplicate name
     }
     const validateSchema = () => {
-        console.log("Validating schema")
         try {
             JSON.parse(schema.current)
+            setErrorMsg("")
             return true
         } catch (e) {
-            console.log("Setting error message")
             setErrorMsg("Please enter valid JSON")
             return false
         }
-        setErrorMsg("")
-        return true
     };
 
-    const createStream = async () => {
-        console.log("Creating stream")
+    const createStreamAPI = async () => {
         const createStreamReq: CreateStreamRequest = { name: name, schema: schema.current }
         var resp: any
-        // Make an API calls
         axiosAuth.put("/v1/stream", createStreamReq).then((resp) => {
-            console.log(resp)
             router.push("/console/streams/create/success")
         }).catch((error: AxiosError) => {
             resp = error.response?.data
@@ -72,20 +62,17 @@ const CreateStream = () => {
             if (!checkName()) { return }
         } else if (curStep == 2) {
             if (!validateSchema()) { return }
-        } else {
-            CreateStream()
+        } else if (curStep == 3) {
+            createStreamAPI()
         }
         setProgress(progress + 1)
-        console.log("Pressed next step:", errorMsg)
 
     }
     const prevStep = async () => {
-        console.log("Pressed prev step")
         setErrorMsg("")
         setProgress(progress - 1)
     }
     const onStreamNameChange = async (streamName: string) => {
-        console.log("Stream name changed", streamName)
         setName(streamName)
     }
     return (
@@ -134,11 +121,8 @@ const CreateStream = () => {
                 {progress >= 2 &&
                     <Button onClick={prevStep} licon={faArrowLeft} text={"Back"} />
                 }
-                {progress >= 1 && progress <= 2 &&
-                    <Button onClick={nextStep} ricon={faArrowRight} text={"Next"} />
-                }
-                {progress >= 3 &&
-                    <Button onClick={createStream} ricon={faFlagCheckered} text={"Finish"} />
+                {progress >= 1 && progress <= 3 &&
+                    <Button onClick={nextStep} ricon={progress <= 2 ? faArrowRight : faFlagCheckered} text={progress <= 2 ? "Next" : "Finish"} />
                 }
             </div>
         </div >
