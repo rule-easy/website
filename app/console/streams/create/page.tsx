@@ -1,5 +1,5 @@
 'use client'
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import React, { useRef } from 'react';
@@ -25,23 +25,33 @@ const CreateStream = () => {
 
     const schema = useRef("")
 
-    const checkName = () => {
+    const checkName = async () => {
+        // Check for empty name
         if (name.length == 0) {
             setErrorMsg("Stream name cannot be empty")
-            return false
+            return
         }
-        setErrorMsg("")
-        return true
-        // TODO: Validate name for duplicate name
+        // Check for duplicate name
+        axiosAuth.get("/v1/stream?name=" + name).then((resp: AxiosResponse) => {
+            let data: ServerResponse = resp.data
+            if (data.success?.data != null) {
+                setErrorMsg("Stream with this name already exists")
+            } else {
+                setErrorMsg("")
+                setProgress(progress + 1)
+            }
+        }).catch((err: AxiosError) => {
+            setErrorMsg("Error")
+        })
     }
+
     const validateSchema = () => {
         try {
             JSON.parse(schema.current)
             setErrorMsg("")
-            return true
+            setProgress(progress + 1)
         } catch (e) {
             setErrorMsg("Please enter valid JSON")
-            return false
         }
     };
 
@@ -59,15 +69,14 @@ const CreateStream = () => {
     const nextStep = async () => {
         let curStep = progress
         if (curStep == 1) {
-            if (!checkName()) { return }
+            checkName()
         } else if (curStep == 2) {
-            if (!validateSchema()) { return }
+            validateSchema()
         } else if (curStep == 3) {
             createStreamAPI()
         }
-        setProgress(progress + 1)
-
     }
+
     const prevStep = async () => {
         setErrorMsg("")
         setProgress(progress - 1)
@@ -83,7 +92,7 @@ const CreateStream = () => {
                         On PatternAct, streams signify the incoming flow of homogeneous events from client side. Each event in a stream shares a common schema that needs to be registered before sending data.
                     </p>
                     <div className="flex justify-end col-span-6 mt-5">
-                        <Button onClick={nextStep} licon={faDatabase} text={"Create new stream"} ricon={faArrowRight} />
+                        <Button onClick={() => setProgress(1)} licon={faDatabase} text={"Create new stream"} ricon={faArrowRight} />
                     </div>
                 </div>
             }
