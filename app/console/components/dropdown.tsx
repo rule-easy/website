@@ -1,5 +1,10 @@
 import React from 'react';
 
+interface DropDownItem {
+    id: string
+    name: string
+}
+
 const DropDown = (props: any) => {
     return (
         <div>
@@ -7,8 +12,8 @@ const DropDown = (props: any) => {
                 <select className="select select-primary w-full max-w-xs disabled:bg-gray-800" disabled={props.disabled}>
                     <option disabled> {props.placeholder} </option>
                     {
-                        props.options.map((element: string, index: number) => (
-                            <option key={index}>{element}</option>
+                        props.options.map((element: DropDownItem, index: number) => (
+                            <option key={element.id}>{element.name}</option>
                         ))
                     }
                 </select>

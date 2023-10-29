@@ -1,4 +1,5 @@
 'use client'
+import { AxiosError, AxiosResponse } from 'axios';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -6,6 +7,7 @@ import { v4 as uuid } from 'uuid';
 
 import Button from '@/components/button';
 import useAxiosAuth from '@/lib/interceptors/hooks/useAxiosAuth';
+import { ServerResponse } from '@/types/auth';
 import {
     faArrowLeft, faArrowRight, faCircleMinus, faCirclePlus, faDatabase, faFlagCheckered, faPlus,
     faShieldHalved
@@ -23,6 +25,12 @@ interface Rule {
     order: number;
 }
 
+interface Stream {
+    id: string
+    name: string
+    schema: string
+}
+
 const CreateRule = () => {
     const [progress, setProgress] = React.useState(0)
     const [errorMsg, setErrorMsg] = React.useState("")
@@ -30,38 +38,66 @@ const CreateRule = () => {
     const [rule, setRule] = React.useState("")
     const [ruleMap, setRuleMap] = React.useState<Map<string, Rule>>(new Map<string, Rule>())
     const [totalRules, setTotalRules] = React.useState(1)
+    const [allStreams, setAllStreams] = React.useState<Stream[]>([])
 
     const axiosAuth = useAxiosAuth()
     const router = useRouter();
 
     const checkName = async () => {
+        // Check for empty name
+        if (name.length == 0) {
+            setErrorMsg("Stream name cannot be empty")
+            return
+        }
+        // Check for duplicate name
+        axiosAuth.get("/v1/rule?name=" + name).then((resp: AxiosResponse) => {
+            let data: ServerResponse = resp.data
+            if (data.success?.data != null) {
+                setErrorMsg("Rule with name " + name + " already exists")
+            } else {
+                setErrorMsg("")
+                addNewRule()
+                setProgress(progress + 1)
+            }
+        }).catch((err: AxiosError) => {
+            setErrorMsg("Error")
+        })
     }
     const checkStream = async () => {
+        setProgress(progress + 1)
     };
-    const createRule = async () => {
-        addNewRule()
-        setProgress(3)
-    }
 
     const createActions = async () => {
         setProgress(4)
+    }
+
+    const getAllStreams = async () => {
+        // Check for duplicate name
+        axiosAuth.get("/v1/stream").then((resp: AxiosResponse) => {
+            let data: ServerResponse = resp.data
+            if (data.success?.data != null) {
+                setAllStreams(data.success.data)
+            }
+            setProgress(progress + 1)
+        }).catch((err: AxiosError) => {
+            setErrorMsg("Error")
+        })
     }
 
     const nextStep = async () => {
         // Validation steps
         let curStep = progress
         if (curStep == 0) {
+            getAllStreams()
         } else if (curStep == 1) {
             checkStream()
         } else if (curStep == 2) {
             checkName()
-            createRule()
         } else if (curStep == 3) {
             // Invoke rule creation API here
         } else if (curStep == 4) {
             createActions()
         }
-        setProgress(progress + 1)
     }
 
     const clearRules = async () => {
@@ -140,7 +176,7 @@ const CreateRule = () => {
             {
                 progress >= 1 &&
                 <div data-aos="fade-up" data-aos-delay="200" className="flex flex-col w-full lg:flex-row lg:justify-around">
-                    <DropDown placeholder="----- Select stream -----" options={['add-cash', 'withdrawals', 'promotions']} disabled={progress > 1} />
+                    <DropDown placeholder="----- Select stream -----" options={allStreams} disabled={progress > 1} />
                     <div className="divider lg:divider-horizontal">OR</div>
                     <Button licon={faPlus} ricon={faDatabase} href={"/console/streams/create"} text={"Create stream"} disabled={progress > 1} />
                 </div>

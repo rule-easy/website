@@ -1,7 +1,10 @@
 import React from 'react';
+import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
 import { faCircleMinus, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import Autocomplete from './autocomplete';
 
 const RuleDataSetter = (props: any) => {
     const [conditionEnabled, setConditionEnabled] = React.useState(false);
@@ -34,7 +37,8 @@ const RuleDataSetter = (props: any) => {
         <div>
             <div className='flex flex-row space-x-3 space-y-1'>
 
-                <input onChange={operand1Changed} type="text" placeholder="Start typing (ex: amount)" className="grow input input-bordered input-primary w-full max-w-xs disabled:bg-gray-800" disabled={props.disabled} />
+                <Autocomplete></Autocomplete>
+                {/* <input onChange={operand1Changed} type="text" placeholder="Start typing (ex: amount)" className="grow input input-bordered input-primary w-full max-w-xs disabled:bg-gray-800" disabled={props.disabled} /> */}
 
                 <select onChange={operatorChanged} className="select select-primary w-full max-w-xs basis-2/12 disabled:bg-gray-800" defaultValue="  " disabled={props.disabled}>
                     <option></option>

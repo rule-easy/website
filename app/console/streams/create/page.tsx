@@ -64,8 +64,8 @@ const CreateStream = () => {
             resp = error.response?.data
             setErrorMsg(resp.error?.msg || "")
         })
-        setProgress(4)
     }
+
     const nextStep = async () => {
         let curStep = progress
         if (curStep == 1) {
