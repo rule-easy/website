@@ -2,7 +2,8 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Stream as Item } from 'stream';
 import { v4 as uuid } from 'uuid';
 
 import Button from '@/components/button';
@@ -25,25 +26,81 @@ interface Rule {
     order: number;
 }
 
-interface Stream {
+interface Item {
     id: string
     name: string
-    schema: string
 }
 
 const CreateRule = () => {
+    // All stream names
+    const [allStreams, setAllStreams] = React.useState<Item[]>([])
+    // Stream states
+    const [streamName, setStreamName] = React.useState<string>("")
+    const [schemaKeys, setStreamSchemaKeys] = React.useState<Item[]>([])
+
+    // Progress steps
     const [progress, setProgress] = React.useState(0)
     const [errorMsg, setErrorMsg] = React.useState("")
+    // Rule name, ID and details
     const [name, setName] = React.useState("")
     const [rule, setRule] = React.useState("")
+    // Rule data - Condition vs string
     const [ruleMap, setRuleMap] = React.useState<Map<string, Rule>>(new Map<string, Rule>())
+    // Total rrules
     const [totalRules, setTotalRules] = React.useState(1)
-    const [allStreams, setAllStreams] = React.useState<Stream[]>([])
 
     const axiosAuth = useAxiosAuth()
     const router = useRouter();
 
-    const checkName = async () => {
+    const getAllStreams = async () => {
+        // Check for duplicate name
+        axiosAuth.get("/v1/stream").then((resp: AxiosResponse) => {
+            let data: ServerResponse = resp.data
+            if (data.success?.data != null) {
+                console.log(data.success.data)
+                setAllStreams(data.success.data)
+            }
+            setProgress(progress + 1)
+        }).catch((err: AxiosError) => {
+            setErrorMsg("Error")
+        })
+    }
+
+    const streamSelected = async (stream: Item) => {
+        console.log("Stream selected:", stream)
+        setStreamName(stream.name)
+    }
+
+    // TODO: Not the best way of setting
+    useEffect(() => {
+        getStream();
+    }, [streamName]);
+
+    const getStream = async () => {
+        if (streamName == "") { return }
+        axiosAuth.get("/v1/stream?name=" + streamName).then((resp: AxiosResponse) => {
+            let data: ServerResponse = resp.data
+            if (data.success?.data != null) {
+                var schemaLoc: Item[] = []
+                console.log(data)
+                data.success.data[0].schema_keys.forEach((element: string) => {
+                    schemaLoc.push({ id: uuid(), name: element })
+                });
+                console.log(schemaLoc)
+                setStreamSchemaKeys(schemaLoc)
+                setErrorMsg("")
+            }
+        }).catch((err: AxiosError) => {
+            console.log(err)
+            setErrorMsg("Could not fetch the stream. Please try again!!")
+        })
+    };
+
+    const createActions = async () => {
+        setProgress(4)
+    }
+
+    const checkRuleName = async () => {
         // Check for empty name
         if (name.length == 0) {
             setErrorMsg("Stream name cannot be empty")
@@ -63,26 +120,6 @@ const CreateRule = () => {
             setErrorMsg("Error")
         })
     }
-    const checkStream = async () => {
-        setProgress(progress + 1)
-    };
-
-    const createActions = async () => {
-        setProgress(4)
-    }
-
-    const getAllStreams = async () => {
-        // Check for duplicate name
-        axiosAuth.get("/v1/stream").then((resp: AxiosResponse) => {
-            let data: ServerResponse = resp.data
-            if (data.success?.data != null) {
-                setAllStreams(data.success.data)
-            }
-            setProgress(progress + 1)
-        }).catch((err: AxiosError) => {
-            setErrorMsg("Error")
-        })
-    }
 
     const nextStep = async () => {
         // Validation steps
@@ -90,9 +127,9 @@ const CreateRule = () => {
         if (curStep == 0) {
             getAllStreams()
         } else if (curStep == 1) {
-            checkStream()
+            setProgress(progress + 1)
         } else if (curStep == 2) {
-            checkName()
+            checkRuleName()
         } else if (curStep == 3) {
             // Invoke rule creation API here
         } else if (curStep == 4) {
@@ -176,7 +213,7 @@ const CreateRule = () => {
             {
                 progress >= 1 &&
                 <div data-aos="fade-up" data-aos-delay="200" className="flex flex-col w-full lg:flex-row lg:justify-around">
-                    <DropDown placeholder="----- Select stream -----" options={allStreams} disabled={progress > 1} />
+                    <DropDown parentCallback={streamSelected} placeholder="----- Select stream -----" options={allStreams} disabled={progress > 1} />
                     <div className="divider lg:divider-horizontal">OR</div>
                     <Button licon={faPlus} ricon={faDatabase} href={"/console/streams/create"} text={"Create stream"} disabled={progress > 1} />
                 </div>
@@ -202,7 +239,9 @@ const CreateRule = () => {
                                     <div className='flex flex-row items-center'>
                                         <FontAwesomeIcon onClick={progress == 3 && rule.order > 1 ? () => removeRule(ruleID) : undefined} icon={faCircleMinus} className={clsx({ "text-custom-red cursor-pointer hover:text-indigo-700": progress == 3 && rule.order > 1 }, { "text-gray-600 cursor-not-allowed": progress > 3 || rule.order == 1 })} />
                                     </div>
-                                    <RuleDataSetter id={ruleID} parentCallback={updateRule} disabled={progress >= 4}></RuleDataSetter>
+                                    < div className='flex grow'>
+                                        <RuleDataSetter initialSuggestion={schemaKeys} id={ruleID} parentCallback={updateRule} disabled={progress >= 4}></RuleDataSetter>
+                                    </div>
                                     <div className='flex flex-row items-center '>
                                         <FontAwesomeIcon onClick={progress == 3 ? () => addNewRule() : undefined} icon={faCirclePlus} className={clsx({ "text-custom-green cursor-pointer hover:text-indigo-700": progress == 3 }, { "text-gray-600 cursor-not-allowed": progress > 3 })} />
                                     </div>

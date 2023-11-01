@@ -34,30 +34,20 @@ const RuleDataSetter = (props: any) => {
         props.parentCallback(props.id, operand1 + " " + operator + " " + operand2 + " " + event.target.value);
     }
     return (
-        <div>
-            <div className='flex flex-row space-x-3 space-y-1'>
-
-                <Autocomplete></Autocomplete>
-                {/* <input onChange={operand1Changed} type="text" placeholder="Start typing (ex: amount)" className="grow input input-bordered input-primary w-full max-w-xs disabled:bg-gray-800" disabled={props.disabled} /> */}
-
-                <select onChange={operatorChanged} className="select select-primary w-full max-w-xs basis-2/12 disabled:bg-gray-800" defaultValue="  " disabled={props.disabled}>
-                    <option></option>
-                    <option>==</option>
-                    <option>&gt;=</option>
-                    <option>&lt;=</option>
-                    <option>&gt;</option>
-                    <option>&lt;</option>
-                </select>
-
-                <input onChange={operand2Changed} type="text" placeholder="Ex: 200" className="basis-4/12 input input-bordered input-primary w-full max-w-xs disabled:bg-gray-800" disabled={props.disabled} />
-
-                <select onChange={conditionChanged} className="select select-primary w-full max-w-xs basis-2/12 disabled:bg-gray-800" defaultValue="  " disabled={props.disabled}>
-                    <option></option>
-                    <option>&&</option>
-                    <option>||</option>
-                </select>
-
+        <div className='flex grow flex-row justify-around'>
+            <div className="basis-6/12">
+                <Autocomplete initialSuggestion={props.initialSuggestion} placeholder="Start typing ex: amount"></Autocomplete>
             </div>
+            <div className="basis-1/12">
+                <Autocomplete initialSuggestion={[{ "id": 1, name: "==" }]} placeholder="=="></Autocomplete>
+            </div>
+            <div className="basis-4/12">
+                <input onChange={operand2Changed} type="text" placeholder="Ex: 200" className="basis-4/12 input input-xs input-bordered w-full max-w-xs disabled:bg-gray-800" disabled={props.disabled} />
+            </div>
+            <div className="basis-1/12">
+                <Autocomplete initialSuggestion={[{ "id": 1, name: "&&" }, { "id": 2, name: "||" }]} placeholder="&&"></Autocomplete>
+            </div>
+
         </div>
     )
 }

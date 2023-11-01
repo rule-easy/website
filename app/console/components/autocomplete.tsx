@@ -9,33 +9,16 @@ interface Item {
 
 const Autocomplete = (props: any) => {
 
-    const [suggestions, setSuggestions] = React.useState<string[]>([])
-    const [initialized, setInitialized] = React.useState(false)
-    const [initialSuggestion, setInitialSuggestion] = React.useState<string[]>([])
+    const [suggestions, setSuggestions] = React.useState<Item[]>([])
     const [value, setValue] = React.useState<string>("")
 
     const valueChanged = async (event: any) => {
-        if (!initialized) {
-            loadSuggestions()
-            setInitialized(true)
+        if (event.target.value == "") {
+            setSuggestions([])
+            return
         }
-        let filteredSuggestions = initialSuggestion.filter(curSuggestion => curSuggestion.startsWith(event.target.value));
-        console.log(initialSuggestion)
-        console.log(filteredSuggestions)
+        let filteredSuggestions = props.initialSuggestion.filter((curSuggestion: Item) => curSuggestion.name.startsWith(event.target.value));
         setSuggestions(filteredSuggestions)
-    }
-
-    const loadSuggestions = async () => {
-        setInitialSuggestion([
-            "batters.batter[i].id",
-            "batters.batter[i].type",
-            "id",
-            "name",
-            "ppu",
-            "topping[i].id",
-            "topping[i].type",
-            "type"
-        ])
     }
 
     const updateSuggestions = async () => {
@@ -48,12 +31,12 @@ const Autocomplete = (props: any) => {
     }
 
     return (
-        <div className='flex flex-col'>
-            <input onChange={valueChanged} type="text" placeholder="Start typing (ex: amount)" className="grow input input-bordered input-primary w-full max-w-xs disabled:bg-gray-800" disabled={props.disabled} />
-            <div className="join join-vertical overlay">
+        <div className='flex flex-col w-full max-w-xs relative'>
+            <input onChange={valueChanged} type="text" placeholder={props.placeholder} className="input input-xs input-bordered font-mono w-full max-w-xs p-0 m-0 disabled:bg-gray-800" disabled={props.disabled} />
+            <div className="absolute top-6 left-0 w-full join-vertical overlay">
                 {
-                    suggestions.map((e) => (
-                        <p key={e} onClick={() => selectSuggestion(e)} className="join-item bg-gray-700 text-sm font-mono py-1 px-2 justify-start cursor-pointer hover:bg-gray-800">{e}</p>
+                    suggestions.map((e: Item) => (
+                        <p key={e.id} onClick={() => selectSuggestion(e.name)} className="join-item bg-gray-700 text-sm font-mono py-1 px-2 justify-start cursor-pointer hover:bg-gray-800">{e.name}</p>
                     ))
                 }
             </div>

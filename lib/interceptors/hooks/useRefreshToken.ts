@@ -15,6 +15,7 @@ export const useRefreshToken = () => {
         }).then((resp: AxiosResponse) => {
             if (session) session.user.accessToken = resp.data.success?.data?.accessToken;
         }).catch((error) => {
+            console.log(error)
             // Clear the token
             signIn();
         })
