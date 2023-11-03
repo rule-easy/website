@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import FeatImage01 from '@/public/images/features-03-image-01.png';
+import FeatImage01 from '@/public/images/features-03-image-01.gif';
 import FeatImage02 from '@/public/images/features-03-image-02.png';
 import FeatImage03 from '@/public/images/features-03-image-03.png';
 import FeatImage05 from '@/public/images/features-03-image-05.png';

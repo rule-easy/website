@@ -17,35 +17,35 @@ const RuleDataSetter = (props: any) => {
         setConditionEnabled(true)
     }
 
-    const operand1Changed = async (event: any) => {
-        setOperand1(event.target.value)
-        props.parentCallback(props.id, event.target.value + " " + operator + " " + operand2 + " " + condition);
+    const operand1Changed = async (value: any) => {
+        setOperand1(value)
+        props.parentCallback(props.id, value + " " + operator + " " + operand2 + " " + condition);
     }
-    const operatorChanged = async (event: any) => {
-        setOperator(event.target.value)
-        props.parentCallback(props.id, operand1 + " " + event.target.value + " " + operand2 + " " + condition);
+    const operatorChanged = async (value: any) => {
+        setOperator(value)
+        props.parentCallback(props.id, operand1 + " " + value + " " + operand2 + " " + condition);
     }
-    const operand2Changed = async (event: any) => {
-        setOperand2(event.target.value)
-        props.parentCallback(props.id, operand1 + " " + operator + " " + event.target.value + " " + condition);
+    const operand2Changed = async (value: any) => {
+        setOperand2(value)
+        props.parentCallback(props.id, operand1 + " " + operator + " " + value + " " + condition);
     }
-    const conditionChanged = async (event: any) => {
-        setCondition(event.target.value)
-        props.parentCallback(props.id, operand1 + " " + operator + " " + operand2 + " " + event.target.value);
+    const conditionChanged = async (value: any) => {
+        setCondition(value)
+        props.parentCallback(props.id, operand1 + " " + operator + " " + operand2 + " " + value);
     }
     return (
-        <div className='flex grow flex-row justify-around'>
-            <div className="basis-6/12">
-                <Autocomplete initialSuggestion={props.initialSuggestion} placeholder="Start typing ex: amount"></Autocomplete>
-            </div>
-            <div className="basis-1/12">
-                <Autocomplete initialSuggestion={[{ "id": 1, name: "==" }]} placeholder="=="></Autocomplete>
-            </div>
+        <div className='flex grow flex-row mx-2'>
             <div className="basis-4/12">
-                <input onChange={operand2Changed} type="text" placeholder="Ex: 200" className="basis-4/12 input input-xs input-bordered w-full max-w-xs disabled:bg-gray-800" disabled={props.disabled} />
+                <Autocomplete initialSuggestion={props.initialSuggestion} onSuggestionSelect={operand1Changed} placeholder="Start typing ex: amount"></Autocomplete>
             </div>
             <div className="basis-1/12">
-                <Autocomplete initialSuggestion={[{ "id": 1, name: "&&" }, { "id": 2, name: "||" }]} placeholder="&&"></Autocomplete>
+                <Autocomplete onSuggestionSelect={operatorChanged} initialSuggestion={[{ "id": "1", name: "==" }, { "id": "2", name: ">=" }, { "id": "3", name: "<=" }, { "id": "4", name: "&&" }, { "id": "5", name: "||" }]} placeholder="=="></Autocomplete>
+            </div>
+            <div className="basis-6/12 flex flex-col">
+                <input onChange={(e) => operand2Changed(e.target.value)} type="text" placeholder="Ex: 200" className="input input-xs input-bordered rounded-none font-mono w-full p-0 m-0 text-center disabled:bg-gray-800" disabled={props.disabled} />
+            </div>
+            <div className="basis-1/12">
+                <Autocomplete onSuggestionSelect={conditionChanged} initialSuggestion={[{ "id": "1", name: "&&" }, { "id": "2", name: "||" }]} placeholder="&&"></Autocomplete>
             </div>
 
         </div>
