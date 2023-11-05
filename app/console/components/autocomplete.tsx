@@ -1,8 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import { prefix } from '@fortawesome/free-solid-svg-icons';
-
 interface Item {
     id: string
     name: string
@@ -31,9 +29,15 @@ const Autocomplete = (props: any) => {
 
     const valueChanged = async (event: any) => {
         resetAllValues()
-        if (event.target.value == "") return
+        console.log(event.target.value)
+        if (event.target.value == "") {
+            setValue(event.target.value)
+            return
+        }
         let filteredSuggestions = props.initialSuggestion.filter((curSuggestion: Item) => curSuggestion.name.startsWith(event.target.value));
         updateSuggestions(filteredSuggestions)
+        props.onChange(event.target.value)
+        setValue(event.target.value)
     }
 
     const onKeyPressDown = async (e: any) => {
@@ -73,11 +77,9 @@ const Autocomplete = (props: any) => {
         resetAllValues()
     }
 
-
-
     return (
         <div className='flex flex-col w-full max-w-xs relative'>
-            <input onChange={valueChanged} onKeyDown={onKeyPressDown} type="text" placeholder={props.placeholder} className="input input-xs input-bordered rounded-none font-mono w-full p-0 m-0 disabled:bg-gray-800" disabled={props.disabled} />
+            <input value={value} onChange={valueChanged} onKeyDown={onKeyPressDown} type="text" placeholder={props.placeholder} className="input input-xs input-bordered rounded-none font-mono w-full p-0 m-0 disabled:bg-gray-800" disabled={props.disabled} />
             <div className="absolute top-6 left-0 w-full join-vertical overlay">
                 {
                     suggestions.map((e: Item) => (
