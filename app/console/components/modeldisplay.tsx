@@ -25,7 +25,7 @@ const ModelDisplay = (props: any) => {
 
     const beautify = async () => {
         console.log(schema)
-        var beautifiedValue = JSON.stringify(JSON.parse(schema), null, "\t")
+        var beautifiedValue = JSON.stringify(JSON.parse(schema), null, '\t')
         setSchema(beautifiedValue)
         props.onChange(schema)
     }
@@ -34,7 +34,7 @@ const ModelDisplay = (props: any) => {
         console.log(key)
         var updatedSchemaData: any = schemaData
         delete updatedSchemaData[key]
-        setSchema(JSON.stringify(updatedSchemaData, null, "\t"))
+        setSchema(JSON.stringify(updatedSchemaData, null, '\t'))
         setSchemaData(updatedSchemaData)
     }
 
@@ -54,7 +54,7 @@ const ModelDisplay = (props: any) => {
             </div>
             {
                 ipModelMode == 1 &&
-                <div className=" bg-gray-900 min-w-full rounded-md outline outline-1 outline-gray-700 overflow-hidden">
+                <div className=" bg-gray-900 min-w-full h-60 rounded-md outline outline-1 outline-gray-700 overflow-hidden">
                     <div className='flex flex-row m-2 justify-end'>
                         <button title="Beautify" onClick={() => beautify()}
                             className={clsx({ "btn btn-sm justify-self-end rounded-none text-indigo-100 outline-none ": true })}>
@@ -70,13 +70,13 @@ const ModelDisplay = (props: any) => {
                         </button>
                     </div>
                     <div className='flex flex-row'>
-                        <textarea onChange={onChange} className="textarea outline-none rounded-none text-xs font-mono bg-gray-900 min-w-full" placeholder='{ "amount": 100, "status": "COMPLETED", "userID": "dsad-saas-dssa-dassa"}' disabled={props.disabled} value={schema}></textarea>
+                        <textarea onChange={onChange} className="textarea outline-none rounded-none text-xs h-48 font-mono bg-gray-900 min-w-full" placeholder='{ "amount": 100, "status": "COMPLETED", "userID": "dsad-saas-dssa-dassa"}' disabled={props.disabled} value={schema}></textarea>
                     </div>
                 </div>
             }
             {
                 ipModelMode == 2 &&
-                <div className=" bg-gray-900 min-w-full rounded-md outline outline-1 outline-gray-700 overflow-hidden">
+                <div className=" bg-gray-900 min-w-full h-60 rounded-md outline outline-1 outline-gray-700 overflow-hidden">
                     <div className='flex flex-row m-2 justify-end'>
                         <button title="Beautify" onClick={() => beautify()}
                             className={clsx({ "btn btn-sm justify-self-end rounded-none text-indigo-100 outline-none ": true })}>
@@ -91,7 +91,7 @@ const ModelDisplay = (props: any) => {
                             Collapse <FontAwesomeIcon onClick={() => beautify()} icon={faAnglesDown} />
                         </button>
                     </div>
-                    <div className='flex flex-col overflow-auto'>
+                    <div className='flex flex-col h-48 overflow-auto'>
                         {
                             Object.keys(schemaData).map((item, i) => (
                                 <SimpleModelItem onDelete={removeKey} data={item} />
