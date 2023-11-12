@@ -14,7 +14,7 @@ export default function Console({
 }) {
     const { data: session } = useSession();
 
-    if (true) {
+    if (session) {
         return (
             <section>
                 <div className="max-w-6xl mx-auto relative">

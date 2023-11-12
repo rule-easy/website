@@ -10,13 +10,13 @@ const LabelledInput = (props: any) => {
 
     return (
         <div>
-            <div data-aos="fade-up" data-aos-delay="200" className="form-control pl-8">
+            <div data-aos="fade-up" data-aos-delay="200" className="form-control">
                 <label className="label">
                     <span className="label-text">{props.top_label}</span>
                 </label>
                 <label className="input-group">
-                    <span>{props.label}</span>
-                    <input onChange={onTrigger} type="text" placeholder={props.placeholder} className="input input-bordered disabled:bg-gray-800" disabled={props.disabled} />
+                    <span className='bg-custom-primary'>{props.label}</span>
+                    <input onChange={onTrigger} type="text" placeholder={props.placeholder} className="input input-bordered disabled:bg-gray-600" disabled={props.disabled} />
                 </label>
             </div>
         </div>

@@ -31,7 +31,7 @@ module.exports = {
           900: '#262668',
         },
         custom: {
-          primary: '#5D5DFF',
+          primary: '#4F46E5',
           green: '#B6D7A8',
           red: '#EA9999',
           gray: '#1D232A'
