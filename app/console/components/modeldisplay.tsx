@@ -52,10 +52,9 @@ const ModelDisplay = (props: any) => {
                     </button>
                 </div>
             </div>
-
             {
                 ipModelMode == 1 &&
-                <div className="h-60 bg-gray-900 min-w-full rounded-md outline outline-1 outline-gray-700 overflow-hidden">
+                <div className=" bg-gray-900 min-w-full rounded-md outline outline-1 outline-gray-700 overflow-hidden">
                     <div className='flex flex-row m-2 justify-end'>
                         <button title="Beautify" onClick={() => beautify()}
                             className={clsx({ "btn btn-sm justify-self-end rounded-none text-indigo-100 outline-none ": true })}>
@@ -71,13 +70,13 @@ const ModelDisplay = (props: any) => {
                         </button>
                     </div>
                     <div className='flex flex-row'>
-                        <textarea onChange={onChange} className="textarea outline-none rounded-none text-xs font-mono h-48 bg-gray-900 min-w-full" placeholder='{ "amount": 100, "status": "COMPLETED", "userID": "dsad-saas-dssa-dassa"}' disabled={props.disabled} value={schema}></textarea>
+                        <textarea onChange={onChange} className="textarea outline-none rounded-none text-xs font-mono bg-gray-900 min-w-full" placeholder='{ "amount": 100, "status": "COMPLETED", "userID": "dsad-saas-dssa-dassa"}' disabled={props.disabled} value={schema}></textarea>
                     </div>
                 </div>
             }
             {
                 ipModelMode == 2 &&
-                <div className="h-60 bg-gray-900 min-w-full rounded-md outline outline-1 outline-gray-700 overflow-hidden">
+                <div className=" bg-gray-900 min-w-full rounded-md outline outline-1 outline-gray-700 overflow-hidden">
                     <div className='flex flex-row m-2 justify-end'>
                         <button title="Beautify" onClick={() => beautify()}
                             className={clsx({ "btn btn-sm justify-self-end rounded-none text-indigo-100 outline-none ": true })}>
@@ -92,7 +91,7 @@ const ModelDisplay = (props: any) => {
                             Collapse <FontAwesomeIcon onClick={() => beautify()} icon={faAnglesDown} />
                         </button>
                     </div>
-                    <div className='flex flex-col h-48 overflow-auto'>
+                    <div className='flex flex-col overflow-auto'>
                         {
                             Object.keys(schemaData).map((item, i) => (
                                 <SimpleModelItem onDelete={removeKey} data={item} />
