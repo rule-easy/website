@@ -16,7 +16,7 @@ const LabelledInput = (props: any) => {
                 </label>
                 <label className="input-group">
                     <span className='bg-custom-primary'>{props.label}</span>
-                    <input onChange={onTrigger} type="text" placeholder={props.placeholder} className="input input-bordered disabled:bg-gray-600" disabled={props.disabled} />
+                    <input onChange={onTrigger} type="text" placeholder={props.placeholder} className="input input-bordered bg-gray-900 disabled:bg-gray-600 disabled:border-gray-600" disabled={props.disabled} />
                 </label>
             </div>
         </div>

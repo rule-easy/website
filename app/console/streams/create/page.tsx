@@ -13,18 +13,17 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import LabelledInput from '../../components/labelledinput';
+import ModelDisplay from '../../components/modeldisplay';
 import ProgressSteps from '../../components/progresssteps';
 
 const CreateStream = () => {
     const [progress, setProgress] = React.useState(0);
     const [errorMsg, setErrorMsg] = React.useState("");
     const [name, setName] = React.useState("")
-    const [ipModelMode, setIpModelMode] = React.useState(1)
 
     const axiosAuth = useAxiosAuth()
     const router = useRouter();
-
-    const schema = useRef("")
+    const [schema, setSchema] = React.useState("")
 
     const checkName = async () => {
         // Check for empty name
@@ -48,7 +47,7 @@ const CreateStream = () => {
 
     const validateSchema = () => {
         try {
-            JSON.parse(schema.current)
+            JSON.parse(schema)
             setErrorMsg("")
             setProgress(progress + 1)
         } catch (e) {
@@ -57,7 +56,7 @@ const CreateStream = () => {
     };
 
     const createStreamAPI = async () => {
-        const createStreamReq: CreateStreamRequest = { name: name, schema: schema.current }
+        const createStreamReq: CreateStreamRequest = { name: name, schema: schema }
         var resp: any
         axiosAuth.put("/v1/stream", createStreamReq).then((resp) => {
             router.push("/console/streams/create/success")
@@ -84,10 +83,6 @@ const CreateStream = () => {
     }
     const onStreamNameChange = async (streamName: string) => {
         setName(streamName)
-    }
-
-    const ipModelModeChanged = async (state: number) => {
-        setIpModelMode(state)
     }
 
     return (
@@ -127,22 +122,7 @@ const CreateStream = () => {
                     <label className="label">
                         <span className="label-text">Input model</span>
                     </label>
-                    <div className='flex flex-row'>
-                        <div className="join mb-2">
-                            <button onClick={() => ipModelModeChanged(1)}
-                                className={clsx({ "btn btn-sm rounded-none text-indigo-100 outline-none": true }, { "bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2": ipModelMode == 1 })}>
-                                JSON
-                            </button>
-                            <button onClick={() => ipModelModeChanged(2)}
-                                className={clsx({ "btn btn-sm rounded-none text-indigo-100 outline-none": true }, { "bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2": ipModelMode == 2 })}>
-                                SIMPLE
-                            </button>
-                            <Button>
-
-                            </Button>
-                        </div>
-                    </div>
-                    <textarea onChange={(e) => (schema.current = e.target.value)} className="textarea textarea-bordered h-24" placeholder='{ "amount": 100, "status": "COMPLETED", "userID": "dsad-saas-dssa-dassa"}' disabled={progress > 2}></textarea>
+                    <ModelDisplay disabled={progress > 2} onChange={setSchema} />
                 </div>
             }
 
