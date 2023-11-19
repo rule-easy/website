@@ -1,17 +1,15 @@
 import clsx from 'clsx';
 import React, { useRef } from 'react';
 
-import { icon } from '@fortawesome/fontawesome-svg-core';
 import { faAdd, faAnglesDown, faAnglesUp, faFan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import SimpleModelDisplay from './simplemodeldisplay';
 import SimpleModelItem from './simplemodelitem';
 
 const ModelDisplay = (props: any) => {
     const [ipModelMode, setIpModelMode] = React.useState(1)
     const [schema, setSchema] = React.useState<string>("{}")
-    const [schemaData, setSchemaData] = React.useState<any>(JSON.parse("{}"))
+    const [schemaJSON, setSchemaJSON] = React.useState<any>(JSON.parse("{}"))
 
     const ipModelModeChanged = async (state: number) => {
         setIpModelMode(state)
@@ -19,7 +17,7 @@ const ModelDisplay = (props: any) => {
 
     const onChange = async (e: any) => {
         setSchema(e.target.value)
-        setSchemaData(JSON.parse(e.target.value))
+        setSchemaJSON(JSON.parse(e.target.value))
         props.onChange(schema)
     }
 
@@ -32,10 +30,10 @@ const ModelDisplay = (props: any) => {
 
     const removeKey = async (key: string) => {
         console.log(key)
-        var updatedSchemaData: any = schemaData
+        var updatedSchemaData: any = schemaJSON
         delete updatedSchemaData[key]
         setSchema(JSON.stringify(updatedSchemaData, null, '\t'))
-        setSchemaData(updatedSchemaData)
+        setSchemaJSON(updatedSchemaData)
     }
 
     return (
@@ -60,14 +58,6 @@ const ModelDisplay = (props: any) => {
                             className={clsx({ "btn btn-sm justify-self-end rounded-none text-indigo-100 outline-none ": true })}>
                             Beautify <FontAwesomeIcon onClick={() => beautify()} icon={faFan} />
                         </button>
-                        <button title="Beautify" onClick={() => beautify()}
-                            className={clsx({ "btn btn-sm justify-self-end rounded-none text-indigo-100 outline-none ": true })}>
-                            Expand <FontAwesomeIcon onClick={() => beautify()} icon={faAnglesUp} />
-                        </button>
-                        <button title="Beautify" onClick={() => beautify()}
-                            className={clsx({ "btn btn-sm justify-self-end rounded-none text-indigo-100 outline-none ": true })}>
-                            Collapse <FontAwesomeIcon onClick={() => beautify()} icon={faAnglesDown} />
-                        </button>
                     </div>
                     <div className='flex flex-row'>
                         <textarea onChange={onChange} className="textarea outline-none rounded-none text-xs h-48 font-mono bg-gray-900 min-w-full" placeholder='{ "amount": 100, "status": "COMPLETED", "userID": "dsad-saas-dssa-dassa"}' disabled={props.disabled} value={schema}></textarea>
@@ -78,24 +68,22 @@ const ModelDisplay = (props: any) => {
                 ipModelMode == 2 &&
                 <div className=" bg-gray-900 min-w-full h-60 rounded-md outline outline-1 outline-gray-700 overflow-hidden">
                     <div className='flex flex-row m-2 justify-end'>
-                        <button title="Beautify" onClick={() => beautify()}
+                        <button title="Add root" onClick={() => beautify()}
                             className={clsx({ "btn btn-sm justify-self-end rounded-none text-indigo-100 outline-none ": true })}>
                             Add root <FontAwesomeIcon onClick={() => beautify()} icon={faAdd} />
                         </button>
-                        <button title="Beautify" onClick={() => beautify()}
+                        <button title="Expand" onClick={() => beautify()}
                             className={clsx({ "btn btn-sm justify-self-end rounded-none text-indigo-100 outline-none ": true })}>
                             Expand <FontAwesomeIcon onClick={() => beautify()} icon={faAnglesUp} />
                         </button>
-                        <button title="Beautify" onClick={() => beautify()}
+                        <button title="Collapse" onClick={() => beautify()}
                             className={clsx({ "btn btn-sm justify-self-end rounded-none text-indigo-100 outline-none ": true })}>
                             Collapse <FontAwesomeIcon onClick={() => beautify()} icon={faAnglesDown} />
                         </button>
                     </div>
                     <div className='flex flex-col h-48 overflow-auto'>
                         {
-                            Object.keys(schemaData).map((item, i) => (
-                                <SimpleModelItem onDelete={removeKey} data={item} />
-                            ))
+                            <SimpleModelItem depth={0} onDelete={removeKey} data={schemaJSON} expand_child={false} />
                         }
                     </div>
                 </div>
