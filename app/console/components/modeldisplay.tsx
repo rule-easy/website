@@ -83,7 +83,7 @@ const ModelDisplay = (props: any) => {
                     </div>
                     <div className='flex flex-col h-48 overflow-auto'>
                         {
-                            <SimpleModelItem depth={0} onDelete={removeKey} data={schemaJSON} expand_child={false} />
+                            <SimpleModelItem onDelete={removeKey} parent={schemaJSON} expand_child={false} />
                         }
                     </div>
                 </div>
