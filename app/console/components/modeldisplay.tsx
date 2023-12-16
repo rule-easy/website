@@ -17,7 +17,13 @@ const ModelDisplay = (props: any) => {
 
     const onChange = async (e: any) => {
         setSchema(e.target.value)
-        setSchemaJSON(JSON.parse(e.target.value))
+        try {
+            JSON.parse(e.target.value)
+            setSchemaJSON(JSON.parse(e.target.value))
+        } catch {
+            console.log("Not a valid JSON yet")
+            setSchemaJSON(e.target.value)
+        }
         props.onChange(schema)
     }
 
@@ -60,7 +66,7 @@ const ModelDisplay = (props: any) => {
                         </button>
                     </div>
                     <div className='flex flex-row'>
-                        <textarea onChange={onChange} className="textarea outline-none rounded-none text-xs h-48 font-mono bg-gray-900 min-w-full" placeholder='{ "amount": 100, "status": "COMPLETED", "userID": "dsad-saas-dssa-dassa"}' disabled={props.disabled} value={schema}></textarea>
+                        <textarea onChange={onChange} className="textarea h-48 resize-none outline-none rounded-none text-xs font-mono bg-gray-900 min-w-full" placeholder='{ "amount": 100, "status": "COMPLETED", "userID": "dsad-saas-dssa-dassa"}' disabled={props.disabled} value={schema}></textarea>
                     </div>
                 </div>
             }

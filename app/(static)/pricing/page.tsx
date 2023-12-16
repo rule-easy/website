@@ -48,14 +48,14 @@ export default function Pricing() {
                                     <span className="inline-block font-semibold align-text-top text-gray-200"> Ideal for biz that are just starting up</span>
                                     <span className="inline-block align-text-top text-gray-600"> No PII data required to start</span>
                                     <br></br>
-                                    <button type="submit" className="w-full flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ">Get started <FontAwesomeIcon icon={faArrowRight} className="pl-4 text-indigo-100" /></button>
+                                    <button type="submit" className="w-full flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 "> <a href="https://app.reclaim.ai/m/patternact"> Schedule demo </a><FontAwesomeIcon icon={faArrowRight} className="pl-4 text-indigo-100" /></button>
                                 </div>
                                 <div className="flex flex-col mr-4">
                                     <div className='h2 mb-4 text-custom-primary text-2xl'> Pro </div>
                                     <span className="inline-block font-semibold align-text-top text-gray-200"> Ideal for biz that are just starting up</span>
                                     <span className="inline-block align-text-top text-gray-600"> No PII data required to start</span>
                                     <br></br>
-                                    <button type="submit" className="w-full flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Get pricing <FontAwesomeIcon icon={faArrowRight} className="pl-4 text-indigo-100" /></button>
+                                    <button type="submit" className="w-full flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-indigo-100 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"> <a href="https://app.reclaim.ai/m/patternact"> Get pricing </a> <FontAwesomeIcon icon={faArrowRight} className="pl-4 text-indigo-100" /></button>
                                 </div>
                             </div>
 

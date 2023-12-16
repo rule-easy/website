@@ -41,7 +41,7 @@ const CreateStream = () => {
                 setProgress(progress + 1)
             }
         }).catch((err: AxiosError) => {
-            setErrorMsg("Error")
+            setErrorMsg("Session expired. Please login")
         })
     }
 
@@ -120,7 +120,7 @@ const CreateStream = () => {
                 progress >= 2 &&
                 <div data-aos="fade-up" data-aos-delay="200" className="form-control mt-10">
                     <label className="label">
-                        <span className="label-text">Input model</span>
+                        <span className="label-text">Input sample event</span>
                     </label>
                     <ModelDisplay disabled={progress > 2} onChange={setSchema} />
                 </div>

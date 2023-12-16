@@ -5,8 +5,7 @@ export interface Config {
 }
 
 export async function GetEnvConfig() {
-    // const { publicRuntimeConfig } = getConfig();
-    // const backendHost = publicRuntimeConfig.backendHost || 'http://localhost:8080';
     var config: Config = { backendHost: 'http://localhost:8080' }
+    // var config: Config = { backendHost: 'http://api.patternact.com' }
     return config;
 }
