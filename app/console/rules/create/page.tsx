@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import React, { useEffect, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import Button from '@/components/button';
+import CustomButton from '@/components/button';
 import useAxiosAuth from '@/lib/interceptors/hooks/useAxiosAuth';
 import { ServerResponse } from '@/types/auth';
 import {
@@ -16,9 +16,9 @@ import {
     Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure
 } from '@nextui-org/react';
 
-import DropDown from '../../components/dropdown';
-import Label from '../../components/label';
-import LabelledInput from '../../components/labelledinput';
+import CustomDropDown from '../../components/dropdown';
+import CustLabel from '../../components/label';
+import LabeledInput from '../../components/labelledinput';
 import ProgressSteps from '../../components/progresssteps';
 import RuleDataSetter from '../../components/ruleselector';
 
@@ -200,7 +200,7 @@ const CreateRule = () => {
                         On PatternAct, Rules are set of customer defined logic that needs to be evaluated against each event in a stream. PatternAct systematically evaluates these rules for every incoming event in a stream.
                     </p>
                     <div className="flex justify-end col-span-6 mt-5">
-                        <Button onClick={nextStep} licon={faShieldHalved} text={"Create new rule"} ricon={faArrowRight} />
+                        <CustomButton onClick={nextStep} licon={faShieldHalved} text={"Create new rule"} ricon={faArrowRight} />
                     </div>
                 </div>
             }
@@ -220,17 +220,17 @@ const CreateRule = () => {
             {
                 progress >= 1 &&
                 <div data-aos="fade-up" data-aos-delay="200" className="flex flex-col">
-                    <Label label="Select stream" disabled={progress > 1} />
+                    <CustLabel label="Select stream" disabled={progress > 1} />
                     <div className="flex flex-row w-full lg:flex-row lg:justify-between">
-                        <DropDown parentCallback={streamSelected} placeholder="----- Select stream -----" options={allStreams} disabled={progress > 1} />
+                        <CustomDropDown parentCallback={streamSelected} placeholder="----- Select stream -----" options={allStreams} disabled={progress > 1} />
                         <div>OR</div>
                         {
                             progress <= 1 &&
-                            <Button licon={faPlus} ricon={faDatabase} href={"/console/streams/create"} text={"Create stream"} disabled={progress > 1} />
+                            <CustomButton licon={faPlus} ricon={faDatabase} href={"/console/streams/create"} text={"Create stream"} disabled={progress > 1} />
                         }
                         {
                             progress > 1 &&
-                            <Button ricon={faEye} onClick={onOpen} text={"View stream"} disabled={progress <= 1} />
+                            <CustomButton ricon={faEye} onClick={onOpen} text={"View stream"} disabled={progress <= 1} />
                         }
                     </div>
                 </div>
@@ -239,14 +239,14 @@ const CreateRule = () => {
             {/* Step-2 - Select rule name */}
             {
                 progress >= 2 &&
-                <LabelledInput parentCallback={setName} label="Rule name" top_label="Choose a unique rule name" disabled={progress > 2} />
+                <LabeledInput parentCallback={setName} label="Rule name" top_label="Choose a unique rule name" disabled={progress > 2} />
             }
 
             {/* Step-3 - Configure rule */}
             {
                 progress >= 3 &&
                 <div data-aos="fade-up" data-aos-delay="200" className="mt-8 form-control ">
-                    <Label label="Configure conditions" disabled={progress > 4} />
+                    <CustLabel label="Configure conditions" disabled={progress > 4} />
                     <div className='flex flex-col pl-8 p-4 border-dashed border rounded-sm border-gray-500'>
                         {
                             [...ruleMap.entries()].map(([ruleID, rule]) =>
@@ -274,13 +274,13 @@ const CreateRule = () => {
             {/* Navigation buttons */}
             <div data-aos="fade-down" data-aos-delay="200" className={clsx({ "flex flex-row mt-12": true }, { "justify-end": progress == 1 }, { "justify-between": progress >= 2 })}>
                 {progress >= 2 &&
-                    <Button onClick={prevStep} licon={faArrowLeft} text={"Back"} />
+                    <CustomButton onClick={prevStep} licon={faArrowLeft} text={"Back"} />
                 }
                 {progress >= 1 && progress <= 3 &&
-                    <Button onClick={nextStep} ricon={faArrowRight} text={"Next"} />
+                    <CustomButton onClick={nextStep} ricon={faArrowRight} text={"Next"} />
                 }
                 {progress >= 4 &&
-                    <Button onClick={nextStep} ricon={faFlagCheckered} text={"Finish"} />
+                    <CustomButton onClick={nextStep} ricon={faFlagCheckered} text={"Finish"} />
                 }
             </div>
 

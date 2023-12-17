@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
-const Label = (props: any) => {
+const CustLabel = (props: any) => {
 
     return (
         <div>
@@ -12,4 +12,4 @@ const Label = (props: any) => {
     )
 }
 
-export default Label
+export default CustLabel

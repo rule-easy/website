@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import React, { useRef } from 'react';
 
-import Button from '@/components/button';
+import CustomButton from '@/components/button';
 import useAxiosAuth from '@/lib/interceptors/hooks/useAxiosAuth';
 import { ServerResponse } from '@/types/auth';
 import { CreateStreamRequest } from '@/types/stream';
@@ -12,7 +12,7 @@ import {
     faArrowLeft, faArrowRight, faDatabase, faFlagCheckered
 } from '@fortawesome/free-solid-svg-icons';
 
-import LabelledInput from '../../components/labelledinput';
+import LabeledInput from '../../components/labelledinput';
 import ModelDisplay from '../../components/modeldisplay';
 import ProgressSteps from '../../components/progresssteps';
 
@@ -93,7 +93,7 @@ const CreateStream = () => {
                         On PatternAct, streams signify the incoming flow of homogeneous events from client side. Each event in a stream shares a common schema that needs to be registered before sending data.
                     </p>
                     <div className="flex justify-end col-span-6 mt-5">
-                        <Button onClick={() => setProgress(1)} licon={faDatabase} text={"Create new stream"} ricon={faArrowRight} />
+                        <CustomButton onClick={() => setProgress(1)} licon={faDatabase} text={"Create new stream"} ricon={faArrowRight} />
                     </div>
                 </div>
             }
@@ -112,7 +112,7 @@ const CreateStream = () => {
             {/* Step-1 form */}
             {
                 progress >= 1 &&
-                <LabelledInput parentCallback={onStreamNameChange} placeholder="Ex:add-cash-events" label="Stream name" top_label="Choose a unique stream name" disabled={progress > 1} />
+                <LabeledInput parentCallback={onStreamNameChange} placeholder="Ex:add-cash-events" label="Stream name" top_label="Choose a unique stream name" disabled={progress > 1} />
             }
 
             {/* Step-2 form */}
@@ -129,10 +129,10 @@ const CreateStream = () => {
             {/* Navigation buttons */}
             <div data-aos="fade-down" data-aos-delay="200" className={clsx({ "flex flex-row mt-12": true }, { "justify-end": progress == 1 }, { "justify-between": progress >= 2 })}>
                 {progress >= 2 &&
-                    <Button onClick={prevStep} licon={faArrowLeft} text={"Back"} />
+                    <CustomButton onClick={prevStep} licon={faArrowLeft} text={"Back"} />
                 }
                 {progress >= 1 && progress <= 3 &&
-                    <Button onClick={nextStep} ricon={progress <= 2 ? faArrowRight : faFlagCheckered} text={progress <= 2 ? "Next" : "Finish"} />
+                    <CustomButton onClick={nextStep} ricon={progress <= 2 ? faArrowRight : faFlagCheckered} text={progress <= 2 ? "Next" : "Finish"} />
                 }
             </div>
         </div >

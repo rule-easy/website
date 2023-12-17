@@ -6,7 +6,7 @@ interface DropDownItem {
     name: string
 }
 
-const DropDown = (props: any) => {
+const CustomDropDown = (props: any) => {
     const onTrigger = async (event: any) => {
         // Call the parent callback function 
         console.log(event)
@@ -33,4 +33,4 @@ const DropDown = (props: any) => {
     )
 }
 
-export default DropDown
+export default CustomDropDown

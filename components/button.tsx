@@ -5,7 +5,7 @@ import React from 'react';
 
 import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 
-const Button = (props: any) => {
+const CustomButton = (props: any) => {
     return (
         <div>
             <button onClick={props.onClick} type="submit"
@@ -27,4 +27,4 @@ const Button = (props: any) => {
     )
 }
 
-export default Button
+export default CustomButton
