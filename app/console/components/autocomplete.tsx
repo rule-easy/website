@@ -4,6 +4,7 @@ import React from 'react';
 interface Item {
     id: string
     name: string
+    displayName: string
 }
 
 const Autocomplete = (props: any) => {
@@ -15,7 +16,6 @@ const Autocomplete = (props: any) => {
     const [optionKeys, setOptionKeys] = React.useState<string[]>([])
 
     const resetAllValues = () => {
-        console.log("Value reset")
         setSuggestions([])
         setSelectedOptionKey("")
         setSelectedOptionIndex(-1)
@@ -34,9 +34,9 @@ const Autocomplete = (props: any) => {
             setValue(event.target.value)
             return
         }
-        let filteredSuggestions = props.initialSuggestion.filter((curSuggestion: Item) => curSuggestion.name.startsWith(event.target.value));
+        let filteredSuggestions = props.initialSuggestion.filter((curSuggestion: Item) => curSuggestion.displayName.startsWith(event.target.value));
         updateSuggestions(filteredSuggestions)
-        props.onChange(event.target.value)
+        props.onChange({ id: -1, name: event.target.value, displayName: event.target.value })
         setValue(event.target.value)
     }
 
@@ -58,21 +58,18 @@ const Autocomplete = (props: any) => {
             return
         }
         let newIndex = Math.abs(selectedOptionIndex + step) % (optionKeys.length)
-        console.log(optionKeys)
-        console.log(newIndex, selectedOptionIndex)
-        console.log(optionKeys[newIndex])
         setSelectedOptionIndex(selectedOptionIndex + step)
         setSelectedOptionKey(optionKeys[newIndex])
     }
 
     const onKeyEnter = async () => {
         let selectedValue = props.initialSuggestion.filter((curSuggestion: Item) => curSuggestion.id.startsWith(selectedOptionKey))[0];
-        selectSuggestion(selectedValue.name)
+        selectSuggestion(selectedValue)
     }
 
-    const selectSuggestion = async (selectedSuggestion: string) => {
-        console.log("Suggestion selected:", selectedSuggestion)
-        setValue(selectedSuggestion)
+    const selectSuggestion = async (selectedSuggestion: Item) => {
+        console.log("Suggestion selected:", selectedSuggestion.displayName)
+        setValue(selectedSuggestion.displayName)
         props.onSuggestionSelect(selectedSuggestion)
         resetAllValues()
     }
@@ -83,7 +80,7 @@ const Autocomplete = (props: any) => {
             <div className="absolute top-6 left-0 w-full join-vertical overlay">
                 {
                     suggestions.map((e: Item) => (
-                        <p key={e.id} onClick={() => selectSuggestion(e.name)} className={clsx({ "join-item text-sm font-mono py-1 px-2 justify-start cursor-pointer bg-gray-700 hover:bg-gray-800": true }, { "bg-gray-800": e.id == selectedOptionKey })}>{e.name}</p>
+                        <p key={e.id} onClick={() => selectSuggestion(e)} className={clsx({ "join-item text-sm font-mono py-1 px-2 cursor-pointer bg-gray-700 hover:bg-gray-800": true }, { "bg-gray-800": e.id == selectedOptionKey })}>{e.displayName}</p>
                     ))
                 }
             </div>

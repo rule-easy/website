@@ -7,6 +7,7 @@ import { v4 as uuid } from 'uuid';
 import CustomButton from '@/components/button';
 import useAxiosAuth from '@/lib/interceptors/hooks/useAxiosAuth';
 import { ServerResponse } from '@/types/auth';
+import { Operator, Rule } from '@/types/rules';
 import {
     faArrowLeft, faArrowRight, faCircleMinus, faCirclePlus, faDatabase, faEye, faFlagCheckered,
     faPlus, faShieldHalved
@@ -22,15 +23,10 @@ import LabeledInput from '../../components/labelledinput';
 import ProgressSteps from '../../components/progresssteps';
 import RuleDataSetter from '../../components/ruleselector';
 
-interface Rule {
-    id: string;
-    data: string;
-    order: number;
-}
-
 interface Item {
     id: string
     name: string
+    displayName: string
 }
 
 const CreateRule = () => {
@@ -87,12 +83,12 @@ const CreateRule = () => {
                 var schemaLoc: Item[] = []
                 console.log(data)
                 data.success.data[0].schema_keys.forEach((element: string) => {
-                    schemaLoc.push({ id: uuid(), name: element })
+                    schemaLoc.push({ id: uuid(), name: element, displayName: element })
                 });
 
                 console.log(schemaLoc)
-                console.log(JSON.stringify(JSON.parse(data.success.data[0].schema), null, '  '))
-                setStreamData(data.success.data[0].schema)
+                console.log(JSON.stringify(JSON.parse(data.success.data[0].schema), null, '\t'))
+                setStreamData(JSON.stringify(JSON.parse(data.success.data[0].schema), null, '\t'))
                 setStreamSchemaKeys(schemaLoc)
                 setErrorMsg("")
             }
@@ -161,7 +157,7 @@ const CreateRule = () => {
     const contructRule = async () => {
         let updateRule = "IF {"
         for (let [ruleID, rule] of ruleMap) {
-            updateRule += " " + rule.data
+            updateRule += " " + rule.operand1 + ' ' + rule.operator.displayName + " " + rule.operand2 + " " + rule.condition.displayName
         }
         updateRule += " }"
         setRule(updateRule)
@@ -170,7 +166,7 @@ const CreateRule = () => {
     const addNewRule = async () => {
         console.log("Add new rule")
         let ruleID = uuid()
-        setRuleMap(new Map(ruleMap.set(ruleID, { id: ruleID, order: totalRules, data: "" })))
+        setRuleMap(new Map(ruleMap.set(ruleID, { id: ruleID, order: totalRules, operand1: "", operand2: "", operator: { id: "", name: "", displayName: "" }, condition: { id: "", name: "", displayName: "" } })))
         setTotalRules(totalRules + 1)
         console.log(ruleMap)
         contructRule()
@@ -184,10 +180,9 @@ const CreateRule = () => {
         contructRule()
     }
 
-    const updateRule = async (ruleId: string, updated_rule: string) => {
-        console.log("Rule changed", ruleId, updated_rule)
-        let rule = ruleMap.get(ruleId)
-        setRuleMap(new Map(ruleMap.set(ruleId, { id: ruleId, order: rule?.order || 0, data: updated_rule })))
+    const updateRule = async (ruleId: string, rule: Rule) => {
+        console.log("Rule changed", ruleId, rule)
+        setRuleMap(new Map(ruleMap.set(ruleId, rule)))
         console.log(ruleMap)
         contructRule()
     }
@@ -230,7 +225,7 @@ const CreateRule = () => {
                         }
                         {
                             progress > 1 &&
-                            <CustomButton ricon={faEye} onClick={onOpen} text={"View stream"} disabled={progress <= 1} />
+                            <CustomButton ricon={faEye} onClick={onOpen} text={"View sample event"} disabled={progress <= 1} />
                         }
                     </div>
                 </div>
@@ -255,7 +250,7 @@ const CreateRule = () => {
                                         <FontAwesomeIcon onClick={progress == 3 && rule.order > 1 ? () => removeRule(ruleID) : undefined} icon={faCircleMinus} className={clsx({ "text-custom-red cursor-pointer hover:text-indigo-700": progress == 3 && rule.order > 1 }, { "text-gray-600 cursor-not-allowed": progress > 3 || rule.order == 1 })} />
                                     </div>
                                     < div className='flex grow'>
-                                        <RuleDataSetter initialSuggestion={schemaKeys} id={ruleID} parentCallback={updateRule} disabled={progress >= 4}></RuleDataSetter>
+                                        <RuleDataSetter initialSuggestion={schemaKeys} id={ruleID} order={rule.order} ruleUpdatedCB={updateRule} disabled={progress >= 4}></RuleDataSetter>
                                     </div>
                                     <div className='flex flex-row items-center '>
                                         <FontAwesomeIcon onClick={progress == 3 ? () => addNewRule() : undefined} icon={faCirclePlus} className={clsx({ "text-custom-green cursor-pointer hover:text-indigo-700": progress == 3 }, { "text-gray-600 cursor-not-allowed": progress > 3 })} />
@@ -267,7 +262,10 @@ const CreateRule = () => {
                     <label className="label mt-10">
                         <span className="label-text">Final rule</span>
                     </label>
-                    <textarea className="textarea textarea-bordered h-24 font-mono cursor-not-allowed disabled:bg-gray-800" placeholder='amount == 200 && ...' value={rule} readOnly disabled={progress >= 4} />
+                    <span className='font-mono text-sm border border-solid p-2 border-gray-500'>
+                        {rule}
+                    </span>
+                    {/* <textarea className="textarea textarea-bordered h-24 font-mono cursor-not-allowed disabled:bg-gray-800" placeholder='amount == 200 && ...' value={rule} readOnly disabled={progress >= 4} /> */}
                 </div>
             }
 
@@ -289,8 +287,8 @@ const CreateRule = () => {
                     {(onClose) => (
                         <>
                             <ModalHeader className="flex flex-col bg-gray-800">Stream</ModalHeader>
-                            <ModalBody className='bg-gray-700'>
-                                {streamData}
+                            <ModalBody className='bg-gray-700 p-0'>
+                                <textarea className="textarea textarea-bordered h-40 font-mono cursor-not-allowed disabled:bg-gray-700" value={streamData} />
                             </ModalBody>
                         </>
                     )}
