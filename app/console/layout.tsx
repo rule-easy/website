@@ -33,7 +33,7 @@ export default function DefaultLayout({
                 <Providers>
                     <PageIllustration />
                     <div className='pt-20'>
-                        <div className="max-w-6xl mx-4 relative">
+                        <div className="max-w-6xl mx-auto relative">
                             <div className='grid grid-cols-12 gap-0.5'>
                                 {/* Side bar */}
                                 <div className='col-span-3'>

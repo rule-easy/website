@@ -1,20 +1,23 @@
 'use client'
 import { AxiosError, AxiosResponse } from 'axios';
 import clsx from 'clsx';
-import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import Button from '@/components/button';
 import useAxiosAuth from '@/lib/interceptors/hooks/useAxiosAuth';
 import { ServerResponse } from '@/types/auth';
 import {
-    faArrowLeft, faArrowRight, faCircleMinus, faCirclePlus, faDatabase, faFlagCheckered, faPlus,
-    faShieldHalved
+    faArrowLeft, faArrowRight, faCircleMinus, faCirclePlus, faDatabase, faEye, faFlagCheckered,
+    faPlus, faShieldHalved
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure
+} from '@nextui-org/react';
 
 import DropDown from '../../components/dropdown';
+import Label from '../../components/label';
 import LabelledInput from '../../components/labelledinput';
 import ProgressSteps from '../../components/progresssteps';
 import RuleDataSetter from '../../components/ruleselector';
@@ -35,6 +38,7 @@ const CreateRule = () => {
     const [allStreams, setAllStreams] = React.useState<Item[]>([])
     // Stream states
     const [streamName, setStreamName] = React.useState<string>("")
+    const [streamData, setStreamData] = React.useState<string>("")
     const [schemaKeys, setStreamSchemaKeys] = React.useState<Item[]>([])
 
     // Progress steps
@@ -49,7 +53,7 @@ const CreateRule = () => {
     const [totalRules, setTotalRules] = React.useState(1)
 
     const axiosAuth = useAxiosAuth()
-    const router = useRouter();
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     const getAllStreams = async () => {
         // Check for duplicate name
@@ -85,7 +89,10 @@ const CreateRule = () => {
                 data.success.data[0].schema_keys.forEach((element: string) => {
                     schemaLoc.push({ id: uuid(), name: element })
                 });
+
                 console.log(schemaLoc)
+                console.log(JSON.stringify(JSON.parse(data.success.data[0].schema), null, '  '))
+                setStreamData(data.success.data[0].schema)
                 setStreamSchemaKeys(schemaLoc)
                 setErrorMsg("")
             }
@@ -152,10 +159,11 @@ const CreateRule = () => {
     }
 
     const contructRule = async () => {
-        let updateRule = ""
+        let updateRule = "IF {"
         for (let [ruleID, rule] of ruleMap) {
             updateRule += " " + rule.data
         }
+        updateRule += " }"
         setRule(updateRule)
     }
 
@@ -185,7 +193,7 @@ const CreateRule = () => {
     }
 
     return (
-        <div data-aos="fade-up" data-aos-delay="200" className='flex flex-col bg-custom-gray mr-2 p-2 rounded-xl'>
+        <div data-aos="fade-up" data-aos-delay="200" className='flex flex-col bg-custom-gray mr-2 px-4 py-2 rounded-xl'>
             {progress == 0 &&
                 <div className='flex flex-col p-2'>
                     <p>
@@ -199,7 +207,7 @@ const CreateRule = () => {
 
             {/* Progress bar */}
             {progress > 0 &&
-                <ProgressSteps progress={progress} steps={['Select stream', 'Choose a name', 'Configure rule', 'Configure actions', 'Submit']} />
+                <ProgressSteps progress={progress} steps={['Select stream', 'Choose a name', 'Add conditions', 'Add actions', 'Submit']} />
             }
 
             {!!errorMsg && (
@@ -211,10 +219,20 @@ const CreateRule = () => {
             {/* Step-1 - Choose a stream */}
             {
                 progress >= 1 &&
-                <div data-aos="fade-up" data-aos-delay="200" className="flex flex-col w-full lg:flex-row lg:justify-around">
-                    <DropDown parentCallback={streamSelected} placeholder="----- Select stream -----" options={allStreams} disabled={progress > 1} />
-                    <div className="divider lg:divider-horizontal">OR</div>
-                    <Button licon={faPlus} ricon={faDatabase} href={"/console/streams/create"} text={"Create stream"} disabled={progress > 1} />
+                <div data-aos="fade-up" data-aos-delay="200" className="flex flex-col">
+                    <Label label="Select stream" disabled={progress > 1} />
+                    <div className="flex flex-row w-full lg:flex-row lg:justify-between">
+                        <DropDown parentCallback={streamSelected} placeholder="----- Select stream -----" options={allStreams} disabled={progress > 1} />
+                        <div>OR</div>
+                        {
+                            progress <= 1 &&
+                            <Button licon={faPlus} ricon={faDatabase} href={"/console/streams/create"} text={"Create stream"} disabled={progress > 1} />
+                        }
+                        {
+                            progress > 1 &&
+                            <Button ricon={faEye} onClick={onOpen} text={"View stream"} disabled={progress <= 1} />
+                        }
+                    </div>
                 </div>
             }
 
@@ -227,11 +245,9 @@ const CreateRule = () => {
             {/* Step-3 - Configure rule */}
             {
                 progress >= 3 &&
-                <div data-aos="fade-up" data-aos-delay="200" className="form-control px-8">
-                    <label className="label">
-                        <span className="label-text">Configure rule</span>
-                    </label>
-                    <div className='flex flex-col'>
+                <div data-aos="fade-up" data-aos-delay="200" className="mt-8 form-control ">
+                    <Label label="Configure conditions" disabled={progress > 4} />
+                    <div className='flex flex-col pl-8 p-4 border-dashed border rounded-sm border-gray-500'>
                         {
                             [...ruleMap.entries()].map(([ruleID, rule]) =>
                                 <div className='flex flex-row justify-around' key={ruleID}>
@@ -267,6 +283,20 @@ const CreateRule = () => {
                     <Button onClick={nextStep} ricon={faFlagCheckered} text={"Finish"} />
                 }
             </div>
+
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col bg-gray-800">Stream</ModalHeader>
+                            <ModalBody className='bg-gray-700'>
+                                {streamData}
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
+
         </div >
     )
 }

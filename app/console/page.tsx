@@ -4,7 +4,7 @@ import { signIn, useSession } from 'next-auth/react';
 import React from 'react';
 
 import SideBar from '@/app/console/components/sidebar';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Console({
@@ -17,7 +17,7 @@ export default function Console({
     if (session) {
         return (
             <section>
-                <div className="max-w-12xl mx-4 relative">
+                <div className="max-w-6xl mx-auto relative">
                     <div className='grid grid-cols-12 gap-0.5'>
                         {/* Side bar */}
                         <div className='col-span-3'>

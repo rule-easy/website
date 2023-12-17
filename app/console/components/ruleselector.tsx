@@ -1,8 +1,4 @@
 import React from 'react';
-import { ReactSearchAutocomplete } from 'react-search-autocomplete';
-
-import { faCircleMinus, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Autocomplete from './autocomplete';
 

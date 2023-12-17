@@ -20,7 +20,7 @@ const DropDown = (props: any) => {
     return (
         <div>
             <div className="form-control">
-                <select onChange={onTrigger} className="select select-primary w-full max-w-xs disabled:bg-gray-800" disabled={props.disabled}>
+                <select onChange={onTrigger} className="select select-sm px-2 p-0 select-primary w-full max-w-xs disabled:bg-gray-800" disabled={props.disabled}>
                     <option disabled> {props.placeholder} </option>
                     {
                         props.options.map((element: DropDownItem, index: number) => (
