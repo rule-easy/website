@@ -21,6 +21,7 @@ import CustomDropDown from '../../components/dropdown';
 import CustLabel from '../../components/label';
 import LabeledInput from '../../components/labelledinput';
 import ProgressSteps from '../../components/progresssteps';
+import RuleDisplay from '../../components/ruledisplay';
 import RuleDataSetter from '../../components/ruleselector';
 
 interface Item {
@@ -154,22 +155,12 @@ const CreateRule = () => {
         setProgress(progress - 1)
     }
 
-    const contructRule = async () => {
-        let updateRule = "IF {"
-        for (let [ruleID, rule] of ruleMap) {
-            updateRule += " " + rule.operand1 + ' ' + rule.operator.displayName + " " + rule.operand2 + " " + rule.condition.displayName
-        }
-        updateRule += " }"
-        setRule(updateRule)
-    }
-
     const addNewRule = async () => {
         console.log("Add new rule")
         let ruleID = uuid()
         setRuleMap(new Map(ruleMap.set(ruleID, { id: ruleID, order: totalRules, operand1: "", operand2: "", operator: { id: "", name: "", displayName: "" }, condition: { id: "", name: "", displayName: "" } })))
         setTotalRules(totalRules + 1)
         console.log(ruleMap)
-        contructRule()
     }
 
     const removeRule = async (ruleId: string) => {
@@ -177,14 +168,12 @@ const CreateRule = () => {
         ruleMap.delete(ruleId)
         setRuleMap(new Map(ruleMap))
         console.log(ruleMap)
-        contructRule()
     }
 
     const updateRule = async (ruleId: string, rule: Rule) => {
         console.log("Rule changed", ruleId, rule)
         setRuleMap(new Map(ruleMap.set(ruleId, rule)))
         console.log(ruleMap)
-        contructRule()
     }
 
     return (
@@ -259,15 +248,19 @@ const CreateRule = () => {
                             )
                         }
                     </div>
-                    <label className="label mt-10">
-                        <span className="label-text">Final rule</span>
-                    </label>
-                    <span className='font-mono text-sm border border-solid p-2 border-gray-500'>
-                        {rule}
-                    </span>
-                    {/* <textarea className="textarea textarea-bordered h-24 font-mono cursor-not-allowed disabled:bg-gray-800" placeholder='amount == 200 && ...' value={rule} readOnly disabled={progress >= 4} /> */}
+
                 </div>
             }
+            {
+                progress >= 3 &&
+                <div data-aos="fade-up" data-aos-delay="200" className="mt-8 form-control ">
+                    <CustLabel label="Final rule" disabled={progress > 4} />
+                    <div className='flex flex-col pl-8 p-4 border-dashed border rounded-sm border-gray-500'>
+                        <RuleDisplay ruleMap={ruleMap}></RuleDisplay>
+                    </div>
+                </div>
+            }
+
 
             {/* Navigation buttons */}
             <div data-aos="fade-down" data-aos-delay="200" className={clsx({ "flex flex-row mt-12": true }, { "justify-end": progress == 1 }, { "justify-between": progress >= 2 })}>
