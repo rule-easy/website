@@ -1,5 +1,6 @@
-import ModalVideo from '@/components/modal-video';
-import VideoThumb from '@/public/images/hero-image-01.jpg';
+import CustomButton from '@/components/button';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Hero() {
   return (
@@ -24,32 +25,19 @@ export default function Hero() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="h1 mb-4" data-aos="fade-up">Empowering businesses with Pattern Intelligence</h1>
-            <p className="text-xl text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="200">Leverage <b className='text-indigo-600'>PatternAct</b> to reveal patterns and safeguard the essential earnings of digital businesses.</p>
+            <h1 className="h1 mb-4" data-aos="fade-up">Rule engine - Made with <FontAwesomeIcon icon={faHeart} className="pl-4 text-custom-darkred disabled:cursor-not-allowed" /></h1>
+            <h1 className="h1 mb-4" data-aos="fade-up">Simple, fast and free !!</h1>
+            {/* <p className="text-xl text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="200">A rule engine made by developers for the developers</p> */}
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
-
               <div data-aos="fade-up" data-aos-delay="400">
-                <a className="btn text-white bg-purple-600 hover:bg-purple-700 w-full mb-4 sm:w-auto sm:mb-0" href="https://app.reclaim.ai/m/patternact">Schedule demo</a>
+                <a className="btn text-white bg-purple-600 hover:bg-purple-700 w-full mb-4 sm:w-auto sm:mb-0" href="https://app.reclaim.ai/m/patternact">Try it out</a>
               </div>
-
-              {/* {<div data-aos="fade-up" data-aos-delay="600">
-                <a className="btn text-white bg-gray-700 hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href="#0">Documentation</a>
-              </div>} */}
             </div>
           </div>
-
-          <ModalVideo
-            thumb={VideoThumb}
-            thumbWidth={1024}
-            thumbHeight={576}
-            thumbAlt="Modal video thumbnail"
-            video="/videos/video.mp4"
-            videoWidth={1920}
-            videoHeight={1080} />
 
         </div>
 
       </div>
-    </section>
+    </section >
   )
 }
