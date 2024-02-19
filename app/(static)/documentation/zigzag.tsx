@@ -13,8 +13,7 @@ export default function Zigzag() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16 mt-16">
-            {/* <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 rounded-full mb-4 bg-indigo-600">How it works</div> */}
-            <h1 className="h2 mb-4">Get started in few mins</h1>
+            <h1 className="h2 mb-4">Get started in just four steps !!</h1>
             <p className="text-xl text-gray-400">Generate your API token, tell us how the data looks, create rules and start evaluating </p>
           </div>
 
@@ -29,8 +28,7 @@ export default function Zigzag() {
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right">
                 <div className="md:pr-4 lg:pr-12 xl:pr-16">
-                  {/* <div className="font-architects-daughter text-xl text-purple-600 mb-2">Find the patterns</div> */}
-                  <h3 className="h3 mb-3">Generate your API token</h3>
+                  <h3 className="h3 mb-3"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 1 - </div> Generate API token</h3>
                   <p className="text-xl text-gray-400 mb-4">Complete registration and get your API token for free</p>
                   <ul className="text-lg text-gray-400 -mb-2">
                     <li className="flex items-center mb-2">
@@ -59,7 +57,7 @@ export default function Zigzag() {
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-left">
                 <div className="md:pl-4 lg:pl-12 xl:pl-16">
-                  <h3 className="h3 mb-3">Register schema of the data</h3>
+                  <h3 className="h3 mb-3"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 2 - </div> Register schema</h3>
                   <p className="text-xl text-gray-400 mb-4">Create stream which represents homogenous data</p>
                   <ul className="text-lg text-gray-400 -mb-2">
                     <li className="flex items-center mb-2">
@@ -88,8 +86,7 @@ export default function Zigzag() {
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right">
                 <div className="md:pr-4 lg:pr-12 xl:pr-16">
-                  {/* <div className="font-architects-daughter text-xl text-purple-600 mb-2">Be satisfied with results</div> */}
-                  <h3 className="h3 mb-3">Create rule</h3>
+                  <h3 className="h3 mb-3"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 3 - </div> Create rule</h3>
                   <p className="text-xl text-gray-400 mb-4">Create rules making use of any fields inside a stream</p>
                   <ul className="text-lg text-gray-400 -mb-2">
                     <li className="flex items-center mb-2">
@@ -124,8 +121,7 @@ export default function Zigzag() {
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-left">
                 <div className="md:pl-4 lg:pr-12 xl:pr-16">
-                  {/* <div className="font-architects-daughter text-xl text-purple-600 mb-2">More speed. Less spend</div> */}
-                  <h3 className="h3 mb-3">Test rule</h3>
+                  <h3 className="h3 mb-3"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 4 - </div> Test rule</h3>
                   <p className="text-xl text-gray-400 mb-4">Verify if the rule evaluation</p>
                   <ul className="text-lg text-gray-400 -mb-2">
                     <li className="flex items-center mb-2">
