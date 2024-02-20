@@ -1,21 +1,13 @@
-import React from 'react';
+export const metadata = {
+    title: 'Pricing - PatternAct',
+    description: 'PatternAct documentation page',
+}
+import GetStarted from '@/app/(static)/getstarted/get-started';
 
-const Docs = () => {
+export default function Documentation() {
     return (
         <>
-            <section>
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 relative">
-                    <div className="relative pt-32 pb-10 md:pt-40 md:pb-16">
-                        <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-                            <h1 className="h1 mb-4" data-aos="fade-up">
-                                Hello Case Studies!
-                            </h1>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <GetStarted />
         </>
     )
 }
-
-export default Docs

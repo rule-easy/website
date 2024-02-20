@@ -36,13 +36,18 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Link href="/documentation" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
+                <Link href="/how-it-works" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
                   How it works
                 </Link>
               </li>
               <li>
                 <Link href="/getstarted" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
                   Get started
+                </Link>
+              </li>
+              <li>
+                <Link href="/developers" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
+                  Developers
                 </Link>
               </li>
             </ul>

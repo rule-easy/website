@@ -17,10 +17,10 @@ import {
     Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure
 } from '@nextui-org/react';
 
+import CustLabel from '../../../../components/label';
+import LabeledInput from '../../../../components/labelledinput';
+import ProgressSteps from '../../../../components/progresssteps';
 import CustomDropDown from '../../components/dropdown';
-import CustLabel from '../../components/label';
-import LabeledInput from '../../components/labelledinput';
-import ProgressSteps from '../../components/progresssteps';
 import RuleDisplay from '../../components/ruledisplay';
 import RuleDataSetter from '../../components/ruleselector';
 

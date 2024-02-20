@@ -12,9 +12,9 @@ import {
     faArrowLeft, faArrowRight, faDatabase, faFlagCheckered
 } from '@fortawesome/free-solid-svg-icons';
 
-import LabeledInput from '../../components/labelledinput';
-import ModelDisplay from '../../components/modeldisplay';
-import ProgressSteps from '../../components/progresssteps';
+import LabeledInput from '../../../../components/labelledinput';
+import ModelDisplay from '../../../../components/modeldisplay';
+import ProgressSteps from '../../../../components/progresssteps';
 
 const CreateStream = () => {
     const [progress, setProgress] = React.useState(0);
