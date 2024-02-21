@@ -17,7 +17,7 @@ const LabeledInput = (props: any) => {
                 <CustLabel label={props.top_label} disabled={props.disabled} />
                 <label className="input-group">
                     <span className='text-sm bg-custom-primary'>{props.label}</span>
-                    <input onChange={onTrigger} type="text" placeholder={props.placeholder} className="input input-sm input-bordered bg-gray-900 disabled:bg-gray-600 disabled:border-gray-600" disabled={props.disabled} />
+                    <input onChange={onTrigger} value={props.value} type="text" placeholder={props.placeholder} className="input input-sm input-bordered bg-gray-900 disabled:bg-gray-600 disabled:border-gray-600" disabled={props.disabled} />
                 </label>
             </div>
         </div>

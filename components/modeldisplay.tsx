@@ -7,10 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SimpleModelItem from '../app/console/components/simplemodelitem';
 
 const ModelDisplay = (props: any) => {
-    const [schema, setSchema] = React.useState<string>("{}")
+    const [schema, setSchema] = React.useState<string>("")
     const [schemaJSON, setSchemaJSON] = React.useState<any>(JSON.parse("{}"))
 
     const onChange = async (e: any) => {
+        if (e.target.value == "") {
+            return
+        }
         setSchema(e.target.value)
         try {
             JSON.parse(e.target.value)
