@@ -15,18 +15,13 @@ import ProgressSteps from '@/components/progresssteps';
 import RuleDataSetter from '@/components/ruleselector';
 import useAxiosAuth from '@/lib/interceptors/hooks/useAxiosAuth';
 import { ServerResponse } from '@/types/auth';
+import { Item } from '@/types/item';
 import { CreateRuleRequest, Rule } from '@/types/rules';
 import { CreateStreamRequest } from '@/types/stream';
 import {
     faArrowLeft, faArrowRight, faCircleMinus, faCirclePlus, faDatabase, faFlagCheckered
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-interface Item {
-    id: string
-    name: string
-    displayName: string
-}
 
 const GetStarted = () => {
     const [progress, setProgress] = React.useState(1);

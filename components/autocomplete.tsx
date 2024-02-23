@@ -1,13 +1,16 @@
 import clsx from 'clsx';
 import React from 'react';
 
-interface Item {
-    id: string
-    name: string
-    displayName: string
+import { Item } from '@/types/item';
+
+interface Props {
+    placeholder: string
+    initialSuggestion: Item[]
+    onChange: (event: any) => void
+    disabled: boolean
 }
 
-const Autocomplete = (props: any) => {
+const Autocomplete = (props: Props) => {
 
     const [suggestions, setSuggestions] = React.useState<Item[]>([])
     const [selectedOptionKey, setSelectedOptionKey] = React.useState("")
@@ -28,7 +31,7 @@ const Autocomplete = (props: any) => {
         // Update suggestions based on last token
         console.log("Cur token", curToken)
         // Filter suggestions based on curToken prefix
-        let filteredSuggestions = props.initialSuggestion.filter((curSuggestion: Item) => curSuggestion.displayName.startsWith(curToken));
+        let filteredSuggestions: Item[] = props.initialSuggestion.filter((curSuggestion: Item) => curSuggestion.displayName.startsWith(curToken));
         setSuggestions(filteredSuggestions)
         setOptionKeys(filteredSuggestions.map((a: Item) => (a.id)))
         setSelectedOptionIndex(-1)
@@ -43,18 +46,20 @@ const Autocomplete = (props: any) => {
 
     const onKeyPressDown = async (e: any) => {
         if (e.key == "ArrowDown") {
-            onKeyUpDownArrow(1)
+            onKeyUpDownArrow(e, 1)
         } else if (e.key == "ArrowUp") {
-            onKeyUpDownArrow(-1)
+            onKeyUpDownArrow(e, -1)
         } else if (e.key == "Enter") {
             onKeyEnter()
+        } else if (e.key == "Escape") {
+            resetAllValues()
         }
     }
 
-    const onKeyUpDownArrow = async (step: number) => {
+    const onKeyUpDownArrow = async (event: any, step: number) => {
         if (suggestions.length == 0) {
             // Pressed for  the first time
-            updateSuggestions(props.initialSuggestion)
+            updateSuggestions(event)
             return
         }
         let newIndex = Math.abs(selectedOptionIndex + step) % (optionKeys.length)
@@ -63,6 +68,8 @@ const Autocomplete = (props: any) => {
     }
 
     const onKeyEnter = async () => {
+        console.log("Filtered suggestions:", suggestions)
+        console.log("selectedOptionKey:", selectedOptionKey)
         let selectedValue = props.initialSuggestion.filter((curSuggestion: Item) => curSuggestion.id.startsWith(selectedOptionKey))[0];
         selectSuggestion(selectedValue)
     }
