@@ -10,10 +10,11 @@ interface Item {
 const Autocomplete = (props: any) => {
 
     const [suggestions, setSuggestions] = React.useState<Item[]>([])
-    const [value, setValue] = React.useState<string>("")
     const [selectedOptionKey, setSelectedOptionKey] = React.useState("")
     const [selectedOptionIndex, setSelectedOptionIndex] = React.useState(-1)
     const [optionKeys, setOptionKeys] = React.useState<string[]>([])
+    // i/p data
+    const [value, setValue] = React.useState<string>("")
 
     const resetAllValues = () => {
         setSuggestions([])
@@ -21,27 +22,26 @@ const Autocomplete = (props: any) => {
         setSelectedOptionIndex(-1)
     }
 
-    const updateSuggestions = (filteredSuggestions: Item[]) => {
+    const updateSuggestions = (event: any) => {
+        resetAllValues()
+        var curToken = event.target.value.split(" ").pop() || ""
+        // Update suggestions based on last token
+        console.log("Cur token", curToken)
+        // Filter suggestions based on curToken prefix
+        let filteredSuggestions = props.initialSuggestion.filter((curSuggestion: Item) => curSuggestion.displayName.startsWith(curToken));
         setSuggestions(filteredSuggestions)
         setOptionKeys(filteredSuggestions.map((a: Item) => (a.id)))
         setSelectedOptionIndex(-1)
     }
 
     const valueChanged = async (event: any) => {
-        resetAllValues()
-        console.log(event.target.value)
-        if (event.target.value == "") {
-            setValue(event.target.value)
-            return
-        }
-        let filteredSuggestions = props.initialSuggestion.filter((curSuggestion: Item) => curSuggestion.displayName.startsWith(event.target.value));
-        updateSuggestions(filteredSuggestions)
-        props.onChange({ id: -1, name: event.target.value, displayName: event.target.value })
+        updateSuggestions(event)
+        // Set current value
         setValue(event.target.value)
+        props.onChange(event.target.value)
     }
 
     const onKeyPressDown = async (e: any) => {
-        console.log(e)
         if (e.key == "ArrowDown") {
             onKeyUpDownArrow(1)
         } else if (e.key == "ArrowUp") {
@@ -69,8 +69,15 @@ const Autocomplete = (props: any) => {
 
     const selectSuggestion = async (selectedSuggestion: Item) => {
         console.log("Suggestion selected:", selectedSuggestion.displayName)
-        setValue(selectedSuggestion.displayName)
-        props.onSuggestionSelect(selectedSuggestion)
+        // Update the last value in the value list
+        var tokens = value.split(" ")
+        console.log(tokens)
+        tokens.pop()
+        tokens.push(selectedSuggestion.displayName)
+        console.log(tokens)
+        console.log("Updated value:", tokens.join(" "))
+        setValue(tokens.join(" "))
+        props.onChange(tokens.join(" "))
         resetAllValues()
     }
 

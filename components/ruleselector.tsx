@@ -5,7 +5,7 @@ import { Operator, Rule } from '@/types/rules';
 import Autocomplete from './autocomplete';
 
 const RuleDataSetter = (props: any) => {
-    const [rule, setRule] = React.useState<Rule>({ id: "", condition_data: "", action_data: "" })
+    const [rule, setRule] = React.useState<Rule>({ order: 0, id: "", condition_data: "", action_data: "" })
 
     const supportedOperators: Operator[] = [
         { "id": "1", name: "==", displayName: "EQUALS_TO" },
@@ -32,10 +32,10 @@ const RuleDataSetter = (props: any) => {
     return (
         <div className='flex flex-col w-full'>
             <div className='mb-2'>
-                IF <Autocomplete initialSuggestion={props.initialSuggestion} placeholder="Press up/down arrow key to select fields" onSuggestionSelect={conditionChanged}></Autocomplete>
+                IF <Autocomplete onChange={conditionChanged} initialSuggestion={props.initialSuggestion} placeholder="Press up/down arrow key to select fields"></Autocomplete>
             </div>
             <div className='pl-10'>
-                THEN <Autocomplete initialSuggestion={props.initialSuggestion} placeholder="Start typing ex: amount" onSuggestionSelect={actionChanged}></Autocomplete>
+                THEN <Autocomplete onChange={actionChanged} initialSuggestion={props.initialSuggestion} placeholder="Start typing ex: amount"></Autocomplete>
             </div>
         </div>
 

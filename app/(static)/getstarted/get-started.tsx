@@ -151,9 +151,9 @@ const GetStarted = () => {
         console.log(ruleMap)
     }
 
-    const updateRule = async (ruleId: string, ifThenCond: Rule) => {
-        console.log("Rule changed", ruleId, ifThenCond)
-        setRuleMap(new Map(ruleMap.set(ruleId, ifThenCond)))
+    const updateRule = async (ruleId: string, rule: Rule) => {
+        console.log("Rule changed", ruleId, rule)
+        setRuleMap(new Map(ruleMap.set(ruleId, rule)))
         console.log(ruleMap)
     }
 
