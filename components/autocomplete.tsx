@@ -75,7 +75,7 @@ const Autocomplete = (props: any) => {
     }
 
     return (
-        <div className='flex flex-col w-full max-w-xs relative'>
+        <div className='flex flex-col w-full relative'>
             <input value={value} onChange={valueChanged} onKeyDown={onKeyPressDown} type="text" placeholder={props.placeholder} className="input input-xs input-bordered rounded-none font-mono w-full p-0 m-0 disabled:bg-gray-800" disabled={props.disabled} />
             <div className="absolute top-6 left-0 w-full join-vertical overlay">
                 {

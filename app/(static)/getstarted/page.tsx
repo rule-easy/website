@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Documentation() {
     const { data: session } = useSession();
-    if (true) {
+    if (session) {
         return (
             <>
                 <GetStarted />
