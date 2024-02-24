@@ -132,22 +132,18 @@ const GetStarted = () => {
     }
 
     const addNewRule = async () => {
-        console.log("Add new rule")
         let ruleID = uuid()
         setRuleMap(new Map(ruleMap.set(ruleID, { id: ruleID, order: totalRules, condition_data: "", action_data: "" })))
         setTotalRules(totalRules + 1)
-        console.log(ruleMap)
     }
 
     const removeRule = async (ruleId: string) => {
-        console.log("Remove rule:", ruleId)
         ruleMap.delete(ruleId)
         setRuleMap(new Map(ruleMap))
-        console.log(ruleMap)
     }
 
     const updateRule = async (ruleId: string, rule: Rule) => {
-        console.log("Rule changed", ruleId, rule)
+        // console.log("Rule changed", ruleId, rule)
         setRuleMap(new Map(ruleMap.set(ruleId, rule)))
         console.log(ruleMap)
     }
@@ -179,7 +175,7 @@ const GetStarted = () => {
     }
 
     const createRule = async () => {
-        const createRuleRequest: CreateRuleRequest = { name: ruleName, data: [] }
+        const createRuleRequest: CreateRuleRequest = { name: ruleName, data: Array.from(ruleMap.values()) }
         var resp: any
         axiosAuth.put("/v1/rule", createRuleRequest).then((resp) => {
             let data: ServerResponse = resp.data

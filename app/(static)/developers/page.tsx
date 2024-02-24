@@ -12,7 +12,7 @@ export default function Documentation() {
     return (
         <div className='flex flex-col mt-40 pl-8 p-4 border-dashed border rounded-sm border-gray-500'>
             < div className='flex grow'>
-                <RuleDataSetter id="abc" disabled={false} ruleUpdatedCB={updateRule} initialSuggestion={[{ id: "1", name: "hello", displayName: "hello" }, { id: "2", name: "&&", displayName: "&&" }, { id: "3", name: "hi", displayName: "hi" }, { id: "4", name: ">=", displayName: ">=" }]}></RuleDataSetter>
+                <RuleDataSetter id="abc" disabled={false} ruleUpdatedCB={updateRule} initialSuggestion={[{ id: "1", name: "hello", displayName: "hello" }, { id: "3", name: "hi", displayName: "hi" }]}></RuleDataSetter>
             </div>
         </div >
     )

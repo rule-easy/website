@@ -6,7 +6,7 @@ import { Item } from '@/types/item';
 interface Props {
     placeholder: string
     initialSuggestion: Item[]
-    onChange: (event: any) => void
+    onChange: (event: string) => void
     disabled: boolean
 }
 
@@ -27,14 +27,20 @@ const Autocomplete = (props: Props) => {
 
     const updateSuggestions = (event: any) => {
         resetAllValues()
-        var curToken = event.target.value.split(" ").pop() || ""
         // Update suggestions based on last token
-        console.log("Cur token", curToken)
+        var curToken = event.target.value.split(" ").pop() || ""
+        console.log("Update suggestions triggered. Finding suggestions with prefix:", curToken)
         // Filter suggestions based on curToken prefix
         let filteredSuggestions: Item[] = props.initialSuggestion.filter((curSuggestion: Item) => curSuggestion.displayName.startsWith(curToken));
         setSuggestions(filteredSuggestions)
-        setOptionKeys(filteredSuggestions.map((a: Item) => (a.id)))
-        setSelectedOptionIndex(-1)
+        console.log("Found suggestions:", filteredSuggestions.map((i: Item) => { return i.displayName }))
+        // Update option keys
+        let newOptionKeys = filteredSuggestions.map((i: Item) => (i.id))
+        setOptionKeys(newOptionKeys)
+        console.log("Option keys:", newOptionKeys)
+        // Make the first suggestion as selected
+        setSelectedOptionIndex(0)
+        setSelectedOptionKey(newOptionKeys[0])
     }
 
     const valueChanged = async (event: any) => {
@@ -56,15 +62,22 @@ const Autocomplete = (props: Props) => {
         }
     }
 
+    const selectSuggestionIndex = async (index: number) => {
+        console.log("newIndex:", index)
+        console.log("optionKeys[newIndex]:", optionKeys[index])
+        setSelectedOptionIndex(index)
+        setSelectedOptionKey(optionKeys[index])
+    }
+
     const onKeyUpDownArrow = async (event: any, step: number) => {
+        console.log("Pressed up-down key", step)
         if (suggestions.length == 0) {
             // Pressed for  the first time
             updateSuggestions(event)
             return
         }
         let newIndex = Math.abs(selectedOptionIndex + step) % (optionKeys.length)
-        setSelectedOptionIndex(selectedOptionIndex + step)
-        setSelectedOptionKey(optionKeys[newIndex])
+        selectSuggestionIndex(newIndex)
     }
 
     const onKeyEnter = async () => {
@@ -78,11 +91,12 @@ const Autocomplete = (props: Props) => {
         console.log("Suggestion selected:", selectedSuggestion.displayName)
         // Update the last value in the value list
         var tokens = value.split(" ")
+        console.log("Before applying suggestion:", value)
         console.log(tokens)
         tokens.pop()
         tokens.push(selectedSuggestion.displayName)
         console.log(tokens)
-        console.log("Updated value:", tokens.join(" "))
+        console.log("After applying suggestion:", tokens.join(" "))
         setValue(tokens.join(" "))
         props.onChange(tokens.join(" "))
         resetAllValues()

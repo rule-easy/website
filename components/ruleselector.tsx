@@ -27,12 +27,12 @@ const RuleDataSetter = (props: Props) => {
         { "id": uuid(), name: "OR", displayName: "||" }
     ]
 
-    const conditionChanged = async (event: any) => {
-        rule.condition_data = event
+    const conditionChanged = async (event: string) => {
+        rule.condition_data = "IF { " + event + " }"
         setRule(rule)
         props.ruleUpdatedCB(props.id, rule)
     }
-    const actionChanged = async (event: any) => {
+    const actionChanged = async (event: string) => {
         rule.action_data = event
         setRule(rule)
         props.ruleUpdatedCB(props.id, rule)
@@ -44,7 +44,7 @@ const RuleDataSetter = (props: Props) => {
                 IF <Autocomplete onChange={conditionChanged} initialSuggestion={props.initialSuggestion.concat(supportedOperators, supportedLogicalOperators)} placeholder="Press up/down arrow key to select fields" disabled={props.disabled}></Autocomplete>
                 {/* IF <Autocomplete onChange={conditionChanged} initialSuggestion={props.initialSuggestion} placeholder="Press up/down arrow key to select fields"></Autocomplete> */}
             </div>
-            <div className='pl-10'>
+            <div className='pl-10 mb-6'>
                 THEN <Autocomplete onChange={actionChanged} initialSuggestion={props.initialSuggestion} placeholder="Start typing ex: amount" disabled={props.disabled}></Autocomplete>
             </div>
         </div>
