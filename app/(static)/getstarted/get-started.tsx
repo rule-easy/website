@@ -19,13 +19,14 @@ import { Item } from '@/types/item';
 import { CreateRuleRequest, Rule } from '@/types/rules';
 import { CreateStreamRequest } from '@/types/stream';
 import {
-    faArrowLeft, faArrowRight, faCircleMinus, faCirclePlus, faDatabase, faFlagCheckered
+    faArrowLeft, faArrowRight, faCircleMinus, faCirclePlus, faEye
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const GetStarted = () => {
     const [progress, setProgress] = React.useState(1);
     const [errorMsg, setErrorMsg] = React.useState("");
+    const [showAPIKey, setShowAPIKey] = React.useState<boolean>(false)
 
     // Auth states
     const { data: session } = useSession();
@@ -68,6 +69,10 @@ const GetStarted = () => {
         }).catch((err: AxiosError) => {
             setErrorMsg("Session expired. Please login")
         })
+    }
+
+    const showHidePassword = () => {
+        setShowAPIKey(!showAPIKey)
     }
 
     const validateStreamSchema = () => {
@@ -245,7 +250,8 @@ const GetStarted = () => {
                             </div>
                             <div className="collapse-content">
                                 <div className="flex flex-row w-full">
-                                    <LabeledInput parentCallback={onStreamNameChange} value={session?.user.accessToken} label="API Token" top_label="" disabled={progress > 1} />
+                                    <LabeledInput type={showAPIKey ? "text" : "password"} onChange={onStreamNameChange} value={session?.user.accessToken} label="API Token" top_label="" disabled={progress > 1} />
+                                    <FontAwesomeIcon onClick={() => showHidePassword()} icon={faEye} className="ml-5 mt-1 cursor-pointer hover:text-indigo-500" />
                                 </div>
                             </div>
                         </div>
@@ -258,7 +264,7 @@ const GetStarted = () => {
                             </div>
                             <div className="collapse-content">
                                 <div data-aos="fade-up" data-aos-delay="200" className="form-control mt-2">
-                                    <LabeledInput parentCallback={onStreamNameChange} placeholder="Ex:add-cash-events" label="Stream name" top_label="Choose a unique stream name" disabled={progress > 2} />
+                                    <LabeledInput type="text" onChange={onStreamNameChange} placeholder="Ex:add-cash-events" label="Stream name" top_label="Choose a unique stream name" disabled={progress > 2} />
                                     <label className="label">
                                         <span className="label-text">Input sample event for registering schema</span>
                                     </label>
@@ -275,7 +281,7 @@ const GetStarted = () => {
                             </div>
                             <div className="collapse-content">
                                 <div data-aos="fade-up" data-aos-delay="200" className="form-control mt-2">
-                                    <LabeledInput parentCallback={onRuleNameChange} label="Rule name" top_label="Choose a unique rule name" disabled={progress > 3} />
+                                    <LabeledInput type="text" onChange={onRuleNameChange} label="Rule name" top_label="Choose a unique rule name" disabled={progress > 3} />
                                     <CustLabel label="Configure conditions" disabled={progress > 4} />
                                     {
                                         [...ruleMap.entries()].map(([ruleID, rule]) =>

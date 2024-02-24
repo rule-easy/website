@@ -27,7 +27,7 @@ const ModelDisplay = (props: any) => {
 
     const beautify = async () => {
         console.log(schema)
-        var beautifiedValue = JSON.stringify(JSON.parse(schema), null, '\t')
+        var beautifiedValue = JSON.stringify(JSON.parse(schema), null, '   ')
         setSchema(beautifiedValue)
         props.onChange(schema)
     }
@@ -36,13 +36,10 @@ const ModelDisplay = (props: any) => {
         <div className='flex flex-col'>
             <div className=" bg-gray-900 min-w-full h-60 rounded-md outline outline-1 outline-gray-700 overflow-hidden">
                 <div className='flex flex-row m-2 justify-end'>
-                    <button title="Beautify" onClick={() => beautify()}
-                        className={clsx({ "btn btn-sm justify-self-end rounded-none text-indigo-100 outline-none ": true })}>
-                        Beautify <FontAwesomeIcon onClick={() => beautify()} icon={faFan} />
-                    </button>
+                    <FontAwesomeIcon onClick={() => beautify()} icon={faFan} className="cursor-pointer outline-none justify-self-end" />
                 </div>
                 <div className='flex flex-row'>
-                    <textarea onChange={onChange} className="textarea h-48 resize-none outline-none rounded-none text-xs font-mono bg-gray-900 min-w-full" placeholder='{ "amount": 100, "status": "COMPLETED", "userID": "dsad-saas-dssa-dassa"}' disabled={props.disabled} value={schema}></textarea>
+                    <textarea onChange={onChange} className="textarea h-60 leading-tight resize-none outline-none rounded-none text-xs font-mono bg-gray-900 min-w-full" placeholder='{ "amount": 100, "status": "COMPLETED", "userID": "dsad-saas-dssa-dassa"}' disabled={props.disabled} value={schema}></textarea>
                 </div>
             </div>
         </div >
