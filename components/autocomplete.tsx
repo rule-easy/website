@@ -83,7 +83,8 @@ const Autocomplete = (props: Props) => {
     const onKeyEnter = async () => {
         console.log("Filtered suggestions:", suggestions)
         console.log("selectedOptionKey:", selectedOptionKey)
-        let selectedValue = props.initialSuggestion.filter((curSuggestion: Item) => curSuggestion.id.startsWith(selectedOptionKey))[0];
+        let selectedValue = suggestions.filter((curSuggestion: Item) => curSuggestion.id.startsWith(selectedOptionKey))[0];
+        console.log("selectedValue:", selectedValue)
         selectSuggestion(selectedValue)
     }
 

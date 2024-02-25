@@ -16,7 +16,7 @@ import RuleDataSetter from '@/components/ruleselector';
 import useAxiosAuth from '@/lib/interceptors/hooks/useAxiosAuth';
 import { ServerResponse } from '@/types/auth';
 import { Item } from '@/types/item';
-import { CreateRuleRequest, Rule } from '@/types/rules';
+import { CreateRuleRequest, EvaluateRuleRequest, Rule } from '@/types/rules';
 import { CreateStreamRequest } from '@/types/stream';
 import {
     faArrowLeft, faArrowRight, faCircleMinus, faCirclePlus, faEye
@@ -36,16 +36,20 @@ const GetStarted = () => {
     // Stream states
     const [schema, setSchema] = React.useState("")
     const [streamName, setStreamName] = React.useState<string>("")
+    const [streamID, setStreamID] = React.useState<string>("")
     const [streamData, setStreamData] = React.useState<string>("")
     const [schemaKeys, setStreamSchemaKeys] = React.useState<Item[]>([])
 
     // Rule states
     const [ruleName, setRuleName] = React.useState<string>("")
-
     // string vs Rule(aka condition-action pair)
     const [ruleMap, setRuleMap] = React.useState<Map<string, Rule>>(new Map<string, Rule>())
     // Total rules
     const [totalRules, setTotalRules] = React.useState(1)
+
+    // Test rule
+    const [testData, setTestData] = React.useState<string>("")
+    const [testResultData, setTestResultData] = React.useState<string>("")
 
     const onStreamNameChange = async (streamName: string) => {
         setStreamName(streamName)
@@ -55,19 +59,21 @@ const GetStarted = () => {
         // Check for empty name
         if (streamName.length == 0) {
             setErrorMsg("Stream name cannot be empty")
-            return
+            return false
         }
         // Check for duplicate name
-        axiosAuth.get("/v1/stream?name=" + streamName).then((resp: AxiosResponse) => {
+        return await axiosAuth.get("/v1/stream?name=" + streamName).then((resp: AxiosResponse) => {
             let data: ServerResponse = resp.data
             if (data.success?.data != null) {
                 setErrorMsg("Stream with this name already exists")
+                return false
             } else {
+                return true
                 setErrorMsg("")
-                setProgress(progress + 1)
             }
         }).catch((err: AxiosError) => {
             setErrorMsg("Session expired. Please login")
+            return false
         })
     }
 
@@ -79,16 +85,17 @@ const GetStarted = () => {
         try {
             JSON.parse(schema)
             setErrorMsg("")
-            setProgress(progress + 1)
+            return true
         } catch (e) {
             setErrorMsg("Please enter valid JSON")
+            return false
         }
     };
 
     const createStream = async () => {
         const createStreamReq: CreateStreamRequest = { name: streamName, schema: schema }
         var resp: any
-        axiosAuth.put("/v1/stream", createStreamReq).then((resp) => {
+        return await axiosAuth.put("/v1/stream", createStreamReq).then((resp) => {
             let data: ServerResponse = resp.data
             if (data.success?.data != null) {
                 var schemaLoc: Item[] = []
@@ -100,36 +107,16 @@ const GetStarted = () => {
                 console.log(JSON.stringify(JSON.parse(data.success.data[0].schema), null, '\t'))
                 setStreamData(JSON.stringify(JSON.parse(data.success.data[0].schema), null, '\t'))
                 setStreamSchemaKeys(schemaLoc)
+                setStreamID(data.success.data[0].id)
                 setErrorMsg("")
+                return true
             }
         }).catch((error: AxiosError) => {
             resp = error.response?.data
             setErrorMsg(resp.error?.msg || "")
+            return false
         })
     }
-
-    const getStream = async () => {
-        if (streamName == "") { return }
-        axiosAuth.get("/v1/stream?name=" + streamName).then((resp: AxiosResponse) => {
-            let data: ServerResponse = resp.data
-            if (data.success?.data != null) {
-                var schemaLoc: Item[] = []
-                console.log(data)
-                data.success.data[0].schema_keys.forEach((element: string) => {
-                    schemaLoc.push({ id: uuid(), name: element, displayName: element })
-                });
-
-                console.log(schemaLoc)
-                console.log(JSON.stringify(JSON.parse(data.success.data[0].schema), null, '\t'))
-                setStreamData(JSON.stringify(JSON.parse(data.success.data[0].schema), null, '\t'))
-                setStreamSchemaKeys(schemaLoc)
-                setErrorMsg("")
-            }
-        }).catch((err: AxiosError) => {
-            console.log(err)
-            setErrorMsg("Could not fetch the stream. Please try again!!")
-        })
-    };
 
     const clearRules = async () => {
         setRuleMap(new Map<string, Rule>())
@@ -148,7 +135,6 @@ const GetStarted = () => {
     }
 
     const updateRule = async (ruleId: string, rule: Rule) => {
-        // console.log("Rule changed", ruleId, rule)
         setRuleMap(new Map(ruleMap.set(ruleId, rule)))
         console.log(ruleMap)
     }
@@ -157,22 +143,20 @@ const GetStarted = () => {
         setRuleName(ruleName)
     }
 
-    const getRuleCreationRequest = () => {
-    }
-
     const checkRuleName = async () => {
         if (ruleName.length == 0) {
             setErrorMsg("Rule name cannot be empty")
-            return
+            return false
         }
         // Check for duplicate name
-        axiosAuth.get("/v1/rule?name=" + ruleName).then((resp: AxiosResponse) => {
+        return await axiosAuth.get("/v1/rule?name=" + ruleName).then((resp: AxiosResponse) => {
             let data: ServerResponse = resp.data
             if (data.success?.data != null) {
                 setErrorMsg("Rule with this name already exists")
+                return false
             } else {
                 setErrorMsg("")
-                setProgress(progress + 1)
+                return true
             }
         }).catch((err: AxiosError) => {
             setErrorMsg("Session expired. Please login")
@@ -182,12 +166,14 @@ const GetStarted = () => {
     const createRule = async () => {
         const createRuleRequest: CreateRuleRequest = { name: ruleName, data: Array.from(ruleMap.values()) }
         var resp: any
-        axiosAuth.put("/v1/rule", createRuleRequest).then((resp) => {
+        return await axiosAuth.put("/v1/rule", createRuleRequest).then((resp) => {
             let data: ServerResponse = resp.data
             console.log(data)
+            return true
         }).catch((error: AxiosError) => {
             resp = error.response?.data
             setErrorMsg(resp.error?.msg || "")
+            return false
         })
     }
 
@@ -197,15 +183,33 @@ const GetStarted = () => {
             // TODO: Add validation
             setProgress(progress + 1)
         } else if (curStep == 2) {
-            checkStreamName()
-            validateStreamSchema()
-            createStream()
-            addNewRule()
-            setProgress(progress + 1)
+            // Check JSON validity
+            if (!validateStreamSchema()) {
+                return
+            }
+            console.log("Stream schema valid")
+            // Check stream name validity
+            let streamNameOK = await checkStreamName()
+            console.log("Validation of stream name:", streamNameOK)
+            if (!streamNameOK) {
+                return
+            }
+            // Create stream
+            let createStreamOK = await createStream()
+            console.log("Stream created successfully:", createStreamOK)
+            if (createStreamOK) {
+                addNewRule()
+                setProgress(progress + 1)
+            }
         } else if (curStep == 3) {
-            checkRuleName()
-            createRule()
-            setProgress(progress + 1)
+            let ruleNameOk = await checkRuleName()
+            if (!ruleNameOk) {
+                return
+            }
+            let createRuleOK = await createRule()
+            if (createRuleOK) {
+                setProgress(progress + 1)
+            }
         } else if (curStep == 4) {
             createStream()
         }
@@ -216,11 +220,21 @@ const GetStarted = () => {
         setProgress(progress - 1)
     }
 
-    const onKeyPressDown = async (e: any) => {
-    }
-
-    const onKeyUpDownArrow = async (step: number) => {
-
+    const evaluateTestData = async () => {
+        const evaluateRuleRequest: EvaluateRuleRequest = { id: "1", data: JSON.parse(testData) }
+        var resp: any
+        return await axiosAuth.post("/v1/rule/evaluate/" + streamID, evaluateRuleRequest).then((resp) => {
+            let data: ServerResponse = resp.data
+            if (data.success?.data != null) {
+                setTestResultData(data.success.data.success)
+                setErrorMsg("")
+                return true
+            }
+        }).catch((error: AxiosError) => {
+            resp = error.response?.data
+            setErrorMsg(resp.error?.msg || "")
+            return false
+        })
     }
 
     return (
@@ -244,7 +258,7 @@ const GetStarted = () => {
 
                         {/* Step-1 : Enter API key */}
                         <div className="collapse collapse-arrow join-item border border-base-300">
-                            <input type="radio" name="accordian-steps" checked={progress == 1} />
+                            <input type="radio" readOnly={true} name="accordian-steps" checked={progress == 1} />
                             <div className="collapse-title p-0 text-xl font-medium">
                                 <h4 className="h4 mb-2"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 1 - </div> Generate API token</h4>
                             </div>
@@ -258,7 +272,7 @@ const GetStarted = () => {
 
                         {/* Step-2 : Create stream */}
                         <div className="collapse collapse-arrow join-item border border-base-300">
-                            <input type="radio" name="accordian-steps" checked={progress == 2} />
+                            <input type="radio" readOnly={true} name="accordian-steps" checked={progress == 2} />
                             <div className="collapse-title p-0 text-xl font-medium">
                                 <h4 className="h4 mb-1"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 2 - </div> Register schema</h4>
                             </div>
@@ -268,14 +282,14 @@ const GetStarted = () => {
                                     <label className="label">
                                         <span className="label-text">Input sample event for registering schema</span>
                                     </label>
-                                    <ModelDisplay disabled={progress > 2} onChange={setSchema} />
+                                    <ModelDisplay placeholder='{ "amount": 100, "type": "CC" }' disabled={progress > 2} onChange={setSchema} />
                                 </div>
                             </div>
                         </div>
 
                         {/* Step-3 : Create rule */}
                         <div className="collapse collapse-arrow join-item border border-base-300">
-                            <input type="radio" name="accordian-steps" checked={progress == 3} />
+                            <input type="radio" readOnly={true} name="accordian-steps" checked={progress == 3} />
                             <div className="collapse-title p-0 text-xl font-medium">
                                 <h4 className="h4 mb-1"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 3 - </div> Create rule</h4>
                             </div>
@@ -300,7 +314,7 @@ const GetStarted = () => {
 
                         {/* Step-4 : Test rule */}
                         <div className="collapse collapse-arrow join-item border border-base-300">
-                            <input type="radio" name="accordian-steps" checked={progress >= 4} />
+                            <input type="radio" readOnly={true} name="accordian-steps" checked={progress == 4} />
                             <div className="collapse-title p-0 text-xl font-medium">
                                 <h4 className="h4 mb-1"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 4 - </div> Test rule</h4>
                             </div>
@@ -309,9 +323,14 @@ const GetStarted = () => {
                                     <label className="label">
                                         <span className="label-text">Input test event</span>
                                     </label>
-                                    <div className="flex flex-row w-full lg:flex-row lg:justify-between">
-                                        <ModelDisplay onChange={setSchema} />
-                                        <ModelDisplay onChange={setSchema} />
+                                    <div className="flex flex-row justify-around">
+                                        <div className='basis-4/12'>
+                                            <ModelDisplay onChange={setTestData} disabled={false} placeholder='Enter sample event' />
+                                        </div>
+                                        <CustomButton onClick={evaluateTestData} className="2/12" ricon={faArrowRight} text={"Evaluate"} />
+                                        <div className='basis-4/12'>
+                                            <textarea value={testResultData} className="textarea m-0 p-0 border-1 min-w-full min-h-full resize-none rounded-none text-xs font-mono bg-gray-800"></textarea>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

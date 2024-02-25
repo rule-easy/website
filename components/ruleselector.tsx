@@ -5,6 +5,7 @@ import { Item } from '@/types/item';
 import { Operator, Rule } from '@/types/rules';
 
 import Autocomplete from './autocomplete';
+import ModelDisplay from './modeldisplay';
 
 interface Props {
     id: string
@@ -28,7 +29,7 @@ const RuleDataSetter = (props: Props) => {
     ]
 
     const conditionChanged = async (event: string) => {
-        rule.condition_data = "IF { " + event + " }"
+        rule.condition_data = "IF: { " + event + " }"
         setRule(rule)
         props.ruleUpdatedCB(props.id, rule)
     }
@@ -44,8 +45,9 @@ const RuleDataSetter = (props: Props) => {
                 IF <Autocomplete onChange={conditionChanged} initialSuggestion={props.initialSuggestion.concat(supportedOperators, supportedLogicalOperators)} placeholder="Press up/down arrow key to select fields" disabled={props.disabled}></Autocomplete>
                 {/* IF <Autocomplete onChange={conditionChanged} initialSuggestion={props.initialSuggestion} placeholder="Press up/down arrow key to select fields"></Autocomplete> */}
             </div>
-            <div className='pl-10 mb-6'>
-                THEN <Autocomplete onChange={actionChanged} initialSuggestion={props.initialSuggestion} placeholder="Start typing ex: amount" disabled={props.disabled}></Autocomplete>
+            <div className='pl-10 mb-6 h-20'>
+                THEN
+                <ModelDisplay onChange={actionChanged} disabled={props.disabled} placeholder='Please enter JSON response'></ModelDisplay>
             </div>
         </div>
 

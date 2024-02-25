@@ -15,3 +15,8 @@ export interface CreateRuleRequest {
     name: string
     data: Rule[]
 }
+
+export interface EvaluateRuleRequest {
+    id: string
+    data: Object
+}

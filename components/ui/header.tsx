@@ -50,6 +50,11 @@ export default function Header() {
                   Developers
                 </Link>
               </li>
+              <li>
+                <Link href="/developers" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
+                  Logout
+                </Link>
+              </li>
             </ul>
           </nav>
 
