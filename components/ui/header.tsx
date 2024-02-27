@@ -45,7 +45,7 @@ export default function Header() {
                   Playground
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/developers" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
                   Developers
                 </Link>
@@ -54,7 +54,7 @@ export default function Header() {
                 <Link href="/developers" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
                   Logout
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </nav>
 

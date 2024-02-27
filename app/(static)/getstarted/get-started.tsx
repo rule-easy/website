@@ -17,7 +17,7 @@ import useAxiosAuth from '@/lib/interceptors/hooks/useAxiosAuth';
 import { ServerResponse } from '@/types/auth';
 import { Item } from '@/types/item';
 import { CreateRuleRequest, EvaluateRuleRequest, Rule } from '@/types/rules';
-import { CreateStreamRequest } from '@/types/stream';
+import { CreateStreamRequest, UpdateStreamRequest } from '@/types/stream';
 import {
     faArrowLeft, faArrowRight, faCircleMinus, faCirclePlus, faEye
 } from '@fortawesome/free-solid-svg-icons';
@@ -49,7 +49,7 @@ const GetStarted = () => {
 
     // Test rule
     const [testData, setTestData] = React.useState<string>("")
-    const [testResultData, setTestResultData] = React.useState<string>("")
+    const [testResultData, setTestResultData] = React.useState<string[]>([])
 
     const onStreamNameChange = async (streamName: string) => {
         setStreamName(streamName)
@@ -168,6 +168,20 @@ const GetStarted = () => {
         var resp: any
         return await axiosAuth.put("/v1/rule", createRuleRequest).then((resp) => {
             let data: ServerResponse = resp.data
+            if (data.success?.data != null) {
+                let ruleID = data.success.data.id
+                console.log("Rule creation success:", ruleID)
+                const updateStreamRequest: UpdateStreamRequest = { stream_id: streamID, rule_id: ruleID, status: 1 }
+                axiosAuth.post("/v1/stream", updateStreamRequest).then((resp) => {
+                    let data: ServerResponse = resp.data
+                    console.log("Update stream request success:" + data)
+                }).catch((error: AxiosError) => {
+                    let resp = error.response?.data
+                    console.log("Update stream request error:" + resp)
+                    setErrorMsg("Error while creating rule")
+                    return false
+                })
+            }
             console.log(data)
             return true
         }).catch((error: AxiosError) => {
@@ -225,10 +239,14 @@ const GetStarted = () => {
         var resp: any
         return await axiosAuth.post("/v1/rule/evaluate/" + streamID, evaluateRuleRequest).then((resp) => {
             let data: ServerResponse = resp.data
-            if (data.success?.data != null) {
-                setTestResultData(data.success.data.success)
+            if (data.success?.data.success != null) {
+                let results: string[] = data.success.data.success.map((e: any) => { return e.result })
+                console.log("Final results", results)
+                setTestResultData(results)
                 setErrorMsg("")
                 return true
+            } else {
+                setTestResultData(["No rules evaluated to true"])
             }
         }).catch((error: AxiosError) => {
             resp = error.response?.data

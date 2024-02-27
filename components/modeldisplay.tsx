@@ -43,7 +43,7 @@ const ModelDisplay = (props: Props) => {
     }
 
     return (
-        <div className={clsx({ "bg-gray-900 min-w-full min-h-full rounded-md outline outline-1 outline-gray-700 overflow-hidden": true })}>
+        <div className={clsx({ "bg-gray-900 p-0 m-0 min-w-full min-h-full rounded-t-md outline outline-1 outline-gray-700 overflow-hidden": true })}>
             <div className='flex flex-row m-1 justify-end'>
                 <p className={clsx({ "font-mono font-semibold text-xs mr-3 pointer-events: none": true }, { "text-green-400": validJSON }, { "text-red-400": !validJSON })}> {"{ VALID JSON }"} </p>
                 <FontAwesomeIcon onClick={() => beautify()} icon={faFan} className="cursor-pointer outline-none justify-self-end hover:text-indigo-500" />

@@ -1,9 +1,11 @@
 import Image from 'next/image';
 
-import FeatImage01 from '@/public/images/features-03-image-01.gif';
 import FeatImage02 from '@/public/images/features-03-image-02.png';
 import FeatImage03 from '@/public/images/features-03-image-03.png';
-import FeatImage05 from '@/public/images/features-03-image-05.png';
+import Step01Image from '@/public/images/step-1.gif';
+import Step02Image from '@/public/images/step-2.gif';
+import Step03Image from '@/public/images/step-3.gif';
+import Step04Image from '@/public/images/step-4.gif';
 
 export default function Zigzag() {
   return (
@@ -23,7 +25,7 @@ export default function Zigzag() {
             <div className="md:grid md:grid-cols-12 md:gap-6 items-center">
               {/* Image */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="fade-up">
-                <Image className="max-w-full mx-auto md:max-w-none h-auto" src={FeatImage01} width={540} height={405} alt="Features 01" />
+                <Image className="max-w-full mx-auto md:max-w-none h-auto" src={Step01Image} width={540} height={405} alt="Features 01" />
               </div>
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right">
@@ -52,7 +54,7 @@ export default function Zigzag() {
             <div className="md:grid md:grid-cols-12 md:gap-6 items-center">
               {/* Image */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 rtl" data-aos="fade-up">
-                <Image className="max-w-full mx-auto md:max-w-none h-auto" src={FeatImage01} width={540} height={405} alt="Features 01" />
+                <Image className="max-w-full mx-auto md:max-w-none h-auto" src={Step02Image} width={540} height={405} alt="Features 01" />
               </div>
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-left">
@@ -81,7 +83,7 @@ export default function Zigzag() {
             <div className="md:grid md:grid-cols-12 md:gap-6 items-center">
               {/* Image */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0  md:order-1" data-aos="fade-up">
-                <Image className="max-w-full mx-auto md:max-w-none h-auto" src={FeatImage02} width={540} height={405} alt="Features 02" />
+                <Image className="max-w-full mx-auto md:max-w-none h-auto" src={Step03Image} width={540} height={405} alt="Features 02" />
               </div>
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right">
@@ -116,7 +118,7 @@ export default function Zigzag() {
             <div className="md:grid md:grid-cols-12 md:gap-6 items-center">
               {/* Image */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 rtl" data-aos="fade-up">
-                <Image className="max-w-full mx-auto md:max-w-none h-auto" src={FeatImage03} width={540} height={405} alt="Features 03" />
+                <Image className="max-w-full mx-auto md:max-w-none h-auto" src={Step04Image} width={540} height={405} alt="Features 03" />
               </div>
               {/* Content */}
               <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-left">
