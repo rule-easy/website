@@ -19,7 +19,7 @@ export default function Login() {
             email: userEmail.current,
             password: userPassword.current,
             redirect: true,
-            callbackUrl: "/console",
+            callbackUrl: "/getstarted",
         });
     };
 
@@ -61,7 +61,7 @@ export default function Login() {
                             </div>
                             <div className="flex flex-wrap -mx-3 mt-6">
                                 <div className="w-full px-3">
-                                    <button className="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Sign in</button>
+                                    <button className="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Login</button>
                                 </div>
                             </div>
                         </form>

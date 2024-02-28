@@ -8,8 +8,8 @@ import { Config, GetEnvConfig } from '../config/config';
 //     const env: Config = config
 //     const BASE_URL = env.backendHost
 // })
-const BASE_URL = "http://localhost:8080";
-// const BASE_URL = "http://api.patternact.com";
+// const BASE_URL = "http://localhost:8080";
+const BASE_URL = "http://api.patternact.com";
 export default axios.create({
     baseURL: BASE_URL,
     headers: { "Content-Type": "application/json" },

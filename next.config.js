@@ -1,15 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    // output: 'export',
-    distDir: '_static',
+    // Uncomment below line for production build - Generates index.html
+    output: 'standalone',
     images: {
         unoptimized: true
     },
-    publicRuntimeConfig: {
-        backendHost: 'http://localhost:8080'
-    },
-
 }
 
 module.exports = nextConfig

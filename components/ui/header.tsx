@@ -36,30 +36,25 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Link href="/documentation" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
+                <Link href="/how-it-works" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
                   How it works
                 </Link>
               </li>
               <li>
-                <Link href="/docs" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
-                  Docs
+                <Link href="/getstarted" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
+                  Playground
+                </Link>
+              </li>
+              {/* <li>
+                <Link href="/developers" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
+                  Developers
                 </Link>
               </li>
               <li>
-                <Link href="/casestudies" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
-                  Case studies
+                <Link href="/developers" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
+                  Logout
                 </Link>
-              </li>
-              <li>
-                <Link href="/pricing" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link href="/console" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
-                  Console
-                </Link>
-              </li>
+              </li> */}
             </ul>
           </nav>
 

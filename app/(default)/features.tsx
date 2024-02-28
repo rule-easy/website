@@ -15,8 +15,8 @@ export default function Features() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h2 className="h2 mb-4">Every product has pattern that can be exploited by fraudsters.</h2>
-            <p className="text-xl text-gray-400">PatternAct offers a comprehensive solution to fraud detection, with an emphasis on identifying patterns quickly and taking timely actions to safeguard profits and prevent losses due to fraudulent activities.</p>
+            <h2 className="h2 mb-4">Why use TBD ?</h2>
+            <p className="text-xl text-gray-400">TBD is a lightweight rule engine which is developed for modern day applications. It has developer firendly interface which can get you started in few mins. Also it's free. You can use our APIs or take the code and deploy it on-prem</p>
           </div>
 
           {/* Items */}
@@ -27,8 +27,8 @@ export default function Features() {
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                 <FontAwesomeIcon icon={faBrain} size="xs" className="text-indigo-600" />
               </svg>
-              <h4 className="h4 mb-2">Comprehensive engine</h4>
-              <p className="text-lg text-gray-400 text-center">From heuristic rules to ML-generated ones, we've got you covered.</p>
+              <h4 className="h4 mb-2">Simple</h4>
+              <p className="text-lg text-gray-400 text-center">Simple interface with just 3 APIs</p>
             </div>
 
             {/* 2nd item */}
@@ -36,8 +36,8 @@ export default function Features() {
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                 <FontAwesomeIcon icon={faBan} size="xs" className="text-indigo-600" />
               </svg>
-              <h4 className="h4 mb-2">No-code operations</h4>
-              <p className="text-lg text-gray-400 text-center">Generate and modify patterns without dedicated engineering team.</p>
+              <h4 className="h4 mb-2">No vendor locking</h4>
+              <p className="text-lg text-gray-400 text-center">Open source and supports on-prem.</p>
             </div>
 
             {/* 3rd item */}
@@ -45,39 +45,10 @@ export default function Features() {
               <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                 <FontAwesomeIcon icon={faBoltLightning} size="xs" className="text-indigo-600" />
               </svg>
-              <h4 className="h4 mb-2">Fatser TAT</h4>
-              <p className="text-lg text-gray-400 text-center">Happy with the outcomes, deploy to production to minimize losses quickly.</p>
+              <h4 className="h4 mb-2">Fast</h4>
+              <p className="text-lg text-gray-400 text-center">Go-lang based engine.</p>
             </div>
-
-            {/* 4th item */}
-            <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="300" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <FontAwesomeIcon icon={faUsers} size="xs" className="text-indigo-600" />
-              </svg>
-              <h4 className="h4 mb-2">Collusion first</h4>
-              <p className="text-lg text-gray-400 text-center">Platform built with a primary focus on tackling collusion fraud.</p>
-            </div>
-
-            {/* 5th item */}
-            <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <FontAwesomeIcon icon={faBookAtlas} size="xs" className="text-indigo-600" />
-              </svg>
-              <h4 className="h4 mb-2">Rule library</h4>
-              <p className="text-lg text-gray-400 text-center">Explore rules that are applicable for every industry.</p>
-            </div>
-
-            {/* 6th item */}
-            <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="500" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <FontAwesomeIcon icon={faChartLine} size="xs" className="text-indigo-600" />
-              </svg>
-              <h4 className="h4 mb-2">Monitor</h4>
-              <p className="text-lg text-gray-400 text-center">Monitor efficiency of the system for each pattern configuered.</p>
-            </div>
-
           </div>
-
         </div>
       </div>
     </section>
