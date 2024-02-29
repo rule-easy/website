@@ -15,8 +15,8 @@ export default function Features() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h2 className="h2 mb-4">Why use TBD ?</h2>
-            <p className="text-xl text-gray-400">TBD is a lightweight rule engine which is developed for modern day applications. It has developer firendly interface which can get you started in few mins. Also it's free. You can use our APIs or take the code and deploy it on-prem</p>
+            <h2 className="h2 mb-4">Why use RuleEasy ?</h2>
+            <p className="text-xl text-gray-400">RuleEasy is a lightweight rule engine which is developed for modern day applications. It has developer firendly interface which can get you started in few mins. Also it's free. You can use our APIs or take the code and deploy it on-prem</p>
           </div>
 
           {/* Items */}
@@ -37,7 +37,7 @@ export default function Features() {
                 <FontAwesomeIcon icon={faBan} size="xs" className="text-indigo-600" />
               </svg>
               <h4 className="h4 mb-2">No vendor locking</h4>
-              <p className="text-lg text-gray-400 text-center">Open source and supports on-prem.</p>
+              <p className="text-lg text-gray-400 text-center">Supports on-prem</p>
             </div>
 
             {/* 3rd item */}

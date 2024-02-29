@@ -23,8 +23,8 @@ export default function Newsletter() {
 
             {/* CTA content */}
             <div className="mb-6 lg:mr-16 lg:mb-0 text-center lg:text-left lg:w-1/2">
-              <h3 className="h3 text-white mb-2">Got feedback ?</h3>
-              <p className="text-purple-200 text-lg">Leave your contact and lets talk.</p>
+              <h3 className="h3 text-white mb-2">Want to deploy in production ?</h3>
+              <p className="text-purple-200 text-lg">Leave your mail here</p>
             </div>
 
             {/* CTA form */}

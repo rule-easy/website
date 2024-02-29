@@ -6,6 +6,6 @@ export interface Config {
 
 export async function GetEnvConfig() {
     // var config: Config = { backendHost: 'http://localhost:8080' }
-    var config: Config = { backendHost: 'http://api.patternact.com' }
+    var config: Config = { backendHost: 'http://api.ruleeasy.in' }
     return config;
 }

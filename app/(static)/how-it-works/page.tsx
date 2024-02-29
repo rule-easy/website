@@ -1,6 +1,6 @@
 export const metadata = {
-    title: 'Pricing - PatternAct',
-    description: 'PatternAct documentation page',
+    title: 'How it works - RuleEasy',
+    description: 'RuleEasy how it works page',
 }
 import Zigzag from '@/app/(static)/how-it-works/zigzag';
 
