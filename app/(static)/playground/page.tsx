@@ -2,7 +2,7 @@
 import { signIn, useSession } from 'next-auth/react';
 import React from 'react';
 
-import GetStarted from '@/app/(static)/getstarted/get-started';
+import GetStarted from '@/app/(static)/playground/get-started';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

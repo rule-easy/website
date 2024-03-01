@@ -21,15 +21,15 @@ const APIDocumentation = (props: Props) => {
                     props.method != "GET" &&
                     <div>
                         <h3 className="text-lg font-bold mt-4">Request body</h3>
-                        <div className="whitespace-pre bg-gray-200 p-4 rounded-lg">
+                        <div className="whitespace-pre bg-gray-200 p-4 rounded-lg overflow-auto">
                             <pre>
-                                <code className='text-gray-800'>{props.reqBody}</code>
+                                <code className='text-gray-800 overflow-scroll'>{props.reqBody}</code>
                             </pre>
                         </div>
                     </div>
                 }
                 <h3 className="text-lg font-bold mt-4">Response</h3>
-                <div className="whitespace-pre bg-gray-200 p-4 rounded-lg">
+                <div className="whitespace-pre bg-gray-200 p-4 rounded-lg overflow-auto">
                     <pre>
                         <code className='text-gray-800'>
                             {

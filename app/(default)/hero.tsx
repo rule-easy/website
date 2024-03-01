@@ -30,7 +30,7 @@ export default function Hero() {
             {/* <p className="text-xl text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="200">A rule engine made by developers for the developers</p> */}
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
               <div data-aos="fade-up" data-aos-delay="400">
-                <a className="btn text-white bg-purple-600 hover:bg-purple-700 w-full mb-4 sm:w-auto sm:mb-0" href="/getstarted">Try it out</a>
+                <a className="btn text-white bg-purple-600 hover:bg-purple-700 w-full mb-4 sm:w-auto sm:mb-0" href="/playground">Try it out</a>
               </div>
             </div>
           </div>

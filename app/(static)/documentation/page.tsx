@@ -7,7 +7,7 @@ export default function Documentation() {
     return (
         <div>
             <div className="flex flex-row h-100 mt-40 pl-8 p-4">
-                <div className="w-1/5 bg-gray-200 p-4 sticky top-0">
+                <div className="w-1/5 bg-gray-200 p-4 sticky h-screen invisible sm:visible">
                     <h1 className="text-lg font-bold mb-4 text-indigo-500">API Index</h1>
                     <ul className="space-y-2">
                         <li><a href="#authentication" className="text-blue-500 hover:underline">API authentication</a></li>
@@ -20,14 +20,13 @@ export default function Documentation() {
                         <li><a href="#evaluate-stream" className="text-blue-500 hover:underline">POST /v1/rule/evaluate</a></li>
                     </ul>
                 </div>
-                <div className="w-4/5 p-4 h-100">
+                <div className="w-4/5 p-4 h-screen overflow-auto">
                     <h1 className="text-3xl font-bold mb-8 text-indigo-500">API Documentation</h1>
-
                     <section id="authentication" className="mb-8">
                         <h2 className="text-xl font-bold mb-4 text-indigo-400">Authentication</h2>
                         <p>Authenticate using a Bearer token in the header.</p>
                         <h3 className="text-lg font-bold mt-4">Header</h3>
-                        <div className="whitespace-pre bg-gray-200 p-4 rounded-lg">
+                        <div className="whitespace-pre bg-gray-200 p-4 rounded-lg overflow-auto">
                             <code className='text-gray-800'>Token: &lt;your_token_here&gt;</code>
                         </div>
                     </section>
@@ -36,8 +35,8 @@ export default function Documentation() {
                         <h2 className="text-xl font-bold mb-4 text-indigo-400">API endpoints</h2>
                         <p>Use below API endpoint to test your APIs</p>
                         <h3 className="text-lg font-bold mt-4">Endpoints</h3>
-                        <div className="whitespace-pre bg-gray-200 p-4 rounded-lg">
-                            <code className='text-gray-800'>Staging: http://api.ruleeasy.in</code>
+                        <div className="whitespace-pre bg-gray-200 p-4 rounded-lg overflow-auto">
+                            <code className='text-gray-800'>Staging: https://api.ruleeasy.in</code>
                             <br></br>
                             <code className='text-gray-800'>Production: Please get in touch with us</code>
                         </div>
@@ -50,27 +49,24 @@ export default function Documentation() {
                         description='One stream represents a homogenous collection of events (such as events in a message queue like Kafka). For example if we want to evaluate rules against all the payment events in your system, we can register JSON schema of one payment event like below. If stream creation is successfull, a unique ID is assigned to it. This stream ID could be used to view or update the stream in future if required.'
                         reqBody={`
 {
-    "name": "<Unique name of the stream>",
-    "schema": {
-        "amount": 100,
-        "type": "credit_card",
-        "user_id": "XXXX",
-        "status": "PENDING"
-    }
+    "name": "payment-transaction", // <Unique name of the stream>
+    "schema": "{\"amount\":100,\"type\":\"credit_card\",\"user_id\":\"XXXX\",\"status\":\"PENDING\"}"
 }
                     `}
                         respBody={`
 {
     "success": {
-        "code": 200005, // Status code of the API
+        "code": 201004,
         "data": [
             {
-                "id": "be328e3f-9186-482f-9f04-ceffa2e5f3bc", // Unique ID assigned to the stream
-                "name": "<Unique name of the stream>",
-                "schema_keys": [ // Fields which can be used to form a rule
+                "id": "400d9f87-ba8d-4d8b-a2d9-2d713198c7e8", // Unique ID assigned to stream
+                "name": "payment-transaction",
+                "schema": "{\"amount\":100,\"type\":\"credit_card\",\"user_id\":\"XXXX\",\"status\":\"PENDING\"}",
+                "schema_keys": [ // Schema fields that can be used while forming rules
                     "amount",
+                    "status",
                     "type",
-                    "status"
+                    "user_id"
                 ]
             }
         ]
@@ -90,15 +86,17 @@ export default function Documentation() {
                         respBody={`
 {
     "success": {
-        "code": 200005, // Status code of the API
+        "code": 201004,
         "data": [
             {
-                "id": "be328e3f-9186-482f-9f04-ceffa2e5f3bc", // ID of the stream
-                "name": "<Unique name of the stream>",
-                "schema_keys": [
+                "id": "400d9f87-ba8d-4d8b-a2d9-2d713198c7e8", // Unique ID assigned to stream
+                "name": "payment-transaction",
+                "schema": "{\"amount\":100,\"type\":\"credit_card\",\"user_id\":\"XXXX\",\"status\":\"PENDING\"}",
+                "schema_keys": [ // Schema fields that can be used while forming rules
                     "amount",
+                    "status",
                     "type",
-                    "status"
+                    "user_id"
                 ]
             }
         ]
@@ -120,8 +118,8 @@ export default function Documentation() {
     "name": "high-value-cc-txns",
     "data": [
         {
-            "condition_data": "IF: { amount >= 1000 && type == "credit_card" && status == "SUCCESS"}",
-            "action_data": "{ "high-value-cc-txns" : 1 }"
+            "condition_data": "IF: { amount >= 1000 && type == \"credit_card\" && status == \"SUCCESS\" }",
+            "action_data": "{ \"high-value-cc-txns\" : 1 }"
         }
     ]
 }
@@ -131,12 +129,13 @@ export default function Documentation() {
     "success": {
         "code": 201003,
         "data": {
-            "id": "f4fdcd12-9cfe-45aa-aabd-b707e8dbf647",
+            "id": "b62d7d71-e022-4bca-82ab-61152d92c70c", // Unique ID assigned to rule
             "name": "high-value-cc-txns",
             "data": [
                 {
-                    "condition_data": "IF: { amount >= 1000 && type == "credit_card" && status == "SUCCESS"}",
-                    "action_data": "{ "high-value-cc-txns" : 1 }"
+                    "id": "",
+                    "condition_data": "IF: { amount >= 1000 && type == \"credit_card\" && status == \"SUCCESS\" }", // Rule condition
+                    "action_data": "{ \"high-value-cc-txns\" : 1 }" // Rule action
                 }
             ]
         }
@@ -159,11 +158,11 @@ export default function Documentation() {
         "data": [
             {
                 "id": "f4fdcd12-9cfe-45aa-aabd-b707e8dbf647",
-                "name": "fraud-rule-3",
+                "name": "high-value-cc-txns",
                 "data": [
                     {
                         "id": "79544c1a-634a-4c5f-971c-445b848c4a19",
-                        "condition_data": "IF: { amount >= 1000 && type == "credit_card" && status == "SUCCESS"}",
+                        "condition_data": "IF: { amount >= 1000 && type == "credit_card" && status == "SUCCESS" }",
                         "action_data": "{ "high-value-cc-txns" : 1 }"
                     }
                 ]
@@ -184,9 +183,9 @@ export default function Documentation() {
                         description='Multiple rules can be attached to a stream. For example, for the above created payment transaction stream we can create rules to identify high transactions, low transactions, fraud transactions etc. We can attach/dettatch a stream to a rule by means of this API.'
                         reqBody={`
 {
-    "stream_id":"<Stream ID",
-    "rule_id":"<Rule ID>",
-    "status": <1: Attach, 2 Dettach>
+    "stream_id":"400d9f87-ba8d-4d8b-a2d9-2d713198c7e8", // Stream ID
+    "rule_id":"b62d7d71-e022-4bca-82ab-61152d92c70c", // Rule ID
+    "status":1 // 1:Attach rule to stream, 2: Dettach rule from stream
 }
                         `}
                         respBody={`
@@ -217,7 +216,23 @@ export default function Documentation() {
                         respBody={`
 {
     "success": {
-        "code": 200005
+        "code": 200000,
+        "data": {
+            "success": [
+                {
+                    "rule_id": "c52d933d-4a28-46c4-80d6-c52564f5e5af",
+                    "decision_id": "d4cd1f1b-28d5-41a8-98a3-9d88810ed3a2",
+                    "result": "{ \"high-value-cc-txns\" : 1 }"
+                }
+            ],
+            "failure": [
+                {
+                    "rule_id": "694cf416-d0bd-460e-b804-c11e2371a3cd",
+                    "decision_id": "2e136611-76e5-4a04-8e95-00072ac4cb76",
+                    "result": "{ \"low-value-txns\" : 1 }"
+                }
+            ]
+        }
     },
     "error": {
         "code": 0,
