@@ -6,7 +6,7 @@ import RuleDataSetter from '@/components/ruleselector';
 import { Rule } from '@/types/rules';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-export default function Documentation() {
+export default function Developers() {
 
     const updateRule = async (ruleId: string, rule: Rule) => {
         console.log("Rule changed", ruleId, rule)
