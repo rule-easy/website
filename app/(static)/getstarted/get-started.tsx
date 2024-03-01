@@ -278,7 +278,7 @@ const GetStarted = () => {
                         <div className="collapse collapse-arrow join-item border border-base-300">
                             <input type="radio" readOnly={true} name="accordian-steps" checked={progress == 1} />
                             <div className="collapse-title p-0 text-xl font-medium">
-                                <h4 className="h4 mb-2"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 1 - </div> Generate API token</h4>
+                                <div className="sm:h4 sm:font-bold mb-2"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 1 - </div> Generate API token</div>
                             </div>
                             <div className="collapse-content">
                                 <div className="flex flex-row w-full">
@@ -292,7 +292,7 @@ const GetStarted = () => {
                         <div className="collapse collapse-arrow join-item border border-base-300">
                             <input type="radio" readOnly={true} name="accordian-steps" checked={progress == 2} />
                             <div className="collapse-title p-0 text-xl font-medium">
-                                <h4 className="h4 mb-1"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 2 - </div> Register schema</h4>
+                                <div className="sm:h4 sm:font-bold mb-2"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 2 - </div> Register schema</div>
                             </div>
                             <div className="collapse-content">
                                 <div data-aos="fade-up" data-aos-delay="200" className="form-control mt-2">
@@ -309,7 +309,7 @@ const GetStarted = () => {
                         <div className="collapse collapse-arrow join-item border border-base-300">
                             <input type="radio" readOnly={true} name="accordian-steps" checked={progress == 3} />
                             <div className="collapse-title p-0 text-xl font-medium">
-                                <h4 className="h4 mb-1"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 3 - </div> Create rule</h4>
+                                <div className="sm:h4 sm:font-bold mb-2"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 3 - </div> Create rule</div>
                             </div>
                             <div className="collapse-content">
                                 <div data-aos="fade-up" data-aos-delay="200" className="form-control mt-2">
@@ -334,7 +334,7 @@ const GetStarted = () => {
                         <div className="collapse collapse-arrow join-item border border-base-300">
                             <input type="radio" readOnly={true} name="accordian-steps" checked={progress == 4} />
                             <div className="collapse-title p-0 text-xl font-medium">
-                                <h4 className="h4 mb-1"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 4 - </div> Test rule</h4>
+                                <div className="sm:h4 sm:font-bold mb-2"><div className="font-architects-daughter text-xxl text-purple-600 mb-2 inline-block">Step 4 - </div> Test rule</div>
                             </div>
                             <div className="collapse-content">
                                 <div data-aos="fade-up" data-aos-delay="200" className="form-control mt-2">

@@ -48,7 +48,7 @@ const ModelDisplay = (props: Props) => {
                 <p className={clsx({ "font-mono font-semibold text-xs mr-3 pointer-events: none": true }, { "text-green-400": validJSON }, { "text-red-400": !validJSON })}> {"{ VALID JSON }"} </p>
                 <FontAwesomeIcon onClick={() => beautify()} icon={faFan} className="cursor-pointer outline-none justify-self-end hover:text-indigo-500" />
             </div>
-            <textarea onChange={onChange} className="textarea m-0 p-0 border-0 min-w-full min-h-full resize-none outline-none rounded-none text-xs font-mono bg-gray-800" placeholder={props.placeholder} disabled={props.disabled} value={schema}></textarea>
+            <textarea onChange={onChange} className="textarea m-0 p-0 border-0 min-w-full min-h-full resize-none outline-none rounded-none text-xs font-mono bg-gray-800 align-top focus:outline-none" placeholder={props.placeholder} disabled={props.disabled} value={schema}></textarea>
         </div>
     )
 }
