@@ -19,7 +19,7 @@ export default function Login() {
             email: userEmail.current,
             password: userPassword.current,
             redirect: true,
-            callbackUrl: "/getstarted",
+            callbackUrl: "/playground",
         });
     };
 

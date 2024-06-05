@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Home - PatternAct',
-  description: 'PatternAct landing page',
+  title: 'Home - RuleEasy',
+  description: 'Rule engine for modern applications',
 }
 
 import Features from '@/app/(default)/features';
