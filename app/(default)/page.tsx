@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'Home - RuleEasy',
-  description: 'RuleEasy landing page',
+  description: 'Rule engine for modern applications',
 }
 
 import Features from '@/app/(default)/features';

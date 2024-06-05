@@ -1,6 +1,6 @@
 export const metadata = {
     title: 'How it works - RuleEasy',
-    description: 'RuleEasy how it works page',
+    description: 'How RuleEasy works',
 }
 import Zigzag from '@/app/(static)/how-it-works/zigzag';
 

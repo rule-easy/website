@@ -40,11 +40,11 @@ export default function Header() {
                   How it works
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/playground" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
                   Playground
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/documentation" className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out">
                   Documentation
